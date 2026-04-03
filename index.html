@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Andrade | Creative Portfolio</title>
+    <!-- SEO meta tags -->
+    <meta name="description" content="Portafolio web creativo de Alex Andrade. Diseño Web, Diseño Gráfico, Motion Graphics y Experiencia Socio-ambiental. Diseño monocromático con estilo story-scrolling.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@300;500;800;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader Intro -->
+    <div id="preloader">
+        <div class="preloader-lights">
+            <div class="light-orb light-orb-left"></div>
+            <div class="light-orb light-orb-right"></div>
+        </div>
+        <div class="preloader-content">
+            <div class="loader-rings">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+            </div>
+            <h2 class="preloader-title">ALEX ANDRADE</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+                <div class="progress-glow"></div>
+            </div>
+            <div class="progress-text">SISTEMA INICIANDO... <span id="percent">0</span>%</div>
+        </div>
+    </div>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Vertical Scroll Progress Rail -->
+    <div class="scroll-progress-rail">
+        <div class="scroll-progress-fill"></div>
+    </div>
+
+    <!-- Floating HUD Design Symbols Layer -->
+    <div id="hud-floats" aria-hidden="true">
+
+        <!-- === ZONE 1: Hero (0-17%) === -->
+        <span class="hf hf-code" style="top:7%;left:8%" data-in="2" data-out="22">&lt;div /&gt;</span>
+
+        <!-- Camera icon (SVG inline) -->
+        <svg class="hf hf-icon" style="top:6%;right:7%;width:42px;height:30px" data-in="2" data-out="22" viewBox="0 0 42 30">
+            <rect x="1" y="5" width="40" height="23" rx="2" stroke="currentColor" fill="none" stroke-width="1.2"/>
+            <circle cx="21" cy="17" r="7" stroke="currentColor" fill="none" stroke-width="1.2"/>
+            <circle cx="21" cy="17" r="3.5" stroke="currentColor" fill="none" stroke-width="1"/>
+            <path d="M14,5 L14,2 L24,2 L24,5" stroke="currentColor" fill="none" stroke-width="1.2"/>
+            <circle cx="36" cy="11" r="1.5" fill="currentColor"/>
+            <line x1="8" y1="10" x2="12" y2="10" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="10" y1="8" x2="10" y2="12" stroke="currentColor" stroke-width="0.8"/>
+        </svg>
+
+        <!-- === ZONE 2: Web / Graphic Design (17-33%) === -->
+        <span class="hf hf-code" style="top:20%;right:7%" data-in="15" data-out="38">&lt;/section&gt;</span>
+        <span class="hf hf-code" style="top:25%;left:7%" data-in="17" data-out="40">&#123; transform: scale(1); &#125;</span>
+
+        <!-- Bezier handles icon -->
+        <svg class="hf hf-icon" style="top:28%;right:6%;width:64px;height:44px" data-in="20" data-out="44" viewBox="0 0 64 44">
+            <path d="M6,38 C18,6 46,6 58,38" stroke="currentColor" fill="none" stroke-width="1.2"/>
+            <line x1="6" y1="38" x2="18" y2="6" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+            <line x1="58" y1="38" x2="46" y2="6" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+            <rect x="3" y="34.5" width="5.5" height="5.5" transform="rotate(45,6,37)" stroke="currentColor" fill="none" stroke-width="1"/>
+            <rect x="55" y="34.5" width="5.5" height="5.5" transform="rotate(45,58,37)" stroke="currentColor" fill="none" stroke-width="1"/>
+            <circle cx="18" cy="6" r="3" stroke="currentColor" fill="none" stroke-width="1"/>
+            <circle cx="46" cy="6" r="3" stroke="currentColor" fill="none" stroke-width="1"/>
+        </svg>
+
+        <!-- === ZONE 3: Motion (33-50%) === -->
+        <span class="hf hf-code" style="top:37%;left:7%" data-in="30" data-out="55">@keyframes scroll &#123;</span>
+        <span class="hf hf-code" style="top:41%;left:9%" data-in="32" data-out="55">&nbsp;&nbsp;transform: translateY(-10px);</span>
+        <span class="hf hf-code" style="top:45%;left:7%" data-in="34" data-out="55">&#125;</span>
+        <span class="hf hf-code" style="top:38%;right:7%" data-in="30" data-out="55">// motion.graphics</span>
+
+        <!-- === ZONE 4: Ethnic (50-65%) === -->
+        <span class="hf hf-code" style="top:53%;right:7%" data-in="47" data-out="70">opacity: var(--neon-cyan);</span>
+
+        <!-- Anchor point / Pen Tool symbol -->
+        <svg class="hf hf-icon" style="top:56%;left:6%;width:32px;height:32px" data-in="48" data-out="72" viewBox="0 0 32 32">
+            <rect x="10" y="10" width="12" height="12" transform="rotate(45,16,16)" stroke="currentColor" fill="none" stroke-width="1.3"/>
+            <line x1="16" y1="0" x2="16" y2="8" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
+            <line x1="16" y1="24" x2="16" y2="32" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
+            <line x1="0" y1="16" x2="8" y2="16" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
+            <line x1="24" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
+            <circle cx="16" cy="0" r="1.8" fill="currentColor" opacity="0.6"/>
+            <circle cx="16" cy="32" r="1.8" fill="currentColor" opacity="0.6"/>
+            <circle cx="0" cy="16" r="1.8" fill="currentColor" opacity="0.6"/>
+            <circle cx="32" cy="16" r="1.8" fill="currentColor" opacity="0.6"/>
+        </svg>
+
+        <!-- === ZONE 5: Certs (65-100%) === -->
+        <span class="hf hf-code" style="top:70%;left:7%" data-in="63" data-out="90">&lt;path d="M 0,0 L 100,0"/&gt;</span>
+        <span class="hf hf-code" style="top:75%;right:7%" data-in="67" data-out="92">border-radius: 50%;</span>
+
+        <!-- Grid / Illustrator guide marks -->
+        <svg class="hf hf-icon" style="top:80%;left:6%;width:48px;height:48px" data-in="72" data-out="95" viewBox="0 0 48 48">
+            <!-- crosshair target -->
+            <circle cx="24" cy="24" r="12" stroke="currentColor" fill="none" stroke-width="0.9"/>
+            <circle cx="24" cy="24" r="6" stroke="currentColor" fill="none" stroke-width="0.7" opacity="0.5"/>
+            <circle cx="24" cy="24" r="1.5" fill="currentColor"/>
+            <line x1="24" y1="4" x2="24" y2="12" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="24" y1="36" x2="24" y2="44" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="4" y1="24" x2="12" y2="24" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="36" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.8"/>
+        </svg>
+
+        <span class="hf hf-code" style="top:84%;right:7%" data-in="78" data-out="98">✦ &nbsp; f(x) = ∞ &nbsp; ✦</span>
+
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">A<span>A</span></div>
+        <ul class="nav-links">
+            <li><a href="#sobre">Sobre Mí</a></li>
+            <li><a href="#web">Diseño Web</a></li>
+            <li><a href="#grafico">Diseño Gráfico</a></li>
+            <li><a href="#motion">Motion Graphics</a></li>
+            <li><a href="#socio">Exp. Étnica</a></li>
+        </ul>
+    </nav>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            
+            <section class="panel hero" id="hero">
+                <div class="hero-parallax-bg">
+                    <svg class="hero-drawing-svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice" style="filter: drop-shadow(0px 0px 8px rgba(0, 255, 255, 0.5));">
+                        <!-- Geometría abstracta tipo 'A' / montanas con detalles finos -->
+                        <path class="draw-path" d="M 500 200 L 250 650 M 500 200 L 750 650 M 350 480 L 650 480" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5"/>
+                        <path class="draw-path" d="M 500 100 L 100 800 M 500 100 L 900 800" fill="none" stroke="rgba(0,255,255,0.4)" stroke-width="1"/>
+                        
+                        <!-- Detalles sutiles -->
+                        <circle class="draw-path" cx="500" cy="200" r="15" fill="none" stroke="var(--neon-cyan)" stroke-width="1"/>
+                        <circle class="draw-path" cx="500" cy="200" r="40" fill="none" stroke="rgba(0,255,255,0.2)" stroke-width="1"/>
+                        
+                        <!-- El 'detalle fino' azul cian -->
+                        <circle class="draw-path" cx="500" cy="200" r="5" fill="none" stroke="var(--neon-cyan)" stroke-width="2"/>
+                        <line class="draw-path" x1="480" y1="200" x2="490" y2="200" stroke="var(--neon-cyan)" stroke-width="1"/>
+                        <line class="draw-path" x1="510" y1="200" x2="520" y2="200" stroke="var(--neon-cyan)" stroke-width="1"/>
+                        
+                        <path class="draw-path" d="M 300 750 L 700 750" fill="none" stroke="rgba(0,255,255,0.2)" stroke-width="1"/>
+                        <path class="draw-path" d="M 400 750 L 600 750" fill="none" stroke="var(--neon-cyan)" stroke-width="0.5"/>
+                    </svg>
+                </div>
+                <div class="hero-content">
+                    <h1 class="glitch" data-text="ALEX ANDRADE">ALEX ANDRADE</h1>
+                    <p class="subtitle">Creative Multidisciplinary Designer</p>
+                    <div class="scroll-indicator">
+                        <span>Scroll para descubrir</span>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel section-sobre" id="sobre">
+                <div class="section-content">
+                    <div class="about-grid">
+                        <div class="about-image">
+                            <img src="WhatsApp%20Image%202026-04-02%20at%209.26.58%20PM.jpeg" alt="Alex Andrade Fotografía" loading="lazy">
+                            <div class="image-glow"></div>
+                        </div>
+                        <div class="about-text">
+                            <h2 class="neon-text">Sobre Mí <span class="number">00</span></h2>
+                            <p>Soy un diseñador y director creativo apasionado por la creación de soluciones estructuradas que impactan visualmente y además generan un cambio funcional positivo.</p>
+                            <p>Mi enfoque abarca desde experiencias web minimalistas y gráficos de alto contraste, hasta narrativas en movimiento y compromisos socio-ambientales. Conecto los puntos entre la estética profunda y el diseño centrado en el usuario.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel section-web" id="web">
+                <div class="section-content">
+                    <h2 class="neon-text">Diseño Web <span class="number">01</span></h2>
+                    <p>Creando experiencias digitales inmersivas y funcionales con estética premium.</p>
+                    <div class="portfolio-grid web-grid">
+                        <div class="web-mockup-item">
+                            <div class="browser-mockup">
+                                <div class="browser-header">
+                                    <div class="dots">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <div class="browser-url">malezarap.vercel.app</div>
+                                </div>
+                                <div class="browser-content">
+                                    <iframe src="https://malezarap.vercel.app" title="Maleza Rap live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                            <div class="web-item-footer">
+                                <div class="web-item-info">
+                                    <h3>MALEZA RAP</h3>
+                                    <span>Diseño Web Interactivo</span>
+                                </div>
+                                <a href="https://malezarap.vercel.app" target="_blank" class="cyber-btn">Ver ↗</a>
+                            </div>
+                        </div>
+                        
+                        <div class="web-mockup-item">
+                            <div class="browser-mockup">
+                                <div class="browser-header">
+                                    <div class="dots">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <div class="browser-url">solidhar-beta.vercel.app</div>
+                                </div>
+                                <div class="browser-content">
+                                    <iframe src="https://solidhar-beta.vercel.app" title="Solidhar live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                            <div class="web-item-footer">
+                                <div class="web-item-info">
+                                    <h3>SOLIDHAR</h3>
+                                    <span>Diseño Web Profesional</span>
+                                </div>
+                                <a href="https://solidhar-beta.vercel.app" target="_blank" class="cyber-btn">Ver ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="web-mockup-item">
+                            <div class="browser-mockup">
+                                <div class="browser-header">
+                                    <div class="dots">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <div class="browser-url">l-emon.vercel.app</div>
+                                </div>
+                                <div class="browser-content">
+                                    <iframe src="https://l-emon.vercel.app/" title="Lemon Studio live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                            <div class="web-item-footer">
+                                <div class="web-item-info">
+                                    <h3>LEMON STUDIO</h3>
+                                    <span>Agencia Creativa</span>
+                                </div>
+                                <a href="https://l-emon.vercel.app/" target="_blank" class="cyber-btn">Ver ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="web-mockup-item">
+                            <div class="browser-mockup">
+                                <div class="browser-header">
+                                    <div class="dots">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <div class="browser-url">boskes.vercel.app</div>
+                                </div>
+                                <div class="browser-content">
+                                    <iframe src="https://boskes.vercel.app/" title="Boskes live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                            <div class="web-item-footer">
+                                <div class="web-item-info">
+                                    <h3>BOSKES</h3>
+                                    <span>Creative Studio / Arquitectura</span>
+                                </div>
+                                <a href="https://boskes.vercel.app/" target="_blank" class="cyber-btn">Ver ↗</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel section-grafico" id="grafico">
+                <div class="section-content">
+                    <h2 class="neon-text">Diseño Gráfico <span class="number">02</span></h2>
+                    <p>Comunicación visual de alto impacto donde convergen ideas innovadoras.</p>
+                    <p class="hint-text">☞ Dale clic a cualquier diseño para verlo en pantalla completa.</p>
+                    <div class="portfolio-grid gallery-grid">
+                        <div class="portfolio-item hover-image">
+                            <img src="SOLO 1-CDK3wvje.jfif" alt="Proyecto Gráfico 1" class="portfolio-img" loading="lazy">
+                        </div>
+                        <div class="portfolio-item hover-image">
+                            <img src="2-Car0yTGv.jfif" alt="Proyecto Gráfico 2" class="portfolio-img" loading="lazy">
+                        </div>
+                        <div class="portfolio-item hover-image">
+                            <img src="WhatsApp%20Image%202026-01-22%20at%2010.36.11%20AM%20(1)-BbwLzITu.jpeg" alt="Fotografía Dirección" class="portfolio-img" loading="lazy">
+                        </div>
+                        <div class="portfolio-item hover-image">
+                            <img src="WhatsApp%20Image%202026-04-02%20at%2011.37.05%20AM.jpeg" alt="Campaña Z" class="portfolio-img" loading="lazy">
+                        </div>
+                        <div class="portfolio-item hover-image">
+                            <img src="logo%20dj.png" alt="Logo de DJ" class="portfolio-img" loading="lazy">
+                        </div>
+                        <div class="portfolio-item hover-image">
+                            <img src="lata%20coca.png" alt="Modelado de Lata" class="portfolio-img" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel section-motion" id="motion">
+                <div class="section-content">
+                    <h2 class="neon-text">Motion Graphics <span class="number">03</span></h2>
+                    <p>Dando vida a las ideas a través del movimiento y dinámico storytelling.</p>
+                    <p class="hint-text">☞ Dale clic a las miniaturas para reproducir directamente en HD.</p>
+                    <div class="portfolio-grid gallery-grid">
+                        <div class="portfolio-item hover-image video-trigger" data-video-id="W2tDm558i68">
+                            <img src="https://img.youtube.com/vi/W2tDm558i68/maxresdefault.jpg" alt="Edición de Video 1" class="portfolio-img" loading="lazy">
+                            <div class="play-indicator">▶</div>
+                        </div>
+
+                        <div class="portfolio-item hover-image video-trigger" data-video-id="F2-bgSu0j_8">
+                            <img src="https://img.youtube.com/vi/F2-bgSu0j_8/maxresdefault.jpg" alt="Edición de Video 2" class="portfolio-img" loading="lazy">
+                            <div class="play-indicator">▶</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel section-socio" id="socio">
+                <div class="section-content">
+                    <h2 class="neon-text">Exp. Étnica Socio-ambiental <span class="number">04</span></h2>
+                    <p>Diseño con propósito y consciencia ecológica, honrando identidades, raíces y comunidades.</p>
+                    <div class="ethnic-feature">
+                        <div class="ethnic-image-wrapper">
+                            <img src="Captura%20de%20pantalla%202026-04-02%20223936.png" alt="Investigación acción radiofónica - Tejiendo Pijao" loading="lazy">
+                        </div>
+                        <div class="ethnic-info">
+                            <h3>Buen-Vivir y Memoria:<br>Saber Comunicarse</h3>
+                            <p>En trabajo colaborativo con la comunidad y el grupo <strong>“Tejiendo Pensamiento Pijao”</strong>, co-creamos episodios radiofónicos de recuperación de memoria histórica.</p>
+                            <p>Fui <strong>co-creador de investigación-acción radiofónica</strong> bajo la ecosofía del buen-vivir. Nuestro estudio empírico fue sistematizado y publicado oficialmente por la revista científica <i>Jangwa Pana</i> de la Universidad del Magdalena.</p>
+                            <div class="ethnic-buttons">
+                                <a href="https://open.spotify.com/show/0m50GIG5BUyzWLFqxky7Hv" target="_blank" class="ethnic-btn btn-green">🎧 Escuchar en Spotify</a>
+                                <a href="https://revistas.unimagdalena.edu.co/index.php/jangwapana/article/view/5562" target="_blank" class="ethnic-btn btn-outline-green">📄 Leer Investigación</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel section-certs" id="certs">
+                <div class="section-content">
+                    <h2 class="neon-text">Certificados <span class="number">05</span></h2>
+                    <p>Experiencia laboral respaldada por organizaciones y equipos de alto impacto.</p>
+
+                    <div class="certs-feature">
+                        <div class="cert-pdf-wrapper">
+                            <iframe src="1.3.%20CERTIFICADOS%20LABORALES%20.pdf#toolbar=0" title="Certificados Laborales Alex Andrade" loading="lazy"></iframe>
+                        </div>
+                        <div class="cert-info">
+                            <h3>Certificados Laborales y Recomendaciones</h3>
+                            <p>Respaldo profesional de empresas, organizaciones y equipos con los que he colaborado como <strong>Diseñador Multimedia, Animador y Desarrollador Web</strong>.</p>
+                            <p>Cada uno de estos documentos avala experiencias reales en comunicación, diseño gráfico, producción audiovisual y trabajo comunitario.</p>
+                            <a href="1.3.%20CERTIFICADOS%20LABORALES%20.pdf" download class="cert-download-btn">⬇ Descargar Certificados (PDF)</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <img class="modal-content" id="modalImg" src="" alt="Ampliar imagen">
+    </div>
+
+    <!-- YouTube Video Modal -->
+    <div class="image-modal video-modal" id="videoModal">
+        <div class="modal-content modal-video-container">
+            <iframe id="modalVideoIframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- GSAP core & plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Smooth scroll (Lenis) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
