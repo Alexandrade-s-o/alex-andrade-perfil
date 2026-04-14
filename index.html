@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Andrade | Creative Portfolio</title>
-    <!-- SEO meta tags -->
-    <meta name="description" content="Portafolio web creativo de Alex Andrade. Diseño Web, Diseño Gráfico, Motion Graphics y Experiencia Socio-ambiental. Diseño monocromático con estilo story-scrolling.">
+    <title>Alex Andrade | Portafolio Creativo</title>
+    <meta name="description"
+        content="Portafolio de Alex Andrade — Diseñador Multimedia, Animador y Desarrollador Web. Diseño Web, Gráfico, Motion Graphics y Experiencia Socio-ambiental.">
+    <meta name="author" content="Alex Andrade">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Alex Andrade | Portafolio Creativo">
+    <meta property="og:description"
+        content="Diseñador Multimedia, Animador y Desarrollador Web. Creando experiencias visuales inmersivas.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CO">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Alex Andrade | Portafolio Creativo">
+    <meta name="twitter:description" content="Diseñador Multimedia, Animador y Desarrollador Web.">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>A</text></svg>">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@300;500;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@300;500;800;900&display=swap"
+        rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Skip to content (accesibilidad) -->
+    <a href="#sobre" class="skip-link">Saltar al contenido</a>
+
     <!-- Preloader Intro -->
     <div id="preloader">
         <div class="preloader-lights">
@@ -36,7 +62,9 @@
     </div>
 
     <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <div class="cursor-follower">
+        <span class="cursor-label"></span>
+    </div>
 
     <!-- Vertical Scroll Progress Rail -->
     <div class="scroll-progress-rail">
@@ -45,133 +73,185 @@
 
     <!-- Floating HUD Design Symbols Layer -->
     <div id="hud-floats" aria-hidden="true">
-
-        <!-- === ZONE 1: Hero (0-17%) === -->
+        <!-- ZONE 1: Hero (0-17%) -->
         <span class="hf hf-code" style="top:7%;left:8%" data-in="2" data-out="22">&lt;div /&gt;</span>
-
-        <!-- Camera icon (SVG inline) -->
-        <svg class="hf hf-icon" style="top:6%;right:7%;width:42px;height:30px" data-in="2" data-out="22" viewBox="0 0 42 30">
-            <rect x="1" y="5" width="40" height="23" rx="2" stroke="currentColor" fill="none" stroke-width="1.2"/>
-            <circle cx="21" cy="17" r="7" stroke="currentColor" fill="none" stroke-width="1.2"/>
-            <circle cx="21" cy="17" r="3.5" stroke="currentColor" fill="none" stroke-width="1"/>
-            <path d="M14,5 L14,2 L24,2 L24,5" stroke="currentColor" fill="none" stroke-width="1.2"/>
-            <circle cx="36" cy="11" r="1.5" fill="currentColor"/>
-            <line x1="8" y1="10" x2="12" y2="10" stroke="currentColor" stroke-width="0.8"/>
-            <line x1="10" y1="8" x2="10" y2="12" stroke="currentColor" stroke-width="0.8"/>
+        <svg class="hf hf-icon" style="top:6%;right:7%;width:42px;height:30px" data-in="2" data-out="22"
+            viewBox="0 0 42 30">
+            <rect x="1" y="5" width="40" height="23" rx="2" stroke="currentColor" fill="none" stroke-width="1.2" />
+            <circle cx="21" cy="17" r="7" stroke="currentColor" fill="none" stroke-width="1.2" />
+            <circle cx="21" cy="17" r="3.5" stroke="currentColor" fill="none" stroke-width="1" />
+            <path d="M14,5 L14,2 L24,2 L24,5" stroke="currentColor" fill="none" stroke-width="1.2" />
+            <circle cx="36" cy="11" r="1.5" fill="currentColor" />
+            <line x1="8" y1="10" x2="12" y2="10" stroke="currentColor" stroke-width="0.8" />
+            <line x1="10" y1="8" x2="10" y2="12" stroke="currentColor" stroke-width="0.8" />
         </svg>
 
-        <!-- === ZONE 2: Web / Graphic Design (17-33%) === -->
+        <!-- ZONE 2: Web / Graphic Design (17-33%) -->
         <span class="hf hf-code" style="top:20%;right:7%" data-in="15" data-out="38">&lt;/section&gt;</span>
-        <span class="hf hf-code" style="top:25%;left:7%" data-in="17" data-out="40">&#123; transform: scale(1); &#125;</span>
-
-        <!-- Bezier handles icon -->
-        <svg class="hf hf-icon" style="top:28%;right:6%;width:64px;height:44px" data-in="20" data-out="44" viewBox="0 0 64 44">
-            <path d="M6,38 C18,6 46,6 58,38" stroke="currentColor" fill="none" stroke-width="1.2"/>
-            <line x1="6" y1="38" x2="18" y2="6" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
-            <line x1="58" y1="38" x2="46" y2="6" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
-            <rect x="3" y="34.5" width="5.5" height="5.5" transform="rotate(45,6,37)" stroke="currentColor" fill="none" stroke-width="1"/>
-            <rect x="55" y="34.5" width="5.5" height="5.5" transform="rotate(45,58,37)" stroke="currentColor" fill="none" stroke-width="1"/>
-            <circle cx="18" cy="6" r="3" stroke="currentColor" fill="none" stroke-width="1"/>
-            <circle cx="46" cy="6" r="3" stroke="currentColor" fill="none" stroke-width="1"/>
+        <span class="hf hf-code" style="top:25%;left:7%" data-in="17" data-out="40">&#123; transform: scale(1);
+            &#125;</span>
+        <svg class="hf hf-icon" style="top:28%;right:6%;width:64px;height:44px" data-in="20" data-out="44"
+            viewBox="0 0 64 44">
+            <path d="M6,38 C18,6 46,6 58,38" stroke="currentColor" fill="none" stroke-width="1.2" />
+            <line x1="6" y1="38" x2="18" y2="6" stroke="currentColor" stroke-width="0.8" opacity="0.5" />
+            <line x1="58" y1="38" x2="46" y2="6" stroke="currentColor" stroke-width="0.8" opacity="0.5" />
+            <rect x="3" y="34.5" width="5.5" height="5.5" transform="rotate(45,6,37)" stroke="currentColor" fill="none"
+                stroke-width="1" />
+            <rect x="55" y="34.5" width="5.5" height="5.5" transform="rotate(45,58,37)" stroke="currentColor"
+                fill="none" stroke-width="1" />
+            <circle cx="18" cy="6" r="3" stroke="currentColor" fill="none" stroke-width="1" />
+            <circle cx="46" cy="6" r="3" stroke="currentColor" fill="none" stroke-width="1" />
         </svg>
 
-        <!-- === ZONE 3: Motion (33-50%) === -->
+        <!-- ZONE 3: Motion (33-50%) -->
         <span class="hf hf-code" style="top:37%;left:7%" data-in="30" data-out="55">@keyframes scroll &#123;</span>
-        <span class="hf hf-code" style="top:41%;left:9%" data-in="32" data-out="55">&nbsp;&nbsp;transform: translateY(-10px);</span>
+        <span class="hf hf-code" style="top:41%;left:9%" data-in="32" data-out="55">&nbsp;&nbsp;transform:
+            translateY(-10px);</span>
         <span class="hf hf-code" style="top:45%;left:7%" data-in="34" data-out="55">&#125;</span>
         <span class="hf hf-code" style="top:38%;right:7%" data-in="30" data-out="55">// motion.graphics</span>
 
-        <!-- === ZONE 4: Ethnic (50-65%) === -->
+        <!-- ZONE 4: Ethnic (50-65%) -->
         <span class="hf hf-code" style="top:53%;right:7%" data-in="47" data-out="70">opacity: var(--neon-cyan);</span>
-
-        <!-- Anchor point / Pen Tool symbol -->
-        <svg class="hf hf-icon" style="top:56%;left:6%;width:32px;height:32px" data-in="48" data-out="72" viewBox="0 0 32 32">
-            <rect x="10" y="10" width="12" height="12" transform="rotate(45,16,16)" stroke="currentColor" fill="none" stroke-width="1.3"/>
-            <line x1="16" y1="0" x2="16" y2="8" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
-            <line x1="16" y1="24" x2="16" y2="32" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
-            <line x1="0" y1="16" x2="8" y2="16" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
-            <line x1="24" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
-            <circle cx="16" cy="0" r="1.8" fill="currentColor" opacity="0.6"/>
-            <circle cx="16" cy="32" r="1.8" fill="currentColor" opacity="0.6"/>
-            <circle cx="0" cy="16" r="1.8" fill="currentColor" opacity="0.6"/>
-            <circle cx="32" cy="16" r="1.8" fill="currentColor" opacity="0.6"/>
+        <svg class="hf hf-icon" style="top:56%;left:6%;width:32px;height:32px" data-in="48" data-out="72"
+            viewBox="0 0 32 32">
+            <rect x="10" y="10" width="12" height="12" transform="rotate(45,16,16)" stroke="currentColor" fill="none"
+                stroke-width="1.3" />
+            <line x1="16" y1="0" x2="16" y2="8" stroke="currentColor" stroke-width="0.9" opacity="0.5" />
+            <line x1="16" y1="24" x2="16" y2="32" stroke="currentColor" stroke-width="0.9" opacity="0.5" />
+            <line x1="0" y1="16" x2="8" y2="16" stroke="currentColor" stroke-width="0.9" opacity="0.5" />
+            <line x1="24" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="0.9" opacity="0.5" />
+            <circle cx="16" cy="0" r="1.8" fill="currentColor" opacity="0.6" />
+            <circle cx="16" cy="32" r="1.8" fill="currentColor" opacity="0.6" />
+            <circle cx="0" cy="16" r="1.8" fill="currentColor" opacity="0.6" />
+            <circle cx="32" cy="16" r="1.8" fill="currentColor" opacity="0.6" />
         </svg>
 
-        <!-- === ZONE 5: Certs (65-100%) === -->
-        <span class="hf hf-code" style="top:70%;left:7%" data-in="63" data-out="90">&lt;path d="M 0,0 L 100,0"/&gt;</span>
+        <!-- ZONE 5: Certs (65-100%) -->
+        <span class="hf hf-code" style="top:70%;left:7%" data-in="63" data-out="90">&lt;path d="M 0,0 L
+            100,0"/&gt;</span>
         <span class="hf hf-code" style="top:75%;right:7%" data-in="67" data-out="92">border-radius: 50%;</span>
-
-        <!-- Grid / Illustrator guide marks -->
-        <svg class="hf hf-icon" style="top:80%;left:6%;width:48px;height:48px" data-in="72" data-out="95" viewBox="0 0 48 48">
-            <!-- crosshair target -->
-            <circle cx="24" cy="24" r="12" stroke="currentColor" fill="none" stroke-width="0.9"/>
-            <circle cx="24" cy="24" r="6" stroke="currentColor" fill="none" stroke-width="0.7" opacity="0.5"/>
-            <circle cx="24" cy="24" r="1.5" fill="currentColor"/>
-            <line x1="24" y1="4" x2="24" y2="12" stroke="currentColor" stroke-width="0.8"/>
-            <line x1="24" y1="36" x2="24" y2="44" stroke="currentColor" stroke-width="0.8"/>
-            <line x1="4" y1="24" x2="12" y2="24" stroke="currentColor" stroke-width="0.8"/>
-            <line x1="36" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.8"/>
+        <svg class="hf hf-icon" style="top:80%;left:6%;width:48px;height:48px" data-in="72" data-out="95"
+            viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="12" stroke="currentColor" fill="none" stroke-width="0.9" />
+            <circle cx="24" cy="24" r="6" stroke="currentColor" fill="none" stroke-width="0.7" opacity="0.5" />
+            <circle cx="24" cy="24" r="1.5" fill="currentColor" />
+            <line x1="24" y1="4" x2="24" y2="12" stroke="currentColor" stroke-width="0.8" />
+            <line x1="24" y1="36" x2="24" y2="44" stroke="currentColor" stroke-width="0.8" />
+            <line x1="4" y1="24" x2="12" y2="24" stroke="currentColor" stroke-width="0.8" />
+            <line x1="36" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.8" />
         </svg>
-
-        <span class="hf hf-code" style="top:84%;right:7%" data-in="78" data-out="98">✦ &nbsp; f(x) = ∞ &nbsp; ✦</span>
-
+        <span class="hf hf-code" style="top:84%;right:7%" data-in="78" data-out="98">&#10022; &nbsp; f(x) = &infin; &nbsp; &#10022;</span>
     </div>
 
     <nav class="navbar">
         <div class="logo">A<span>A</span></div>
         <ul class="nav-links">
+            <li><a href="#sobre" data-section="sobre">Sobre Mí</a></li>
+            <li><a href="#web" data-section="web">Diseño Web</a></li>
+            <li><a href="#grafico" data-section="grafico">Gráfico</a></li>
+            <li><a href="#motion" data-section="motion">Motion</a></li>
+            <li><a href="#socio" data-section="socio">Étnica</a></li>
+            <li><a href="#certs" data-section="certs">Certificados</a></li>
+            <li><a href="#contacto" data-section="contacto">Contacto</a></li>
+        </ul>
+        <!-- Hamburger -->
+        <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu" aria-hidden="true">
+        <ul class="mobile-nav-links">
             <li><a href="#sobre">Sobre Mí</a></li>
             <li><a href="#web">Diseño Web</a></li>
             <li><a href="#grafico">Diseño Gráfico</a></li>
             <li><a href="#motion">Motion Graphics</a></li>
             <li><a href="#socio">Exp. Étnica</a></li>
+            <li><a href="#certs">Certificados</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
-    </nav>
+    </div>
 
     <main id="smooth-wrapper">
         <div id="smooth-content">
-            
+
             <section class="panel hero" id="hero">
                 <div class="hero-parallax-bg">
-                    <svg class="hero-drawing-svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice" style="filter: drop-shadow(0px 0px 8px rgba(0, 255, 255, 0.5));">
-                        <!-- Geometría abstracta tipo 'A' / montanas con detalles finos -->
-                        <path class="draw-path" d="M 500 200 L 250 650 M 500 200 L 750 650 M 350 480 L 650 480" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5"/>
-                        <path class="draw-path" d="M 500 100 L 100 800 M 500 100 L 900 800" fill="none" stroke="rgba(0,255,255,0.4)" stroke-width="1"/>
-                        
-                        <!-- Detalles sutiles -->
-                        <circle class="draw-path" cx="500" cy="200" r="15" fill="none" stroke="var(--neon-cyan)" stroke-width="1"/>
-                        <circle class="draw-path" cx="500" cy="200" r="40" fill="none" stroke="rgba(0,255,255,0.2)" stroke-width="1"/>
-                        
-                        <!-- El 'detalle fino' azul cian -->
-                        <circle class="draw-path" cx="500" cy="200" r="5" fill="none" stroke="var(--neon-cyan)" stroke-width="2"/>
-                        <line class="draw-path" x1="480" y1="200" x2="490" y2="200" stroke="var(--neon-cyan)" stroke-width="1"/>
-                        <line class="draw-path" x1="510" y1="200" x2="520" y2="200" stroke="var(--neon-cyan)" stroke-width="1"/>
-                        
-                        <path class="draw-path" d="M 300 750 L 700 750" fill="none" stroke="rgba(0,255,255,0.2)" stroke-width="1"/>
-                        <path class="draw-path" d="M 400 750 L 600 750" fill="none" stroke="var(--neon-cyan)" stroke-width="0.5"/>
+                    <svg class="hero-drawing-svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice"
+                        style="filter: drop-shadow(0px 0px 8px rgba(0, 255, 255, 0.5));">
+                        <path class="draw-path" d="M 500 200 L 250 650 M 500 200 L 750 650 M 350 480 L 650 480"
+                            fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" />
+                        <path class="draw-path" d="M 500 100 L 100 800 M 500 100 L 900 800" fill="none"
+                            stroke="rgba(0,255,255,0.4)" stroke-width="1" />
+                        <circle class="draw-path" cx="500" cy="200" r="15" fill="none" stroke="var(--neon-cyan)"
+                            stroke-width="1" />
+                        <circle class="draw-path" cx="500" cy="200" r="40" fill="none" stroke="rgba(0,255,255,0.2)"
+                            stroke-width="1" />
+                        <circle class="draw-path" cx="500" cy="200" r="5" fill="none" stroke="var(--neon-cyan)"
+                            stroke-width="2" />
+                        <line class="draw-path" x1="480" y1="200" x2="490" y2="200" stroke="var(--neon-cyan)"
+                            stroke-width="1" />
+                        <line class="draw-path" x1="510" y1="200" x2="520" y2="200" stroke="var(--neon-cyan)"
+                            stroke-width="1" />
+                        <path class="draw-path" d="M 300 750 L 700 750" fill="none" stroke="rgba(0,255,255,0.2)"
+                            stroke-width="1" />
+                        <path class="draw-path" d="M 400 750 L 600 750" fill="none" stroke="var(--neon-cyan)"
+                            stroke-width="0.5" />
                     </svg>
                 </div>
+                <!-- Particle canvas for hero -->
+                <canvas id="hero-particles" aria-hidden="true"></canvas>
                 <div class="hero-content">
+                    <p class="hero-tag">Diseñador Multimedia &bull; Animador &bull; Desarrollador Web</p>
                     <h1 class="glitch" data-text="ALEX ANDRADE">ALEX ANDRADE</h1>
-                    <p class="subtitle">Creative Multidisciplinary Designer</p>
+                    <p class="subtitle">Creando experiencias visuales que trascienden</p>
                     <div class="scroll-indicator">
                         <span>Scroll para descubrir</span>
-                        <div class="line"></div>
+                        <div class="mouse-icon">
+                            <div class="mouse-wheel"></div>
+                        </div>
                     </div>
                 </div>
             </section>
+
+            <!-- Marquee strip -->
+            <div class="marquee-strip" aria-hidden="true">
+                <div class="marquee-track">
+                    <span>DISEÑO WEB &bull; MOTION GRAPHICS &bull; BRANDING &bull; ANIMACIÓN &bull; UI/UX &bull; 3D &bull; DIRECCIÓN CREATIVA &bull; DESARROLLO WEB &bull; DISEÑO WEB &bull; MOTION GRAPHICS &bull; BRANDING &bull; ANIMACIÓN &bull; UI/UX &bull; 3D &bull; DIRECCIÓN CREATIVA &bull; DESARROLLO WEB &bull;</span>
+                </div>
+            </div>
 
             <section class="panel section-sobre" id="sobre">
                 <div class="section-content">
                     <div class="about-grid">
                         <div class="about-image">
-                            <img src="WhatsApp%20Image%202026-04-02%20at%209.26.58%20PM.jpeg" alt="Alex Andrade Fotografía" loading="lazy">
+                            <img src="WhatsApp%20Image%202026-04-02%20at%209.26.58%20PM.jpeg"
+                                alt="Alex Andrade — Diseñador Multimedia" loading="lazy" width="380" height="380">
                             <div class="image-glow"></div>
                         </div>
                         <div class="about-text">
                             <h2 class="neon-text">Sobre Mí <span class="number">00</span></h2>
-                            <p>Soy un diseñador y director creativo apasionado por la creación de soluciones estructuradas que impactan visualmente y además generan un cambio funcional positivo.</p>
-                            <p>Mi enfoque abarca desde experiencias web minimalistas y gráficos de alto contraste, hasta narrativas en movimiento y compromisos socio-ambientales. Conecto los puntos entre la estética profunda y el diseño centrado en el usuario.</p>
+                            <p>Soy un diseñador y director creativo apasionado por la creación de soluciones
+                                estructuradas que impactan visualmente y además generan un cambio funcional positivo.
+                            </p>
+                            <p>Mi enfoque abarca desde experiencias web minimalistas y gráficos de alto contraste, hasta
+                                narrativas en movimiento y compromisos socio-ambientales. Conecto los puntos entre la
+                                estética profunda y el diseño centrado en el usuario.</p>
+
+                            <!-- Skills -->
+                            <div class="skills-grid">
+                                <div class="skill-chip" data-skill="Figma">Figma</div>
+                                <div class="skill-chip" data-skill="Photoshop">Photoshop</div>
+                                <div class="skill-chip" data-skill="Illustrator">Illustrator</div>
+                                <div class="skill-chip" data-skill="After Effects">After Effects</div>
+                                <div class="skill-chip" data-skill="Premiere">Premiere Pro</div>
+                                <div class="skill-chip" data-skill="HTML/CSS">HTML / CSS</div>
+                                <div class="skill-chip" data-skill="JavaScript">JavaScript</div>
+                                <div class="skill-chip" data-skill="Blender">Blender 3D</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -186,14 +266,16 @@
                             <div class="browser-mockup">
                                 <div class="browser-header">
                                     <div class="dots">
-                                        <span class="dot red"></span>
-                                        <span class="dot yellow"></span>
-                                        <span class="dot green"></span>
+                                        <span class="dot dot-red"></span>
+                                        <span class="dot dot-yellow"></span>
+                                        <span class="dot dot-green"></span>
                                     </div>
                                     <div class="browser-url">malezarap.vercel.app</div>
                                 </div>
                                 <div class="browser-content">
-                                    <iframe src="https://malezarap.vercel.app" title="Maleza Rap live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                    <div class="iframe-placeholder" data-src="https://malezarap.vercel.app">
+                                        <span class="iframe-loader"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="web-item-footer">
@@ -201,22 +283,24 @@
                                     <h3>MALEZA RAP</h3>
                                     <span>Diseño Web Interactivo</span>
                                 </div>
-                                <a href="https://malezarap.vercel.app" target="_blank" class="cyber-btn">Ver ↗</a>
+                                <a href="https://malezarap.vercel.app" target="_blank" rel="noopener" class="cyber-btn magnetic">Ver sitio</a>
                             </div>
                         </div>
-                        
+
                         <div class="web-mockup-item">
                             <div class="browser-mockup">
                                 <div class="browser-header">
                                     <div class="dots">
-                                        <span class="dot red"></span>
-                                        <span class="dot yellow"></span>
-                                        <span class="dot green"></span>
+                                        <span class="dot dot-red"></span>
+                                        <span class="dot dot-yellow"></span>
+                                        <span class="dot dot-green"></span>
                                     </div>
                                     <div class="browser-url">solidhar-beta.vercel.app</div>
                                 </div>
                                 <div class="browser-content">
-                                    <iframe src="https://solidhar-beta.vercel.app" title="Solidhar live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                    <div class="iframe-placeholder" data-src="https://solidhar-beta.vercel.app">
+                                        <span class="iframe-loader"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="web-item-footer">
@@ -224,7 +308,7 @@
                                     <h3>SOLIDHAR</h3>
                                     <span>Diseño Web Profesional</span>
                                 </div>
-                                <a href="https://solidhar-beta.vercel.app" target="_blank" class="cyber-btn">Ver ↗</a>
+                                <a href="https://solidhar-beta.vercel.app" target="_blank" rel="noopener" class="cyber-btn magnetic">Ver sitio</a>
                             </div>
                         </div>
 
@@ -232,14 +316,16 @@
                             <div class="browser-mockup">
                                 <div class="browser-header">
                                     <div class="dots">
-                                        <span class="dot red"></span>
-                                        <span class="dot yellow"></span>
-                                        <span class="dot green"></span>
+                                        <span class="dot dot-red"></span>
+                                        <span class="dot dot-yellow"></span>
+                                        <span class="dot dot-green"></span>
                                     </div>
                                     <div class="browser-url">l-emon.vercel.app</div>
                                 </div>
                                 <div class="browser-content">
-                                    <iframe src="https://l-emon.vercel.app/" title="Lemon Studio live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                    <div class="iframe-placeholder" data-src="https://l-emon.vercel.app/">
+                                        <span class="iframe-loader"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="web-item-footer">
@@ -247,7 +333,7 @@
                                     <h3>LEMON STUDIO</h3>
                                     <span>Agencia Creativa</span>
                                 </div>
-                                <a href="https://l-emon.vercel.app/" target="_blank" class="cyber-btn">Ver ↗</a>
+                                <a href="https://l-emon.vercel.app/" target="_blank" rel="noopener" class="cyber-btn magnetic">Ver sitio</a>
                             </div>
                         </div>
 
@@ -255,14 +341,16 @@
                             <div class="browser-mockup">
                                 <div class="browser-header">
                                     <div class="dots">
-                                        <span class="dot red"></span>
-                                        <span class="dot yellow"></span>
-                                        <span class="dot green"></span>
+                                        <span class="dot dot-red"></span>
+                                        <span class="dot dot-yellow"></span>
+                                        <span class="dot dot-green"></span>
                                     </div>
                                     <div class="browser-url">boskes.vercel.app</div>
                                 </div>
                                 <div class="browser-content">
-                                    <iframe src="https://boskes.vercel.app/" title="Boskes live preview" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+                                    <div class="iframe-placeholder" data-src="https://boskes.vercel.app/">
+                                        <span class="iframe-loader"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="web-item-footer">
@@ -270,7 +358,7 @@
                                     <h3>BOSKES</h3>
                                     <span>Creative Studio / Arquitectura</span>
                                 </div>
-                                <a href="https://boskes.vercel.app/" target="_blank" class="cyber-btn">Ver ↗</a>
+                                <a href="https://boskes.vercel.app/" target="_blank" rel="noopener" class="cyber-btn magnetic">Ver sitio</a>
                             </div>
                         </div>
                     </div>
@@ -281,25 +369,43 @@
                 <div class="section-content">
                     <h2 class="neon-text">Diseño Gráfico <span class="number">02</span></h2>
                     <p>Comunicación visual de alto impacto donde convergen ideas innovadoras.</p>
-                    <p class="hint-text">☞ Dale clic a cualquier diseño para verlo en pantalla completa.</p>
+                    <p class="hint-text">Clic en cualquier diseño para verlo en pantalla completa</p>
                     <div class="portfolio-grid gallery-grid">
                         <div class="portfolio-item hover-image">
-                            <img src="SOLO 1-CDK3wvje.jfif" alt="Proyecto Gráfico 1" class="portfolio-img" loading="lazy">
+                            <img src="SOLO 1-CDK3wvje.jfif" alt="Diseño de portada musical — estilo urbano" class="portfolio-img" loading="lazy">
+                            <div class="img-overlay"><span>Ver proyecto</span></div>
                         </div>
                         <div class="portfolio-item hover-image">
-                            <img src="2-Car0yTGv.jfif" alt="Proyecto Gráfico 2" class="portfolio-img" loading="lazy">
+                            <img src="2-Car0yTGv.jfif" alt="Arte visual y composición gráfica" class="portfolio-img" loading="lazy">
+                            <div class="img-overlay"><span>Ver proyecto</span></div>
                         </div>
                         <div class="portfolio-item hover-image">
-                            <img src="WhatsApp%20Image%202026-01-22%20at%2010.36.11%20AM%20(1)-BbwLzITu.jpeg" alt="Fotografía Dirección" class="portfolio-img" loading="lazy">
+                            <img src="WhatsApp%20Image%202026-01-22%20at%2010.36.11%20AM%20(1)-BbwLzITu.jpeg"
+                                alt="Dirección de fotografía y concepto visual" class="portfolio-img" loading="lazy">
+                            <div class="img-overlay"><span>Ver proyecto</span></div>
                         </div>
                         <div class="portfolio-item hover-image">
-                            <img src="WhatsApp%20Image%202026-04-02%20at%2011.37.05%20AM.jpeg" alt="Campaña Z" class="portfolio-img" loading="lazy">
+                            <img src="WhatsApp%20Image%202026-04-02%20at%2011.37.05%20AM.jpeg" alt="Campaña publicitaria — concepto Z"
+                                class="portfolio-img" loading="lazy">
+                            <div class="img-overlay"><span>Ver proyecto</span></div>
                         </div>
                         <div class="portfolio-item hover-image">
-                            <img src="logo%20dj.png" alt="Logo de DJ" class="portfolio-img" loading="lazy">
+                            <img src="logo%20dj.png" alt="Diseño de logotipo para DJ" class="portfolio-img" loading="lazy">
+                            <div class="img-overlay"><span>Ver proyecto</span></div>
                         </div>
                         <div class="portfolio-item hover-image">
-                            <img src="lata%20coca.png" alt="Modelado de Lata" class="portfolio-img" loading="lazy">
+                            <img src="lata%20coca.png" alt="Modelado 3D de producto — lata" class="portfolio-img" loading="lazy">
+                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                        </div>
+                        <div class="portfolio-item hover-image pdf-trigger" data-pdf="yenifer.pdf" title="Yenifer — portada (PDF)">
+                            <div class="pdf-cover-wrap" aria-hidden="true">
+                                <iframe class="pdf-cover-preview"
+                                    src="yenifer.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
+                                    title="Portada del proyecto Yenifer"
+                                    tabindex="-1"
+                                    loading="lazy"></iframe>
+                            </div>
+                            <div class="img-overlay"><span>Ver PDF completo</span></div>
                         </div>
                     </div>
                 </div>
@@ -309,16 +415,21 @@
                 <div class="section-content">
                     <h2 class="neon-text">Motion Graphics <span class="number">03</span></h2>
                     <p>Dando vida a las ideas a través del movimiento y dinámico storytelling.</p>
-                    <p class="hint-text">☞ Dale clic a las miniaturas para reproducir directamente en HD.</p>
+                    <p class="hint-text">Clic en las miniaturas para reproducir directamente en HD</p>
                     <div class="portfolio-grid gallery-grid">
                         <div class="portfolio-item hover-image video-trigger" data-video-id="W2tDm558i68">
-                            <img src="https://img.youtube.com/vi/W2tDm558i68/maxresdefault.jpg" alt="Edición de Video 1" class="portfolio-img" loading="lazy">
-                            <div class="play-indicator">▶</div>
+                            <img src="https://img.youtube.com/vi/W2tDm558i68/maxresdefault.jpg" alt="Edición y Motion Graphics — proyecto audiovisual"
+                                class="portfolio-img" loading="lazy">
+                            <div class="play-indicator">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                            </div>
                         </div>
-
                         <div class="portfolio-item hover-image video-trigger" data-video-id="F2-bgSu0j_8">
-                            <img src="https://img.youtube.com/vi/F2-bgSu0j_8/maxresdefault.jpg" alt="Edición de Video 2" class="portfolio-img" loading="lazy">
-                            <div class="play-indicator">▶</div>
+                            <img src="https://img.youtube.com/vi/F2-bgSu0j_8/maxresdefault.jpg" alt="Animación y edición de video profesional"
+                                class="portfolio-img" loading="lazy">
+                            <div class="play-indicator">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -330,15 +441,22 @@
                     <p>Diseño con propósito y consciencia ecológica, honrando identidades, raíces y comunidades.</p>
                     <div class="ethnic-feature">
                         <div class="ethnic-image-wrapper">
-                            <img src="Captura%20de%20pantalla%202026-04-02%20223936.png" alt="Investigación acción radiofónica - Tejiendo Pijao" loading="lazy">
+                            <img src="Captura%20de%20pantalla%202026-04-02%20223936.png"
+                                alt="Investigación acción radiofónica — Tejiendo Pijao" loading="lazy">
                         </div>
                         <div class="ethnic-info">
                             <h3>Buen-Vivir y Memoria:<br>Saber Comunicarse</h3>
-                            <p>En trabajo colaborativo con la comunidad y el grupo <strong>“Tejiendo Pensamiento Pijao”</strong>, co-creamos episodios radiofónicos de recuperación de memoria histórica.</p>
-                            <p>Fui <strong>co-creador de investigación-acción radiofónica</strong> bajo la ecosofía del buen-vivir. Nuestro estudio empírico fue sistematizado y publicado oficialmente por la revista científica <i>Jangwa Pana</i> de la Universidad del Magdalena.</p>
+                            <p>En trabajo colaborativo con la comunidad y el grupo <strong>"Tejiendo Pensamiento
+                                    Pijao"</strong>, co-creamos episodios radiofónicos de recuperación de memoria
+                                histórica.</p>
+                            <p>Fui <strong>co-creador de investigación-acción radiofónica</strong> bajo la ecosofía del
+                                buen-vivir. Nuestro estudio empírico fue sistematizado y publicado oficialmente por la
+                                revista científica <i>Jangwa Pana</i> de la Universidad del Magdalena.</p>
                             <div class="ethnic-buttons">
-                                <a href="https://open.spotify.com/show/0m50GIG5BUyzWLFqxky7Hv" target="_blank" class="ethnic-btn btn-green">🎧 Escuchar en Spotify</a>
-                                <a href="https://revistas.unimagdalena.edu.co/index.php/jangwapana/article/view/5562" target="_blank" class="ethnic-btn btn-outline-green">📄 Leer Investigación</a>
+                                <a href="https://open.spotify.com/show/0m50GIG5BUyzWLFqxky7Hv" target="_blank"
+                                    rel="noopener" class="ethnic-btn btn-green magnetic">Escuchar en Spotify</a>
+                                <a href="https://revistas.unimagdalena.edu.co/index.php/jangwapana/article/view/5562"
+                                    target="_blank" rel="noopener" class="ethnic-btn btn-outline-green magnetic">Leer Investigación</a>
                             </div>
                         </div>
                     </div>
@@ -349,42 +467,100 @@
                 <div class="section-content">
                     <h2 class="neon-text">Certificados <span class="number">05</span></h2>
                     <p>Experiencia laboral respaldada por organizaciones y equipos de alto impacto.</p>
-
                     <div class="certs-feature">
                         <div class="cert-pdf-wrapper">
-                            <iframe src="1.3.%20CERTIFICADOS%20LABORALES%20.pdf#toolbar=0" title="Certificados Laborales Alex Andrade" loading="lazy"></iframe>
+                            <iframe src="1.3.%20CERTIFICADOS%20LABORALES%20.pdf#toolbar=0"
+                                title="Certificados Laborales Alex Andrade" loading="lazy"></iframe>
                         </div>
                         <div class="cert-info">
                             <h3>Certificados Laborales y Recomendaciones</h3>
-                            <p>Respaldo profesional de empresas, organizaciones y equipos con los que he colaborado como <strong>Diseñador Multimedia, Animador y Desarrollador Web</strong>.</p>
-                            <p>Cada uno de estos documentos avala experiencias reales en comunicación, diseño gráfico, producción audiovisual y trabajo comunitario.</p>
-                            <a href="1.3.%20CERTIFICADOS%20LABORALES%20.pdf" download class="cert-download-btn">⬇ Descargar Certificados (PDF)</a>
+                            <p>Respaldo profesional de empresas, organizaciones y equipos con los que he colaborado como
+                                <strong>Diseñador Multimedia, Animador y Desarrollador Web</strong>.</p>
+                            <p>Cada uno de estos documentos avala experiencias reales en comunicación, diseño gráfico,
+                                producción audiovisual y trabajo comunitario.</p>
+                            <a href="1.3.%20CERTIFICADOS%20LABORALES%20.pdf" download class="cert-download-btn magnetic">Descargar Certificados (PDF)</a>
                         </div>
                     </div>
                 </div>
             </section>
-            
+
+            <!-- Sección de contacto -->
+            <section class="panel section-contacto" id="contacto">
+                <div class="section-content">
+                    <h2 class="neon-text">Contacto <span class="number">06</span></h2>
+                    <p>¿Tienes un proyecto en mente? Hablemos y hagamos algo increíble juntos.</p>
+                    <div class="contact-grid contact-grid--three">
+                        <a href="mailto:alexanher9@gmail.com" class="contact-card">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <path d="M2 4l10 8 10-8"/>
+                                </svg>
+                            </div>
+                            <h3>Email</h3>
+                            <span>alexanher9@gmail.com</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/alex-andrade-47b95236b/" target="_blank" rel="noopener" class="contact-card">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <h3>LinkedIn</h3>
+                            <span>Perfil profesional</span>
+                        </a>
+                        <a href="https://github.com/Alexandrade-s-o" target="_blank" rel="noopener" class="contact-card">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                                    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </div>
+                            <h3>GitHub</h3>
+                            <span>@Alexandrade-s-o</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <div class="footer-logo">A<span>A</span></div>
+                    <p class="footer-tagline">Diseño con propósito. Código con pasión.</p>
+                    <div class="footer-divider"></div>
+                    <p class="footer-copy">&copy; 2026 Alex Andrade. Todos los derechos reservados.</p>
+                </div>
+            </footer>
+
         </div>
     </main>
 
+    <!-- Back to top -->
+    <button class="back-to-top" aria-label="Volver arriba">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
     <!-- Image Modal -->
-    <div class="image-modal" id="imageModal">
+    <div class="image-modal" id="imageModal" role="dialog" aria-label="Imagen ampliada">
+        <button class="modal-close" aria-label="Cerrar">&times;</button>
         <img class="modal-content" id="modalImg" src="" alt="Ampliar imagen">
     </div>
 
     <!-- YouTube Video Modal -->
-    <div class="image-modal video-modal" id="videoModal">
+    <div class="image-modal video-modal" id="videoModal" role="dialog" aria-label="Reproductor de video">
+        <button class="modal-close" aria-label="Cerrar">&times;</button>
         <div class="modal-content modal-video-container">
-            <iframe id="modalVideoIframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="modalVideoIframe" src="" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
         </div>
     </div>
 
     <!-- GSAP core & plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Smooth scroll (Lenis) -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
     <!-- Custom JS -->
     <script src="app.js"></script>
 </body>
+
 </html>

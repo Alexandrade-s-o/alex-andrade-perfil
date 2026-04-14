@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV — Alex Andrade Hernández</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@300;500;800;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS (Reusing portfolio style) -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --cv-teal: #00ffff;
+            --cv-teal-dim: rgba(0, 255, 255, 0.15);
+            --cv-dark: #0a0a0a;
+            --cv-light: #f8f8f8;
+            --cv-white: #ffffff;
+            --cv-accent: #e8f9fb;
+        }
+
+        body {
+            background: #d4dde0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        #smooth-wrapper {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--cv-white);
+            position: relative;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.20);
+            z-index: 5;
+        }
+
+        .cv-page {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 297mm;
+        }
+
+        /* ── DIAGONAL DECO LINES (Cinematic touch) ── */
+        .deco { position: absolute; z-index: 1; pointer-events: none; }
+        .deco-1 { top: -50px; right: 50px; width: 1.5px; height: 320px; background: var(--cv-teal); opacity: .3; transform: rotate(-30deg); transform-origin: top center; }
+        .deco-2 { top: -30px; right: 110px; width: 1px; height: 250px; background: var(--cv-teal); opacity: .15; transform: rotate(-30deg); transform-origin: top center; }
+
+        /* SIDEBAR */
+        .sidebar {
+            background: #ffffff;
+            padding: 50px 30px;
+            border-right: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            position: relative;
+        }
+        .sidebar::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--cv-teal);
+        }
+
+        .photo-wrap {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            border: 3px solid var(--cv-teal);
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px var(--cv-teal-dim);
+            transition: all 0.5s ease;
+        }
+        .photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .s-name { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--cv-dark); text-align: center; line-height: 1.2; margin-bottom: 8px; }
+        .s-role { font-size: 0.75rem; font-weight: 700; color: var(--cv-teal); text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+
+        .divider { width: 40px; height: 2px; background: var(--cv-teal); margin-bottom: 25px; }
+
+        .c-list { list-style: none; width: 100%; gap: 12px; display: flex; flex-direction: column; margin-bottom: 30px; }
+        .c-list li { display: flex; align-items: center; gap: 10px; font-size: 0.65rem; color: #555; line-height: 1.4; }
+        .c-icon { width: 18px; height: 18px; border-radius: 50%; background: var(--cv-teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .c-icon svg { width: 10px; height: 10px; fill: white; }
+        .c-list a { color: var(--cv-dark); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--cv-teal-dim); }
+
+        .sb-h { font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--cv-dark); text-transform: uppercase; letter-spacing: 1px; padding-bottom: 6px; border-bottom: 2px solid var(--cv-teal); margin-bottom: 12px; align-self: flex-start; width: 100%; }
+
+        .sk-item { width: 100%; margin-bottom: 10px; }
+        .sk-name { font-size: 0.65rem; font-weight: 600; color: #444; margin-bottom: 4px; display: flex; justify-content: space-between; }
+        .sk-stars { color: var(--cv-teal); font-size: 8px; }
+        .sk-bar { height: 3px; background: #eee; border-radius: 2px; overflow: hidden; }
+        .sk-fill { height: 100%; background: var(--cv-teal); width: 0; transition: width 1s ease-out; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 25px; }
+        .tag { font-size: 0.6rem; font-weight: 600; color: var(--cv-teal); border: 1px solid var(--cv-teal); border-radius: 15px; padding: 2px 8px; background: var(--cv-accent); }
+
+        /* MAIN CONTENT */
+        .main { padding: 40px; display: flex; flex-direction: column; gap: 20px; z-index: 2; background: white; }
+
+        .sec-title { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--cv-dark); margin-bottom: 12px; position: relative; display: inline-block; }
+        .sec-title::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 30px; height: 3px; background: var(--cv-teal); border-radius: 2px; }
+
+        .body-text { font-size: 0.75rem; color: #444; line-height: 1.6; margin-bottom: 8px; }
+
+        .exp-card { border-left: 3px solid var(--cv-teal); padding-left: 15px; margin-bottom: 12px; position: relative; }
+        .exp-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3px; }
+        .exp-title { font-size: 0.85rem; font-weight: 800; color: var(--cv-dark); }
+        .exp-date { font-size: 0.65rem; font-weight: 700; color: var(--cv-teal); background: var(--cv-accent); padding: 2px 8px; border-radius: 10px; }
+        .exp-co { font-size: 0.7rem; font-weight: 700; color: #666; margin-bottom: 6px; }
+        .exp-ul { padding-left: 15px; list-style-type: square; }
+        .exp-ul li { font-size: 0.7rem; color: #555; line-height: 1.5; margin-bottom: 3px; }
+
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 5px; }
+        .proj-item { background: #fdfdfd; border: 1px solid #eee; border-radius: 10px; padding: 12px; border-left: 2px solid var(--cv-teal); }
+        .proj-item h4 { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; color: var(--cv-dark); }
+        .proj-item p { font-size: 0.65rem; color: #777; line-height: 1.4; }
+
+        .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+        .tool-b { 
+            background: #ffffff; 
+            border: 1px solid #f0f0f0; 
+            border-radius: 10px; 
+            padding: 12px 6px; 
+            text-align: center; 
+            font-size: 0.65rem; 
+            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .tool-b svg { border-radius: 3px; }
+
+        .print-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 100;
+            padding: 12px 24px;
+            background: var(--cv-dark);
+            color: white;
+            border-radius: 30px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .print-btn:hover {
+            background: var(--cv-teal);
+            color: var(--cv-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,255,255,0.3);
+        }
+
+        .back-home {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 100;
+            color: var(--cv-dark);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* PRELOADER Overrides */
+        #preloader { background: var(--cv-white) !important; color: var(--cv-dark) !important; }
+        .preloader-title { color: var(--cv-dark) !important; text-transform: uppercase; }
+
+        /* Print Optimization & High-End Aesthetics */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+            body {
+                background: white;
+                padding: 0;
+                cursor: default;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            #smooth-wrapper {
+                box-shadow: none;
+                width: 210mm;
+                min-height: 297mm;
+            }
+            .print-btn, .back-home, .cursor, .cursor-follower, #preloader, .scroll-progress-rail {
+                display: none !important;
+            }
+            .cv-page {
+                grid-template-columns: 240px 1fr !important;
+            }
+            .sidebar {
+                background: #fff !important;
+                border-right: 1px solid #eee !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .main {
+                background: white !important;
+            }
+            .deco {
+                opacity: 0.08 !important;
+            }
+            .sec-title::after {
+                background: var(--cv-teal) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .sk-fill {
+                background: var(--cv-teal) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .tag {
+                background: var(--cv-accent) !important;
+                border: 1px solid var(--cv-teal) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            section, .exp-card, .proj-item {
+                break-inside: avoid;
+            }
+            .c-icon {
+                background: var(--cv-teal) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .s-name, .s-role, .sec-title, .exp-title {
+                color: #000 !important;
+            }
+            .exp-date {
+                background: var(--cv-accent) !important;
+                color: var(--cv-teal) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            #smooth-wrapper { width: 100%; box-shadow: none; }
+            .cv-page { grid-template-columns: 1fr; }
+            .sidebar { border-right: none; border-bottom: 1px solid #eee; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <h2 class="preloader-title">ALEX ANDRADE</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="progress-text">SINCRO. PORTAFOLIO... <span id="percent">0</span>%</div>
+        </div>
+    </div>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <a href="index.html" class="back-home">← PORTFOLIO</a>
+    <button class="print-btn" onclick="window.print()">DESCARGAR PDF ⎙</button>
+
+    <div id="smooth-wrapper">
+        <div class="cv-page">
+            <div class="deco deco-1"></div>
+            <div class="deco deco-2"></div>
+
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <div class="photo-wrap">
+                    <img src="WhatsApp%20Image%202026-04-02%20at%209.26.58%20PM.jpeg" alt="Alex Andrade Hernández">
+                </div>
+                <h1 class="s-name">Alex Andrade Hernández</h1>
+                <p class="s-role">Diseñador Gráfico &<br>Productor Multimedia</p>
+
+                <div class="divider"></div>
+
+                <ul class="c-list">
+                    <li>
+                        <span class="c-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+                        alexanher9@gmail.com
+                    </li>
+                    <li>
+                        <span class="c-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+                        +57 3502528104
+                    </li>
+                </ul>
+
+                <a href="https://alex-andrade-perfil.vercel.app/" target="_blank" style="text-decoration: none; width: 100%; margin-bottom: 30px;">
+                    <div style="background: var(--cv-dark); color: var(--cv-teal); padding: 12px; border-radius: 10px; text-align: center; font-family: var(--font-heading); font-weight: 800; font-size: 0.7rem; border: 1px solid var(--cv-teal); box-shadow: 0 4px 15px var(--cv-teal-dim); transition: 0.3s; width: 100%;">
+                        VER PORTAFOLIO ONLINE ↗
+                    </div>
+                </a>
+
+                <div class="sb-h">Habilidades Técnicas</div>
+                <div class="sk-item">
+                    <div class="sk-name">Adobe Illustrator <span class="sk-stars">⭐⭐⭐⭐⭐</span></div>
+                    <div class="sk-bar"><div class="sk-fill" style="width:100%"></div></div>
+                </div>
+                <div class="sk-item">
+                    <div class="sk-name">Branding & Identidad <span class="sk-stars">⭐⭐⭐⭐⭐</span></div>
+                    <div class="sk-bar"><div class="sk-fill" style="width:100%"></div></div>
+                </div>
+                <div class="sk-item">
+                    <div class="sk-name">After Effects <span class="sk-stars">⭐⭐⭐⭐</span></div>
+                    <div class="sk-bar"><div class="sk-fill" style="width:80%"></div></div>
+                </div>
+                <div class="sk-item">
+                    <div class="sk-name">Premiere Pro <span class="sk-stars">⭐⭐⭐⭐</span></div>
+                    <div class="sk-bar"><div class="sk-fill" style="width:80%"></div></div>
+                </div>
+                <div class="sk-item">
+                    <div class="sk-name">Photoshop <span class="sk-stars">⭐⭐⭐⭐</span></div>
+                    <div class="sk-bar"><div class="sk-fill" style="width:80%"></div></div>
+                </div>
+
+                <div class="sb-h" style="margin-top:20px">Competencias</div>
+                <div class="tags">
+                    <span class="tag">Creatividad</span>
+                    <span class="tag">Comunicación</span>
+                    <span class="tag">Trabajo en campo</span>
+                    <span class="tag">Pensamiento Crítico</span>
+                    <span class="tag">Adaptabilidad</span>
+                </div>
+
+                <div class="sb-h">Idiomas</div>
+                <div class="body-text" style="font-size:0.65rem">
+                    <strong>Español:</strong> Nativo<br>
+                    <strong>Inglés:</strong> A2 / B1 en proceso
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="main">
+                <section>
+                    <h2 class="sec-title">Perfil Profesional</h2>
+                    <p class="body-text">
+                        Diseñador gráfico y productor multimedia con enfoque en soluciones visuales estructuradas que impactan funcionalmente. Especializado en experiencias web premium, gráficos de alto contraste y narrativas en movimiento.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="sec-title">Proyectos & Portafolio</h2>
+                    <div class="project-grid">
+                        <div class="proj-item">
+                            <h4>Diseño Web</h4>
+                            <p>Maleza Rap, Solidhar, Lemon Studio, Boskes Studio.</p>
+                        </div>
+                        <div class="proj-item">
+                            <h4>Producción Audiovisual</h4>
+                            <h4 style="font-size:0.6rem; color:#999; margin-top:2px;">Motion Graphics</h4>
+                            <p>Dirección y edición de video con VFX y dynamic storytelling.</p>
+                        </div>
+                        <div class="proj-item">
+                            <h4>Diseño Gráfico</h4>
+                            <p>Branding integral, modelado y campañas visuales de alto impacto.</p>
+                        </div>
+                        <div class="proj-item">
+                            <h4>Investigación Acción</h4>
+                            <p>Co-creador de investigación radiofónica "Tejiendo Pijao".</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="sec-title">Exp. Étnica Socio-Ambiental</h2>
+                    <p class="body-text">
+                        En colaboración con la comunidad <strong>“Tejiendo Pensamiento Pijao”</strong>, co-creador de investigación-acción radiofónica para la recuperación de memoria histórica bajo la ecosofía del buen-vivir.
+                    </p>
+                    <p class="body-text" style="font-style: italic; color: #666;">
+                        • Sistematizado y publicado por la revista científica <strong>Jangwa Pana</strong> (U. del Magdalena).
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="sec-title">Experiencia Laboral</h2>
+                    <div class="exp-card">
+                        <div class="exp-head">
+                            <span class="exp-title">Diseñador Gráfico</span>
+                            <span class="exp-date">FEB 2026 – AGO 2026</span>
+                        </div>
+                        <div class="exp-co">SOCYA · Medellín, Colombia</div>
+                        <ul class="exp-ul">
+                            <li>Desarrollo de piezas para comunicación interna/externa e impacto social.</li>
+                            <li>Trabajo en campo para levantamiento de necesidades visuales.</li>
+                            <li>Adaptación de material publicitario para medios digitales e impresos.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-card">
+                        <div class="exp-head">
+                            <span class="exp-title">Animador & Editor de Video</span>
+                            <span class="exp-date">2023 – 2024</span>
+                        </div>
+                        <div class="exp-co">COSMO VISUAL · Medellín, Colombia</div>
+                        <ul class="exp-ul">
+                            <li>Creación de animaciones 2D y motion graphics para contenido digital.</li>
+                            <li>Post-producción y edición rítmica de piezas audiovisuales.</li>
+                            <li>Implementación de efectos visuales (VFX) para mejorar la narrativa.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-card">
+                        <div class="exp-head">
+                            <span class="exp-title">Diseñador Multimedia Freelance</span>
+                            <span class="exp-date">2023 – ACTUALIDAD</span>
+                        </div>
+                        <div class="exp-co">Independiente</div>
+                        <ul class="exp-ul">
+                            <li>Amplia experiencia en la gestión de proyectos creativos desde la concepción hasta la entrega.</li>
+                            <li>Branding, diseño UX/UI y producción audiovisual para diversos clientes.</li>
+                            <li>Consultoría en comunicación visual y posicionamiento de marca.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="sec-title">Herramientas</h2>
+                    <div class="tools-grid">
+                        <div class="tool-b">
+                            <svg viewBox="0 0 24 24" width="24" height="24"><rect width="24" height="24" rx="4" fill="#330000"/><text x="50%" y="65%" text-anchor="middle" fill="#FF9A00" font-family="Arial, sans-serif" font-weight="900" font-size="12px">Ai</text></svg>
+                            Illustrator
+                        </div>
+                        <div class="tool-b">
+                            <svg viewBox="0 0 24 24" width="24" height="24"><rect width="24" height="24" rx="4" fill="#00005b"/><text x="50%" y="65%" text-anchor="middle" fill="#D291FF" font-family="Arial, sans-serif" font-weight="900" font-size="12px">Ae</text></svg>
+                            After Effects
+                        </div>
+                        <div class="tool-b">
+                            <svg viewBox="0 0 24 24" width="24" height="24"><rect width="24" height="24" rx="4" fill="#2d002d"/><text x="50%" y="65%" text-anchor="middle" fill="#EA77FF" font-family="Arial, sans-serif" font-weight="900" font-size="12px">Pr</text></svg>
+                            Premiere Pro
+                        </div>
+                        <div class="tool-b">
+                            <svg viewBox="0 0 24 24" width="24" height="24"><rect width="24" height="24" rx="4" fill="#001e36"/><text x="50%" y="65%" text-anchor="middle" fill="#31A8FF" font-family="Arial, sans-serif" font-weight="900" font-size="12px">Ps</text></svg>
+                            Photoshop
+                        </div>
+                        <div class="tool-b"><span>🖱️</span>Figma / UX</div>
+                        <div class="tool-b"><span>🌀</span>Motion</div>
+                        <div class="tool-b"><span>🏷️</span>Branding</div>
+                        <div class="tool-b"><span>📱</span>Social</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="sec-title">Formación</h2>
+                    <div class="body-text">
+                        <strong>Técnico en Producción Multimedia</strong><br>
+                        SENA · Colombia | 📅 2023 - 2025
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="sec-title">Destacados 2025</h2>
+                    <div class="tags">
+                        <span class="tag" style="background:#0a0a0a; color:white; border:none; padding: 4px 10px;">🎯 Diseño Minimalista</span>
+                        <span class="tag" style="background:#0a0a0a; color:white; border:none; padding: 4px 10px;">🎞️ VFX & Storytelling</span>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- GSAP core & plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Smooth scroll (Lenis) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <script>
+        // Preloader Logic
+        const preloaderTl = gsap.timeline();
+        let progress = { val: 0 };
+        preloaderTl.to(progress, {
+            val: 100,
+            duration: 2.5,
+            ease: "power2.inOut",
+            onUpdate: () => {
+                document.getElementById('percent').innerText = Math.round(progress.val);
+                document.querySelector('.progress-bar').style.width = progress.val + "%";
+            }
+        }).to('#preloader', {
+            autoAlpha: 0,
+            duration: 1,
+            onComplete: () => {
+                // Animate skills bars on enter
+                gsap.to('.sk-fill', {
+                    width: (i, el) => {
+                        // Get width from parent style or use data attribute if we had it
+                        // For simplicity, just use the inline width set in HTML
+                        return el.style.width; 
+                    },
+                    duration: 1.5,
+                    stagger: 0.1,
+                    ease: "power2.out"
+                });
+            }
+        });
+
+        // Initialize Lenis
+        const lenis = new Lenis();
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.3 });
+        });
+    </script>
+</body>
+
+</html>
