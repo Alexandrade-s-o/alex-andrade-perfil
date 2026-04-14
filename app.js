@@ -160,84 +160,79 @@ if (cursor && follower) {
 }
 
 // ==============================================
-// 4. PRELOADER (~3.5s instead of ~7s)
+// 4. PRELOADER — video intro (assets/intro.mp4 desde Remotion)
 // ==============================================
-const preloaderTl = gsap.timeline({
-    onComplete: () => {
-        unlockScroll();
-        document.getElementById('preloader').style.display = 'none';
+let introFinished = false;
+
+function playHeroEntrance() {
+    const tl = gsap.timeline();
+    tl.from('.hero-tag', { y: 30, opacity: 0, duration: 1.5, ease: "power3.out" })
+        .from('.hero h1', {
+            scale: 0.7, opacity: 0, duration: 2, ease: "elastic.out(1, 0.4)"
+        }, "-=1")
+        .from('.hero .subtitle', {
+            y: 30, opacity: 0, duration: 1.5, ease: "power3.out"
+        }, "-=1.2")
+        .from('.scroll-indicator', {
+            y: 20, opacity: 0, duration: 1, ease: "power3.out"
+        }, "-=1");
+    return tl;
+}
+
+function finishIntro() {
+    if (introFinished) return;
+    introFinished = true;
+    const preloader = document.getElementById('preloader');
+    const video = document.getElementById('intro-video');
+    if (video) {
+        video.pause();
+    }
+    unlockScroll();
+    if (preloader) {
+        preloader.removeAttribute('aria-busy');
+        gsap.to(preloader, {
+            autoAlpha: 0,
+            duration: 0.95,
+            ease: "power2.out",
+            onComplete: () => {
+                preloader.style.display = 'none';
+                initParticles();
+            }
+        });
+    } else {
         initParticles();
     }
-});
+    playHeroEntrance();
+}
 
-preloaderTl.to('.light-orb', {
-    opacity: 0.15, duration: 1, stagger: 0.2, ease: "power2.out"
-});
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const introVideo = document.getElementById('intro-video');
+const skipBtn = document.getElementById('preloader-skip');
 
-preloaderTl.from('.loader-rings', {
-    scale: 0, opacity: 0, duration: 0.8, ease: "back.out(1.7)"
-}, "-=0.8");
+if (prefersReducedMotion) {
+    finishIntro();
+} else if (introVideo) {
+    introVideo.setAttribute('playsinline', '');
+    introVideo.muted = true;
 
-let progress = { val: 0 };
-preloaderTl.to('.preloader-title', {
-    y: 0, opacity: 1, duration: 0.8, ease: "power3.out"
-}, "-=0.4")
-.to(progress, {
-    val: 100,
-    duration: 3.5,
-    ease: "power2.inOut",
-    onUpdate: () => {
-        document.getElementById('percent').innerText = Math.round(progress.val);
-        document.querySelector('.progress-bar').style.width = progress.val + "%";
-        document.querySelector('.progress-glow').style.width = progress.val + "%";
+    const tryPlay = () => introVideo.play().catch(() => {});
 
-        const phases = [
-            { threshold: 0,  word: "ALEX ANDRADE" },
-            { threshold: 25, word: "DISEÑADOR" },
-            { threshold: 50, word: "ANIMADOR" },
-            { threshold: 75, word: "DESARROLLADOR" },
-        ];
+    introVideo.addEventListener('ended', finishIntro);
+    introVideo.addEventListener('error', () => finishIntro());
 
-        let currentPhase = 0;
-        for (let i = phases.length - 1; i >= 0; i--) {
-            if (progress.val >= phases[i].threshold) { currentPhase = i; break; }
-        }
-
-        const titleEl = document.querySelector('.preloader-title');
-        if (!titleEl.dataset.phase) titleEl.dataset.phase = "0";
-
-        if (titleEl.dataset.phase !== currentPhase.toString()) {
-            titleEl.dataset.phase = currentPhase.toString();
-            gsap.to(titleEl, {
-                opacity: 0, y: -5, duration: 0.2, ease: "power2.in",
-                onComplete: () => {
-                    titleEl.innerText = phases[currentPhase].word;
-                    gsap.fromTo(titleEl,
-                        { y: 5, opacity: 0 },
-                        { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }
-                    );
-                    gsap.to('.loader-rings', {
-                        rotation: "+=60", duration: 1, ease: "power2.inOut"
-                    });
-                }
-            });
-        }
+    if (skipBtn) {
+        skipBtn.addEventListener('click', finishIntro);
     }
-}, "-=0.4")
-.to('.loader-rings', { scale: 8, opacity: 0, duration: 0.6, ease: "power4.in" })
-.to('.preloader-content', { scale: 1.5, opacity: 0, duration: 0.6, ease: "power4.in" }, "-=0.5")
-.to('.light-orb', { opacity: 1, scale: 2.5, duration: 0.5 }, "-=0.4")
-.to('#preloader', { autoAlpha: 0, duration: 1, ease: "power2.out" }, "+=0.05")
-.from('.hero-tag', { y: 30, opacity: 0, duration: 1.5, ease: "power3.out" }, "-=0.8")
-.from('.hero h1', {
-    scale: 0.7, opacity: 0, duration: 2, ease: "elastic.out(1, 0.4)"
-}, "-=1.2")
-.from('.hero .subtitle', {
-    y: 30, opacity: 0, duration: 1.5, ease: "power3.out"
-}, "-=1.5")
-.from('.scroll-indicator', {
-    y: 20, opacity: 0, duration: 1, ease: "power3.out"
-}, "-=1");
+
+    if (introVideo.readyState >= 2) {
+        tryPlay();
+    } else {
+        introVideo.addEventListener('canplay', tryPlay, { once: true });
+        introVideo.addEventListener('loadeddata', tryPlay, { once: true });
+    }
+} else {
+    finishIntro();
+}
 
 // ==============================================
 // 5. PARTICLE CANVAS (HERO)

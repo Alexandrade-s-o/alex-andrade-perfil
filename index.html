@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
     <title>Alex Andrade | Portafolio Creativo</title>
     <meta name="description"
         content="Portafolio de Alex Andrade — Diseñador Multimedia, Animador y Desarrollador Web. Diseño Web, Gráfico, Motion Graphics y Experiencia Socio-ambiental.">
@@ -40,25 +41,13 @@
     <!-- Skip to content (accesibilidad) -->
     <a href="#sobre" class="skip-link">Saltar al contenido</a>
 
-    <!-- Preloader Intro -->
-    <div id="preloader">
-        <div class="preloader-lights">
-            <div class="light-orb light-orb-left"></div>
-            <div class="light-orb light-orb-right"></div>
-        </div>
-        <div class="preloader-content">
-            <div class="loader-rings">
-                <div class="ring ring-1"></div>
-                <div class="ring ring-2"></div>
-                <div class="ring ring-3"></div>
-            </div>
-            <h2 class="preloader-title">ALEX ANDRADE</h2>
-            <div class="progress-bar-container">
-                <div class="progress-bar"></div>
-                <div class="progress-glow"></div>
-            </div>
-            <div class="progress-text">SISTEMA INICIANDO... <span id="percent">0</span>%</div>
-        </div>
+    <!-- Intro: video de presentación (exportar desde remotion-presentation → assets/intro.mp4) -->
+    <div id="preloader" role="dialog" aria-modal="true" aria-busy="true" aria-label="Introducción en video">
+        <video id="intro-video" class="preloader-video" playsinline muted preload="auto">
+            <source src="assets/intro.mp4" type="video/mp4" />
+        </video>
+        <button type="button" class="preloader-skip" id="preloader-skip"
+            aria-label="Saltar la introducción y entrar al portafolio">Saltar intro</button>
     </div>
 
     <div class="cursor"></div>
