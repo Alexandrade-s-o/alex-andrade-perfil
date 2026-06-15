@@ -99,7 +99,7 @@ function BootScreen({ onDone }) {
 /* ----------------------- main app ----------------------- */
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [screen, setScreen] = uS("boot");
+  const [screen, setScreen] = uS("projects");
   const stageRef = uR(null);
   const gbRef = uR(null);
   const pKey = (t.palette || []).join(",");
@@ -156,7 +156,7 @@ function App() {
       case "title": return <TitleScreen paletteKey={pKey} onStart={goMenu} />;
       case "menu":  return <MenuScreen paletteKey={pKey} onPick={setScreen} onBack={goTitle} />;
       case "about": return <AboutScreen paletteKey={pKey} textSpeed={t.textSpeed} onBack={goMenu} />;
-      case "projects":   return <ProjectsScreen paletteKey={pKey} onBack={goMenu} />;
+      case "projects":   return <ProjectsScreen paletteKey={pKey} />;
       case "skills":     return <SkillsScreen paletteKey={pKey} onBack={goMenu} />;
       case "experience": return <ExperienceScreen paletteKey={pKey} onBack={goMenu} />;
       case "blog":       return <BlogScreen paletteKey={pKey} onBack={goMenu} />;

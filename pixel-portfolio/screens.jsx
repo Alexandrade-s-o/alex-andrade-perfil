@@ -219,56 +219,48 @@ function AboutScreen({ paletteKey, textSpeed, onBack }) {
 }
 
 /* ----------------------- PROJECTS ----------------------- */
-function ProjectsScreen({ paletteKey, onBack }) {
+/* Mini-captura del sitio via servicio (con fallback si falla). */
+function shotURL(u)   { return "https://s.wordpress.com/mshots/v1/" + encodeURIComponent(u) + "?w=600&h=450"; }
+function shotFbURL(u) { return "https://image.thum.io/get/width/600/crop/450/" + u; }
+
+function ProjectsScreen({ paletteKey }) {
   const [sel, setSel] = useS(0);
-  const [open, setOpen] = useS(false);
+  const COLS = 2;
   const openSite = (pr) => {
     if (pr && pr.url) { SFX.coin(); window.open(pr.url, "_blank", "noopener"); }
   };
   useGBInput((a) => {
-    if (open) {
-      if (a === "a") { openSite(PROJECTS[sel]); }
-      if (a === "b") { setOpen(false); SFX.back(); }
-      return;
-    }
-    if (a === "up")   { setSel(s => (s + PROJECTS.length - 1) % PROJECTS.length); SFX.move(); }
-    if (a === "down") { setSel(s => (s + 1) % PROJECTS.length); SFX.move(); }
-    if (a === "a")    { setOpen(true); SFX.confirm(); }
-    if (a === "b")    { SFX.back(); onBack && onBack(); }
+    const n = PROJECTS.length;
+    if (a === "left")  { setSel(s => (s + n - 1) % n); SFX.move(); }
+    if (a === "right") { setSel(s => (s + 1) % n); SFX.move(); }
+    if (a === "up")    { setSel(s => (s + n - COLS) % n); SFX.move(); }
+    if (a === "down")  { setSel(s => (s + COLS) % n); SFX.move(); }
+    if (a === "a" || a === "start") { openSite(PROJECTS[sel]); }
   });
-  const p = PROJECTS[sel];
   return (
     <ScreenFrame title="PROYECTOS" iconName="sword" paletteKey={paletteKey}
-      hint={open ? "Ⓐ ABRIR ↗ · Ⓑ CERRAR" : "▲▼ ELEGIR · Ⓐ VER · Ⓑ MENÚ"}>
-      {!open ? (
-        <div className="proj-list">
-          {PROJECTS.map((pr, i) => (
-            <div key={pr.name} className={"proj-row" + (i === sel ? " sel" : "")}
-                 onClick={() => { setSel(i); setOpen(true); SFX.confirm(); }}
-                 onMouseEnter={() => { if (i !== sel) { setSel(i); SFX.move(); } }}>
-              <span className="menu-cursor">{i === sel ? "▶" : "\u00A0"}</span>
-              <IconSprite grid={ICONS[pr.icon]} size={2} paletteKey={paletteKey} />
-              <span className="proj-name">{pr.name}</span>
-              <span className="proj-year">{pr.year}</span>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="proj-detail">
-          <div className="proj-detail-head">
-            <IconSprite grid={ICONS[p.icon]} size={3} paletteKey={paletteKey} />
-            <div>
-              <div className="proj-detail-name">{p.name}</div>
-              <div className="proj-badge">{p.tag} · {p.year}</div>
-            </div>
-          </div>
-          <p className="proj-desc">{p.desc}</p>
-          <div className="proj-tech">‹ {p.tech} ›</div>
-          {p.url && (
-            <button className="proj-open" onClick={() => openSite(p)}>▶ ABRIR SITIO ↗</button>
-          )}
-        </div>
-      )}
+      hint="◀▶▲▼ ELEGIR · Ⓐ ABRIR ↗">
+      <div className="proj-grid">
+        {PROJECTS.map((pr, i) => (
+          <button key={pr.name} type="button"
+              className={"proj-card" + (i === sel ? " sel" : "")}
+              onClick={() => { setSel(i); openSite(pr); }}
+              onMouseEnter={() => { if (i !== sel) { setSel(i); SFX.move(); } }}>
+            <span className="proj-shot">
+              <img src={shotURL(pr.url)} alt={pr.name} loading="lazy"
+                   onError={(e) => {
+                     const im = e.currentTarget;
+                     if (!im.dataset.fb) { im.dataset.fb = "1"; im.src = shotFbURL(pr.url); }
+                     else { im.style.display = "none"; }
+                   }} />
+            </span>
+            <span className="proj-card-foot">
+              <span className="proj-card-name">{pr.name}</span>
+              <span className="proj-card-go">↗</span>
+            </span>
+          </button>
+        ))}
+      </div>
     </ScreenFrame>
   );
 }
