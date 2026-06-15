@@ -7,40 +7,46 @@ const { useState: useS, useEffect: useE, useRef: useR } = React;
 /* ----------------------- CONTENT (placeholder — Alex edits) ----------------------- */
 const DEV = {
   name: "ALEX ANDRADE",
-  role: "FULL-STACK DEV",
+  role: "DISEÑO & DEV WEB",
   level: 27,
-  klass: "CODE WIZARD",
-  hp: "∞", mp: "COFFEE",
+  klass: "MULTIMEDIA",
+  hp: "∞", mp: "CAFÉ",
   bio: [
-    "Hola! Soy Alex, dev full-stack desde la era del floppy.",
-    "Construyo apps web rápidas y juegos pixelados los findes.",
+    "¡Hola! Soy Alex: diseñador multimedia,",
+    "animador y desarrollador web.",
+    "Creo experiencias visuales inmersivas —",
+    "diseño web, motion graphics, branding y 3D.",
     "Misión actual: shippear cosas bonitas que no se rompan.",
   ],
 };
 
 const PROJECTS = [
-  { name: "PIXEL DUNGEON",  icon: "sword", year: "2025", tag: "WEB GAME",
-    desc: "Roguelike por turnos en el navegador. Mapas generados, niebla de guerra y jefes pixelados.",
-    tech: "REACT · CANVAS · TS" },
-  { name: "TASKFORGE",      icon: "flag",  year: "2024", tag: "SAAS",
-    desc: "Gestor de tareas para equipos con tableros en tiempo real y atajos de teclado por todos lados.",
-    tech: "NEXT · POSTGRES · WS" },
-  { name: "SYNTHWAVE API",  icon: "chip",  year: "2024", tag: "BACKEND",
-    desc: "API de streaming de música chiptune. 200k req/día, sub-50ms, escrita para durar.",
-    tech: "GO · REDIS · GRPC" },
-  { name: "DEVQUEST",       icon: "star",  year: "2026", tag: "THIS SITE",
-    desc: "El portfolio que estás jugando ahora mismo. Hecho con amor y demasiados beeps.",
-    tech: "REACT · WEB AUDIO" },
+  { name: "MALEZA RAP",   icon: "star",  year: "2025", tag: "WEB",
+    url: "https://malezarap.vercel.app",
+    desc: "Sitio web interactivo para el proyecto musical Maleza Rap. Estética urbana, animaciones y mucho ritmo.",
+    tech: "WEB · UI/UX · MOTION" },
+  { name: "SOLIDHAR",     icon: "chip",  year: "2025", tag: "WEB",
+    url: "https://solidhar-beta.vercel.app",
+    desc: "Diseño web profesional con identidad sólida y una experiencia de usuario cuidada de principio a fin.",
+    tech: "WEB · BRANDING · UI" },
+  { name: "LEMON STUDIO", icon: "flag",  year: "2024", tag: "AGENCIA",
+    url: "https://l-emon.vercel.app/",
+    desc: "Sitio para la agencia creativa Lemon Studio. Portafolio y servicios con un estilo fresco y vibrante.",
+    tech: "WEB · BRANDING · UI/UX" },
+  { name: "BOSKES",       icon: "sword", year: "2024", tag: "STUDIO",
+    url: "https://boskes.vercel.app/",
+    desc: "Creative studio enfocado en arquitectura. Web visual y minimalista con foco en los proyectos.",
+    tech: "WEB · ARQ · UI" },
 ];
 
 const SKILLS = [
-  { name: "JAVASCRIPT", lvl: 95 },
-  { name: "TYPESCRIPT", lvl: 90 },
-  { name: "REACT",      lvl: 92 },
-  { name: "NODE / GO",  lvl: 80 },
-  { name: "PYTHON",     lvl: 74 },
-  { name: "SQL / DB",   lvl: 82 },
-  { name: "PIXEL ART",  lvl: 65 },
+  { name: "DISEÑO WEB", lvl: 92 },
+  { name: "DESARROLLO", lvl: 85 },
+  { name: "MOTION GFX", lvl: 90 },
+  { name: "ANIMACIÓN",  lvl: 88 },
+  { name: "BRANDING",   lvl: 86 },
+  { name: "UI / UX",    lvl: 84 },
+  { name: "3D",         lvl: 78 },
 ];
 
 const JOBS = [
@@ -60,10 +66,12 @@ const POSTS = [
 ];
 
 const CONTACTS = [
-  { label: "EMAIL",    value: "alex@andrade.dev", icon: "mail" },
-  { label: "GITHUB",   value: "github.com/alexa",  icon: "chip" },
-  { label: "LINKEDIN", value: "in/alexandrade",    icon: "flag" },
-  { label: "ITCH.IO",  value: "alexa.itch.io",     icon: "star" },
+  { label: "EMAIL",    value: "alexanher9@gmail.com", icon: "mail",
+    url: "mailto:alexanher9@gmail.com" },
+  { label: "LINKEDIN", value: "in/alex-andrade",      icon: "flag",
+    url: "https://www.linkedin.com/in/alex-andrade-47b95236b/" },
+  { label: "GITHUB",   value: "Alexandrade-s-o",       icon: "chip",
+    url: "https://github.com/Alexandrade-s-o" },
 ];
 
 /* ----------------------- shared layout ----------------------- */
@@ -144,8 +152,6 @@ const MENU_ITEMS = [
   { id: "about",      label: "SOBRE MÍ",    icon: "heart" },
   { id: "projects",   label: "PROYECTOS",   icon: "sword" },
   { id: "skills",     label: "HABILIDADES", icon: "chip" },
-  { id: "experience", label: "EXPERIENCIA", icon: "flag" },
-  { id: "blog",       label: "BLOG",        icon: "book" },
   { id: "contact",    label: "CONTACTO",    icon: "mail" },
 ];
 
@@ -216,8 +222,12 @@ function AboutScreen({ paletteKey, textSpeed, onBack }) {
 function ProjectsScreen({ paletteKey, onBack }) {
   const [sel, setSel] = useS(0);
   const [open, setOpen] = useS(false);
+  const openSite = (pr) => {
+    if (pr && pr.url) { SFX.coin(); window.open(pr.url, "_blank", "noopener"); }
+  };
   useGBInput((a) => {
     if (open) {
+      if (a === "a") { openSite(PROJECTS[sel]); }
       if (a === "b") { setOpen(false); SFX.back(); }
       return;
     }
@@ -229,7 +239,7 @@ function ProjectsScreen({ paletteKey, onBack }) {
   const p = PROJECTS[sel];
   return (
     <ScreenFrame title="PROYECTOS" iconName="sword" paletteKey={paletteKey}
-      hint={open ? "Ⓑ CERRAR" : "▲▼ ELEGIR · Ⓐ VER · Ⓑ MENÚ"}>
+      hint={open ? "Ⓐ ABRIR ↗ · Ⓑ CERRAR" : "▲▼ ELEGIR · Ⓐ VER · Ⓑ MENÚ"}>
       {!open ? (
         <div className="proj-list">
           {PROJECTS.map((pr, i) => (
@@ -254,6 +264,9 @@ function ProjectsScreen({ paletteKey, onBack }) {
           </div>
           <p className="proj-desc">{p.desc}</p>
           <div className="proj-tech">‹ {p.tech} ›</div>
+          {p.url && (
+            <button className="proj-open" onClick={() => openSite(p)}>▶ ABRIR SITIO ↗</button>
+          )}
         </div>
       )}
     </ScreenFrame>
@@ -347,20 +360,25 @@ function BlogScreen({ paletteKey, onBack }) {
 function ContactScreen({ paletteKey, onBack }) {
   const [sel, setSel] = useS(0);
   const [saved, setSaved] = useS(false);
+  const openContact = (c) => {
+    if (!c || !c.url) return;
+    SFX.coin(); setSaved(true); setTimeout(() => setSaved(false), 1400);
+    window.open(c.url, "_blank", "noopener");
+  };
   useGBInput((a) => {
     if (a === "up")   { setSel(s => (s + CONTACTS.length - 1) % CONTACTS.length); SFX.move(); }
     if (a === "down") { setSel(s => (s + 1) % CONTACTS.length); SFX.move(); }
-    if (a === "a")    { setSaved(true); SFX.coin(); setTimeout(() => setSaved(false), 1400); }
+    if (a === "a")    { openContact(CONTACTS[sel]); }
     if (a === "b") { SFX.back(); onBack && onBack(); }
   });
   return (
-    <ScreenFrame title="CONTACTO" iconName="mail" paletteKey={paletteKey} hint="▲▼ ELEGIR · Ⓐ COPIAR · Ⓑ VOLVER">
+    <ScreenFrame title="CONTACTO" iconName="mail" paletteKey={paletteKey} hint="▲▼ ELEGIR · Ⓐ ABRIR ↗ · Ⓑ VOLVER">
       <div className="contact-intro">¡GAME OVER? NO — APENAS EL PRINCIPIO.<br/>ELIGE UN PORTAL Y SALUDA:</div>
       <div className="contact-list">
         {CONTACTS.map((c, i) => (
           <div key={c.label} className={"contact-row" + (i === sel ? " sel" : "")}
                onMouseEnter={() => { if (i !== sel) { setSel(i); SFX.move(); } }}
-               onClick={() => { setSel(i); setSaved(true); SFX.coin(); setTimeout(() => setSaved(false), 1400); }}>
+               onClick={() => { setSel(i); openContact(c); }}>
             <span className="menu-cursor">{i === sel ? "▶" : "\u00A0"}</span>
             <IconSprite grid={ICONS[c.icon]} size={2} paletteKey={paletteKey} />
             <span className="contact-label">{c.label}</span>
@@ -368,7 +386,7 @@ function ContactScreen({ paletteKey, onBack }) {
           </div>
         ))}
       </div>
-      <div className={"save-toast" + (saved ? " show" : "")}>★ ¡COPIADO! ★</div>
+      <div className={"save-toast" + (saved ? " show" : "")}>★ ¡ABRIENDO! ★</div>
     </ScreenFrame>
   );
 }

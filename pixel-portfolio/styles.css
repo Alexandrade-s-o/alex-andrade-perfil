@@ -220,6 +220,11 @@ img,canvas{ image-rendering:pixelated; }
 .proj-desc{ font-size:8.5px; line-height:1.85; color:var(--c0); border-left:3px solid var(--c2); padding-left:8px; }
 .proj-tech{ margin-top:auto; font-size:7.5px; color:var(--c1); letter-spacing:1px; text-align:center;
   border:2px dashed var(--c2); padding:6px; }
+.proj-open{ font-family:inherit; font-size:8px; letter-spacing:1px; color:var(--c3);
+  background:var(--c1); border:2px solid var(--c0); padding:7px 8px; cursor:pointer; text-align:center;
+  transition:filter .1s ease, transform .05s ease; }
+.proj-open:hover,.proj-open:focus{ filter:brightness(1.18); outline:none; }
+.proj-open:active{ transform:translateY(1px); }
 
 /* ---- skills ---- */
 .skill-list{ display:flex; flex-direction:column; gap:7px; }
