@@ -559,7 +559,7 @@ if (hamburger && mobileMenu) {
 // ==============================================
 // 11. SMOOTH NAV SCROLL + ACTIVE SECTION
 // ==============================================
-document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach(link => {
+document.querySelectorAll('.nav-links a, .mobile-nav-links a, .hero-choose a').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const target = document.querySelector(link.getAttribute('href'));

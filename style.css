@@ -1013,6 +1013,42 @@ body::after {
     transform: translateX(0);
 }
 
+/* Hero — selector de perfil (¿qué quieres ver?) */
+.hero-choose {
+    margin-top: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hero-choose-label {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #555);
+    opacity: 0.9;
+}
+
+.hero-choose-btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+}
+
+.hero-choice {
+    font-size: 0.95rem;
+    padding: 13px 32px;
+}
+
+@media (max-width: 600px) {
+    .hero-choose { margin-top: 1.8rem; }
+    .hero-choose-btns { gap: 0.6rem; }
+    .hero-choice { font-size: 0.78rem; padding: 10px 20px; }
+}
+
 /* =============================================
    PORTFOLIO IMAGES
    ============================================= */
