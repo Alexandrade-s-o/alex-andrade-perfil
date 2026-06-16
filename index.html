@@ -38,10 +38,8 @@
 </head>
 
 <body>
-    <!-- Skip to content (accesibilidad) -->
-    <a href="#sobre" class="skip-link">Saltar al contenido</a>
+    <a href="#hero" class="skip-link">Saltar al contenido</a>
 
-    <!-- Intro: video de presentación (exportar desde remotion-presentation → assets/intro.mp4) -->
     <div id="preloader" role="dialog" aria-modal="true" aria-busy="true" aria-label="Introducción en video">
         <video id="intro-video" class="preloader-video" playsinline muted preload="auto">
             <source src="assets/intro.mp4" type="video/mp4" />
@@ -50,17 +48,6 @@
             aria-label="Saltar la introducción y entrar al portafolio">Saltar intro</button>
     </div>
 
-    <div class="cursor"></div>
-    <div class="cursor-follower">
-        <span class="cursor-label"></span>
-    </div>
-
-    <!-- Vertical Scroll Progress Rail -->
-    <div class="scroll-progress-rail">
-        <div class="scroll-progress-fill"></div>
-    </div>
-
-    <!-- Floating HUD Design Symbols Layer -->
     <div id="hud-floats" aria-hidden="true">
         <!-- ZONE 1: Hero (0-17%) -->
         <span class="hf hf-code" style="top:7%;left:8%" data-in="2" data-out="22">&lt;div /&gt;</span>
@@ -132,16 +119,25 @@
         <span class="hf hf-code" style="top:84%;right:7%" data-in="78" data-out="98">&#10022; &nbsp; f(x) = &infin; &nbsp; &#10022;</span>
     </div>
 
+    <div class="cursor"></div>
+    <div class="cursor-follower">
+        <span class="cursor-label"></span>
+    </div>
+
+    <div class="scroll-progress-rail">
+        <div class="scroll-progress-fill"></div>
+    </div>
+
     <nav class="navbar">
-        <div class="logo">A<span>A</span></div>
+        <a class="logo" href="index.html">A<span>A</span></a>
         <ul class="nav-links">
-            <li><a href="#sobre" data-section="sobre">Sobre Mí</a></li>
-            <li><a href="#web" data-section="web">Diseño Web</a></li>
-            <li><a href="#grafico" data-section="grafico">Gráfico</a></li>
-            <li><a href="#motion" data-section="motion">Motion</a></li>
-            <li><a href="#socio" data-section="socio">Étnica</a></li>
-            <li><a href="#certs" data-section="certs">Certificados</a></li>
-            <li><a href="#contacto" data-section="contacto">Contacto</a></li>
+            <li><a href="sobre.html">Sobre Mí</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="grafico.html">Gráfico</a></li>
+            <li><a href="animacion.html">Motion</a></li>
+            <li><a href="etnica.html">Étnica</a></li>
+            <li><a href="certificados.html">Certificados</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
         </ul>
         <!-- Hamburger -->
         <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -151,16 +147,15 @@
         </button>
     </nav>
 
-    <!-- Mobile menu overlay -->
     <div class="mobile-menu" aria-hidden="true">
         <ul class="mobile-nav-links">
-            <li><a href="#sobre">Sobre Mí</a></li>
-            <li><a href="#web">Diseño Web</a></li>
-            <li><a href="#grafico">Diseño Gráfico</a></li>
-            <li><a href="#motion">Motion Graphics</a></li>
-            <li><a href="#socio">Exp. Étnica</a></li>
-            <li><a href="#certs">Certificados</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="sobre.html">Sobre Mí</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="grafico.html">Diseño Gráfico</a></li>
+            <li><a href="animacion.html">Motion Graphics</a></li>
+            <li><a href="etnica.html">Exp. Étnica</a></li>
+            <li><a href="certificados.html">Certificados</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
         </ul>
     </div>
 
@@ -200,9 +195,9 @@
                     <div class="hero-choose">
                         <span class="hero-choose-label">¿Qué quieres ver?</span>
                         <div class="hero-choose-btns">
-                            <a href="#web" class="cyber-btn hero-choice">Diseño Web</a>
-                            <a href="#motion" class="cyber-btn hero-choice">Animación</a>
-                            <a href="#grafico" class="cyber-btn hero-choice">Diseño Gráfico</a>
+                            <a href="diseno-web.html" class="cyber-btn hero-choice">Diseño Web</a>
+                            <a href="animacion.html" class="cyber-btn hero-choice">Animación</a>
+                            <a href="grafico.html" class="cyber-btn hero-choice">Diseño Gráfico</a>
                         </div>
                     </div>
                     <div class="scroll-indicator">
@@ -220,209 +215,6 @@
                     <span>DISEÑO WEB &bull; MOTION GRAPHICS &bull; BRANDING &bull; ANIMACIÓN &bull; UI/UX &bull; 3D &bull; DIRECCIÓN CREATIVA &bull; DESARROLLO WEB &bull; DISEÑO WEB &bull; MOTION GRAPHICS &bull; BRANDING &bull; ANIMACIÓN &bull; UI/UX &bull; 3D &bull; DIRECCIÓN CREATIVA &bull; DESARROLLO WEB &bull;</span>
                 </div>
             </div>
-
-            <section class="panel section-sobre" id="sobre">
-                <div class="section-content">
-                    <div class="about-grid">
-                        <div class="about-image">
-                            <img src="WhatsApp%20Image%202026-04-02%20at%209.26.58%20PM.jpeg"
-                                alt="Alex Andrade — Diseñador Multimedia" loading="lazy" width="380" height="380">
-                            <div class="image-glow"></div>
-                        </div>
-                        <div class="about-text">
-                            <h2 class="neon-text">Sobre Mí <span class="number">00</span></h2>
-                            <p>Soy un diseñador y director creativo apasionado por la creación de soluciones
-                                estructuradas que impactan visualmente y además generan un cambio funcional positivo.
-                            </p>
-                            <p>Mi enfoque abarca desde experiencias web minimalistas y gráficos de alto contraste, hasta
-                                narrativas en movimiento y compromisos socio-ambientales. Conecto los puntos entre la
-                                estética profunda y el diseño centrado en el usuario.</p>
-
-                            <!-- Skills -->
-                            <div class="skills-grid">
-                                <div class="skill-chip" data-skill="Figma">Figma</div>
-                                <div class="skill-chip" data-skill="Photoshop">Photoshop</div>
-                                <div class="skill-chip" data-skill="Illustrator">Illustrator</div>
-                                <div class="skill-chip" data-skill="After Effects">After Effects</div>
-                                <div class="skill-chip" data-skill="Premiere">Premiere Pro</div>
-                                <div class="skill-chip" data-skill="HTML/CSS">HTML / CSS</div>
-                                <div class="skill-chip" data-skill="JavaScript">JavaScript</div>
-                                <div class="skill-chip" data-skill="Blender">Blender 3D</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel section-web" id="web">
-                <div class="section-content">
-                    <h2 class="neon-text">Diseño Web <span class="number">01</span></h2>
-                    <p>Explora mis proyectos web en una experiencia retro jugable. Enciende la consola, entra a <strong>PROYECTOS</strong> y abre cada sitio.</p>
-                    <p class="hint-text">Usa el D-pad / las flechas y los botones A&middot;B &mdash; o haz clic directamente sobre la pantalla</p>
-                    <div class="devboy-embed">
-                        <div class="iframe-placeholder devboy-loader" data-src="pixel-portfolio/index.html?v=2">
-                            <span class="iframe-loader"></span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel section-grafico" id="grafico">
-                <div class="section-content">
-                    <h2 class="neon-text">Diseño Gráfico <span class="number">02</span></h2>
-                    <p>Comunicación visual de alto impacto donde convergen ideas innovadoras.</p>
-                    <p class="hint-text">Clic en cualquier diseño para verlo en pantalla completa</p>
-                    <div class="portfolio-grid gallery-grid">
-                        <div class="portfolio-item hover-image">
-                            <img src="SOLO 1-CDK3wvje.jfif" alt="Diseño de portada musical — estilo urbano" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
-                        </div>
-                        <div class="portfolio-item hover-image">
-                            <img src="2-Car0yTGv.jfif" alt="Arte visual y composición gráfica" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
-                        </div>
-                        <div class="portfolio-item hover-image">
-                            <img src="WhatsApp%20Image%202026-01-22%20at%2010.36.11%20AM%20(1)-BbwLzITu.jpeg"
-                                alt="Dirección de fotografía y concepto visual" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
-                        </div>
-                        <div class="portfolio-item hover-image">
-                            <img src="WhatsApp%20Image%202026-04-02%20at%2011.37.05%20AM.jpeg" alt="Campaña publicitaria — concepto Z"
-                                class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
-                        </div>
-                        <div class="portfolio-item hover-image">
-                            <img src="logo%20dj.png" alt="Diseño de logotipo para DJ" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
-                        </div>
-                        <div class="portfolio-item hover-image">
-                            <img src="lata%20coca.png" alt="Modelado 3D de producto — lata" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
-                        </div>
-                        <div class="portfolio-item hover-image pdf-trigger" data-pdf="yenifer.pdf" title="Yenifer — portada (PDF)">
-                            <div class="pdf-cover-wrap" aria-hidden="true">
-                                <iframe class="pdf-cover-preview"
-                                    src="yenifer.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
-                                    title="Portada del proyecto Yenifer"
-                                    tabindex="-1"
-                                    loading="lazy"></iframe>
-                            </div>
-                            <div class="img-overlay"><span>Ver PDF completo</span></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel section-motion" id="motion">
-                <div class="section-content">
-                    <h2 class="neon-text">Motion Graphics <span class="number">03</span></h2>
-                    <p>Dando vida a las ideas a través del movimiento y dinámico storytelling.</p>
-                    <p class="hint-text">Clic en las miniaturas para reproducir directamente en HD</p>
-                    <div class="portfolio-grid gallery-grid">
-                        <div class="portfolio-item hover-image video-trigger" data-video-id="W2tDm558i68">
-                            <img src="https://img.youtube.com/vi/W2tDm558i68/maxresdefault.jpg" alt="Edición y Motion Graphics — proyecto audiovisual"
-                                class="portfolio-img" loading="lazy">
-                            <div class="play-indicator">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-                            </div>
-                        </div>
-                        <div class="portfolio-item hover-image video-trigger" data-video-id="F2-bgSu0j_8">
-                            <img src="https://img.youtube.com/vi/F2-bgSu0j_8/maxresdefault.jpg" alt="Animación y edición de video profesional"
-                                class="portfolio-img" loading="lazy">
-                            <div class="play-indicator">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel section-socio" id="socio">
-                <div class="section-content">
-                    <h2 class="neon-text">Exp. Étnica Socio-ambiental <span class="number">04</span></h2>
-                    <p>Diseño con propósito y consciencia ecológica, honrando identidades, raíces y comunidades.</p>
-                    <div class="ethnic-feature">
-                        <div class="ethnic-image-wrapper">
-                            <img src="Captura%20de%20pantalla%202026-04-02%20223936.png"
-                                alt="Investigación acción radiofónica — Tejiendo Pijao" loading="lazy">
-                        </div>
-                        <div class="ethnic-info">
-                            <h3>Buen-Vivir y Memoria:<br>Saber Comunicarse</h3>
-                            <p>En trabajo colaborativo con la comunidad y el grupo <strong>"Tejiendo Pensamiento
-                                    Pijao"</strong>, co-creamos episodios radiofónicos de recuperación de memoria
-                                histórica.</p>
-                            <p>Fui <strong>co-creador de investigación-acción radiofónica</strong> bajo la ecosofía del
-                                buen-vivir. Nuestro estudio empírico fue sistematizado y publicado oficialmente por la
-                                revista científica <i>Jangwa Pana</i> de la Universidad del Magdalena.</p>
-                            <div class="ethnic-buttons">
-                                <a href="https://open.spotify.com/show/0m50GIG5BUyzWLFqxky7Hv" target="_blank"
-                                    rel="noopener" class="ethnic-btn btn-green magnetic">Escuchar en Spotify</a>
-                                <a href="https://revistas.unimagdalena.edu.co/index.php/jangwapana/article/view/5562"
-                                    target="_blank" rel="noopener" class="ethnic-btn btn-outline-green magnetic">Leer Investigación</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel section-certs" id="certs">
-                <div class="section-content">
-                    <h2 class="neon-text">Certificados <span class="number">05</span></h2>
-                    <p>Experiencia laboral respaldada por organizaciones y equipos de alto impacto.</p>
-                    <div class="certs-feature">
-                        <div class="cert-pdf-wrapper">
-                            <iframe src="1.3.%20CERTIFICADOS%20LABORALES%20.pdf#toolbar=0"
-                                title="Certificados Laborales Alex Andrade" loading="lazy"></iframe>
-                        </div>
-                        <div class="cert-info">
-                            <h3>Certificados Laborales y Recomendaciones</h3>
-                            <p>Respaldo profesional de empresas, organizaciones y equipos con los que he colaborado como
-                                <strong>Diseñador Multimedia, Animador y Desarrollador Web</strong>.</p>
-                            <p>Cada uno de estos documentos avala experiencias reales en comunicación, diseño gráfico,
-                                producción audiovisual y trabajo comunitario.</p>
-                            <a href="1.3.%20CERTIFICADOS%20LABORALES%20.pdf" download class="cert-download-btn magnetic">Descargar Certificados (PDF)</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sección de contacto -->
-            <section class="panel section-contacto" id="contacto">
-                <div class="section-content">
-                    <h2 class="neon-text">Contacto <span class="number">06</span></h2>
-                    <p>¿Tienes un proyecto en mente? Hablemos y hagamos algo increíble juntos.</p>
-                    <div class="contact-grid contact-grid--three">
-                        <a href="mailto:alexanher9@gmail.com" class="contact-card">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
-                                    <path d="M2 4l10 8 10-8"/>
-                                </svg>
-                            </div>
-                            <h3>Email</h3>
-                            <span>alexanher9@gmail.com</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/alex-andrade-47b95236b/" target="_blank" rel="noopener" class="contact-card">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
-                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                </svg>
-                            </div>
-                            <h3>LinkedIn</h3>
-                            <span>Perfil profesional</span>
-                        </a>
-                        <a href="https://github.com/Alexandrade-s-o" target="_blank" rel="noopener" class="contact-card">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
-                                    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                                </svg>
-                            </div>
-                            <h3>GitHub</h3>
-                            <span>@Alexandrade-s-o</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
 
             <!-- Footer -->
             <footer class="site-footer">
