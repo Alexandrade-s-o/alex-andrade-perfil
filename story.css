@@ -1,0 +1,166 @@
+/* =====================================================================
+   STORY SCROLLING — experiencia de scrollytelling en una sola página.
+   Capas: escenas de título por capítulo (.chapter-intro) + riel de
+   progreso (.chapter-rail). El contenido de cada disciplina conserva su
+   sección normal (con los reveals de app.js).
+   ===================================================================== */
+
+/* ---- Escena de título de capítulo (pantalla completa) ---- */
+.chapter-intro {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+    isolation: isolate;
+}
+
+/* degradado que funde el final de la escena hacia el blanco del contenido */
+.chapter-intro::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 22vh;
+    background: linear-gradient(to bottom, transparent, var(--bg-primary, #fff));
+    z-index: 2;
+    pointer-events: none;
+}
+
+.chapter-intro .ci-inner {
+    position: relative;
+    z-index: 3;
+    padding: 2rem;
+    max-width: 900px;
+}
+
+.chapter-intro .ci-num {
+    display: block;
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 900;
+    font-size: clamp(4rem, 18vw, 12rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent, #fff);
+    text-stroke: 2px var(--accent, #fff);
+    opacity: 0.85;
+    margin-bottom: 0.5rem;
+}
+
+.chapter-intro .ci-title {
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 8vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: #fff;
+    text-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+.chapter-intro .ci-line {
+    margin-top: 1.4rem;
+    font-size: clamp(1rem, 2.6vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 32ch;
+    margin-inline: auto;
+    line-height: 1.6;
+}
+
+.chapter-intro .ci-cue {
+    display: inline-block;
+    margin-top: 2.6rem;
+    font-family: var(--font-heading, sans-serif);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+    color: var(--accent, #fff);
+    opacity: 0.9;
+    animation: ciCue 1.8s ease-in-out infinite;
+}
+@keyframes ciCue { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(8px); opacity: 1; } }
+
+/* gran número/decoración de fondo */
+.chapter-intro .ci-ghost {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 900;
+    font-size: 56vh;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ---- Temas por capítulo (degradado + acento) ---- */
+.ci-sobre    { background: linear-gradient(135deg, #1b1430 0%, #2c1a4d 100%); --accent: #b794f6; }
+.ci-web      { background: radial-gradient(120% 120% at 50% 35%, #0c130c 0%, #050805 70%); --accent: #39ff14; }
+.ci-grafico  { background: linear-gradient(135deg, #0e0e0e 0%, #1c0c0c 100%); --accent: #ff3b30; }
+.ci-motion   { background: linear-gradient(135deg, #2a0a3a 0%, #0a1340 100%); --accent: #ff4dd2; }
+.ci-socio    { background: linear-gradient(135deg, #2a1a0e 0%, #3c2417 100%); --accent: #e0913c; }
+.ci-certs    { background: linear-gradient(135deg, #0a1426 0%, #14233f 100%); --accent: #e6c25c; }
+.ci-contacto { background: radial-gradient(120% 120% at 50% 50%, #141414 0%, #050505 75%); --accent: #00e5ff; }
+
+/* el acento del capítulo tiñe los títulos neón de la sección que le sigue */
+.story-page .chapter-intro + .panel .neon-text { color: var(--accent, var(--neon-cyan)); }
+
+/* ---- Riel de progreso de capítulos (fijo) ---- */
+.chapter-rail {
+    position: fixed;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.chapter-rail a {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+.chapter-rail a::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-family: var(--font-heading, sans-serif);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary, #111);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+.chapter-rail a:hover::after { opacity: 0.8; }
+.chapter-rail a.active {
+    border-color: var(--neon-cyan, #00e5ff);
+    background: var(--neon-cyan, #00e5ff);
+    box-shadow: 0 0 14px var(--neon-cyan-dim, rgba(0, 229, 255, 0.5));
+    transform: scale(1.25);
+}
+@media (max-width: 900px) { .chapter-rail { display: none; } }
+
+/* el primer reveal de cada escena lo controla story.js; estado inicial seguro */
+.story-page .chapter-intro .ci-num,
+.story-page .chapter-intro .ci-title,
+.story-page .chapter-intro .ci-line,
+.story-page .chapter-intro .ci-cue { will-change: transform, opacity; }
