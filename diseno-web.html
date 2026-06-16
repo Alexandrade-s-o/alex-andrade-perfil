@@ -33,12 +33,17 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@300;500;800;900&display=swap"
         rel="stylesheet">
+    <!-- Fuentes retro CRT -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="diseno-web.css">
 </head>
 
-<body>
+<body class="page-web">
     <a href="#web" class="skip-link">Saltar al contenido</a>
+
+    <div class="crt-overlay" aria-hidden="true"></div>
 
     <div class="cursor"></div>
     <div class="cursor-follower">
@@ -83,15 +88,15 @@
     <main id="smooth-wrapper">
         <div id="smooth-content">
 
-            <section class="panel section-web" id="web">
-                <div class="section-content">
-                    <h2 class="neon-text">Diseño Web <span class="number">01</span></h2>
-                    <p>Explora mis proyectos web en una experiencia retro jugable. Enciende la consola, entra a <strong>PROYECTOS</strong> y abre cada sitio.</p>
-                    <p class="hint-text">Usa el D-pad / las flechas y los botones A&middot;B &mdash; o haz clic directamente sobre la pantalla</p>
-                    <div class="devboy-embed">
-                        <div class="iframe-placeholder devboy-loader" data-src="pixel-portfolio/index.html?v=2">
-                            <span class="iframe-loader"></span>
-                        </div>
+            <section class="panel section-web crt-stage" id="web">
+                <div class="crt-head">
+                    <p class="crt-prompt"><span class="crt-user">alex@andrade</span>:<span class="crt-path">~/web</span>$ <span class="crt-type" data-text="run proyectos.exe"></span><span class="crt-caret">&#9646;</span></p>
+                    <h1 class="crt-title">DISEÑO WEB</h1>
+                    <p class="crt-sub">&#9654; INSERT COIN &middot; enciende la consola y abre cada proyecto</p>
+                </div>
+                <div class="devboy-embed">
+                    <div class="iframe-placeholder devboy-loader" data-src="pixel-portfolio/index.html?v=2">
+                        <span class="iframe-loader"></span>
                     </div>
                 </div>
             </section>
@@ -135,6 +140,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Custom JS -->
     <script src="app.js"></script>
+    <script>
+        // Máquina de escribir para el prompt de terminal
+        (function () {
+            var el = document.querySelector('.crt-type');
+            if (!el) return;
+            var txt = el.getAttribute('data-text') || '', i = 0;
+            (function tick() {
+                el.textContent = txt.slice(0, i);
+                if (i++ <= txt.length) setTimeout(tick, 75);
+            })();
+        })();
+    </script>
 </body>
 
 </html>
