@@ -559,13 +559,10 @@ if (hamburger && mobileMenu) {
 // ==============================================
 // 11. SMOOTH NAV SCROLL + ACTIVE SECTION
 // ==============================================
-document.querySelectorAll('.nav-links a, .mobile-nav-links a, .hero-choose a').forEach(link => {
+document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach(link => {
     link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        // Solo interceptamos anclas internas (#seccion); los enlaces a páginas navegan normal.
-        if (!href || href.charAt(0) !== '#') return;
         e.preventDefault();
-        const target = document.querySelector(href);
+        const target = document.querySelector(link.getAttribute('href'));
         if (target) {
             const y = target.getBoundingClientRect().top + window.scrollY - 80;
             window.scrollTo({ top: y, behavior: 'smooth' });

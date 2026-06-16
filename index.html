@@ -35,12 +35,13 @@
         rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="story.css">
 </head>
 
-<body class="story-page">
-    <a href="#hero" class="skip-link">Saltar al contenido</a>
+<body>
+    <!-- Skip to content (accesibilidad) -->
+    <a href="#sobre" class="skip-link">Saltar al contenido</a>
 
+    <!-- Intro: video de presentación (exportar desde remotion-presentation → assets/intro.mp4) -->
     <div id="preloader" role="dialog" aria-modal="true" aria-busy="true" aria-label="Introducción en video">
         <video id="intro-video" class="preloader-video" playsinline muted preload="auto">
             <source src="assets/intro.mp4" type="video/mp4" />
@@ -54,10 +55,12 @@
         <span class="cursor-label"></span>
     </div>
 
+    <!-- Vertical Scroll Progress Rail -->
     <div class="scroll-progress-rail">
         <div class="scroll-progress-fill"></div>
     </div>
 
+    <!-- Floating HUD Design Symbols Layer -->
     <div id="hud-floats" aria-hidden="true">
         <!-- ZONE 1: Hero (0-17%) -->
         <span class="hf hf-code" style="top:7%;left:8%" data-in="2" data-out="22">&lt;div /&gt;</span>
@@ -129,26 +132,16 @@
         <span class="hf hf-code" style="top:84%;right:7%" data-in="78" data-out="98">&#10022; &nbsp; f(x) = &infin; &nbsp; &#10022;</span>
     </div>
 
-    <aside class="chapter-rail" aria-label="Capítulos">
-        <a href="#sobre" data-label="Sobre Mí"></a>
-        <a href="#web" data-label="Diseño Web"></a>
-        <a href="#grafico" data-label="Diseño Gráfico"></a>
-        <a href="#motion" data-label="Animación"></a>
-        <a href="#socio" data-label="Étnica"></a>
-        <a href="#certs" data-label="Certificados"></a>
-        <a href="#contacto" data-label="Contacto"></a>
-    </aside>
-
     <nav class="navbar">
-        <a class="logo" href="#hero">A<span>A</span></a>
+        <div class="logo">A<span>A</span></div>
         <ul class="nav-links">
-            <li><a href="#sobre">Sobre Mí</a></li>
-            <li><a href="#web">Diseño Web</a></li>
-            <li><a href="#grafico">Gráfico</a></li>
-            <li><a href="#motion">Motion</a></li>
-            <li><a href="#socio">Étnica</a></li>
-            <li><a href="#certs">Certificados</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#sobre" data-section="sobre">Sobre Mí</a></li>
+            <li><a href="#web" data-section="web">Diseño Web</a></li>
+            <li><a href="#grafico" data-section="grafico">Gráfico</a></li>
+            <li><a href="#motion" data-section="motion">Motion</a></li>
+            <li><a href="#socio" data-section="socio">Étnica</a></li>
+            <li><a href="#certs" data-section="certs">Certificados</a></li>
+            <li><a href="#contacto" data-section="contacto">Contacto</a></li>
         </ul>
         <!-- Hamburger -->
         <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -158,6 +151,7 @@
         </button>
     </nav>
 
+    <!-- Mobile menu overlay -->
     <div class="mobile-menu" aria-hidden="true">
         <ul class="mobile-nav-links">
             <li><a href="#sobre">Sobre Mí</a></li>
@@ -203,14 +197,6 @@
                     <p class="hero-tag">Diseñador Multimedia &bull; Animador &bull; Desarrollador Web</p>
                     <h1 class="glitch" data-text="ALEX ANDRADE">ALEX ANDRADE</h1>
                     <p class="subtitle">Creando experiencias visuales que trascienden</p>
-                    <div class="hero-choose">
-                        <span class="hero-choose-label">¿Qué quieres ver?</span>
-                        <div class="hero-choose-btns">
-                            <a href="#web" class="cyber-btn hero-choice">Diseño Web</a>
-                            <a href="#motion" class="cyber-btn hero-choice">Animación</a>
-                            <a href="#grafico" class="cyber-btn hero-choice">Diseño Gráfico</a>
-                        </div>
-                    </div>
                     <div class="scroll-indicator">
                         <span>Scroll para descubrir</span>
                         <div class="mouse-icon">
@@ -226,16 +212,6 @@
                     <span>DISEÑO WEB &bull; MOTION GRAPHICS &bull; BRANDING &bull; ANIMACIÓN &bull; UI/UX &bull; 3D &bull; DIRECCIÓN CREATIVA &bull; DESARROLLO WEB &bull; DISEÑO WEB &bull; MOTION GRAPHICS &bull; BRANDING &bull; ANIMACIÓN &bull; UI/UX &bull; 3D &bull; DIRECCIÓN CREATIVA &bull; DESARROLLO WEB &bull;</span>
                 </div>
             </div>
-
-            <section class="chapter-intro ci-sobre" data-chapter="sobre">
-            <div class="ci-ghost" aria-hidden="true">00</div>
-                <div class="ci-inner">
-                    <span class="ci-num">00</span>
-                    <h2 class="ci-title">Sobre Mí</h2>
-                    <p class="ci-line">Diseñador multimedia, animador y desarrollador web.</p>
-                    <span class="ci-cue">scroll &#9662;</span>
-                </div>
-            </section>
 
             <section class="panel section-sobre" id="sobre">
                 <div class="section-content">
@@ -270,35 +246,16 @@
                 </div>
             </section>
 
-            <section class="chapter-intro ci-web" data-chapter="web">
-            <div class="ci-ghost" aria-hidden="true">01</div>
-                <div class="ci-inner">
-                    <span class="ci-num">01</span>
-                    <h2 class="ci-title">Diseño Web</h2>
-                    <p class="ci-line">Experiencias digitales que se juegan, no solo se ven.</p>
-                    <span class="ci-cue">scroll &#9662;</span>
-                </div>
-            </section>
-
             <section class="panel section-web" id="web">
                 <div class="section-content">
                     <h2 class="neon-text">Diseño Web <span class="number">01</span></h2>
-                    <p>Explora mis proyectos en una consola jugable. Entra a <strong>PROYECTOS</strong> y abre cada sitio.</p>
+                    <p>Explora mis proyectos web en una experiencia retro jugable. Enciende la consola, entra a <strong>PROYECTOS</strong> y abre cada sitio.</p>
+                    <p class="hint-text">Usa el D-pad / las flechas y los botones A&middot;B &mdash; o haz clic directamente sobre la pantalla</p>
                     <div class="devboy-embed">
                         <div class="iframe-placeholder devboy-loader" data-src="pixel-portfolio/index.html?v=2">
                             <span class="iframe-loader"></span>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <section class="chapter-intro ci-grafico" data-chapter="grafico">
-            <div class="ci-ghost" aria-hidden="true">02</div>
-                <div class="ci-inner">
-                    <span class="ci-num">02</span>
-                    <h2 class="ci-title">Diseño Gráfico</h2>
-                    <p class="ci-line">Comunicación visual de alto impacto.</p>
-                    <span class="ci-cue">scroll &#9662;</span>
                 </div>
             </section>
 
@@ -348,16 +305,6 @@
                 </div>
             </section>
 
-            <section class="chapter-intro ci-motion" data-chapter="motion">
-            <div class="ci-ghost" aria-hidden="true">03</div>
-                <div class="ci-inner">
-                    <span class="ci-num">03</span>
-                    <h2 class="ci-title">Animación</h2>
-                    <p class="ci-line">Donde las ideas cobran movimiento.</p>
-                    <span class="ci-cue">scroll &#9662;</span>
-                </div>
-            </section>
-
             <section class="panel section-motion" id="motion">
                 <div class="section-content">
                     <h2 class="neon-text">Motion Graphics <span class="number">03</span></h2>
@@ -379,16 +326,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <section class="chapter-intro ci-socio" data-chapter="socio">
-            <div class="ci-ghost" aria-hidden="true">04</div>
-                <div class="ci-inner">
-                    <span class="ci-num">04</span>
-                    <h2 class="ci-title">Étnica</h2>
-                    <p class="ci-line">Diseño con raíz, memoria y propósito social.</p>
-                    <span class="ci-cue">scroll &#9662;</span>
                 </div>
             </section>
 
@@ -420,16 +357,6 @@
                 </div>
             </section>
 
-            <section class="chapter-intro ci-certs" data-chapter="certs">
-            <div class="ci-ghost" aria-hidden="true">05</div>
-                <div class="ci-inner">
-                    <span class="ci-num">05</span>
-                    <h2 class="ci-title">Certificados</h2>
-                    <p class="ci-line">Trayectoria y respaldo profesional.</p>
-                    <span class="ci-cue">scroll &#9662;</span>
-                </div>
-            </section>
-
             <section class="panel section-certs" id="certs">
                 <div class="section-content">
                     <h2 class="neon-text">Certificados <span class="number">05</span></h2>
@@ -451,16 +378,7 @@
                 </div>
             </section>
 
-            <section class="chapter-intro ci-contacto" data-chapter="contacto">
-            <div class="ci-ghost" aria-hidden="true">06</div>
-                <div class="ci-inner">
-                    <span class="ci-num">06</span>
-                    <h2 class="ci-title">Contacto</h2>
-                    <p class="ci-line">Construyamos algo juntos.</p>
-                    <span class="ci-cue">scroll &#9662;</span>
-                </div>
-            </section>
-
+            <!-- Sección de contacto -->
             <section class="panel section-contacto" id="contacto">
                 <div class="section-content">
                     <h2 class="neon-text">Contacto <span class="number">06</span></h2>
@@ -537,7 +455,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Custom JS -->
     <script src="app.js"></script>
-    <script src="story.js"></script>
 </body>
 
 </html>
