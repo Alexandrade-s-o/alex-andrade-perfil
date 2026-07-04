@@ -1,38 +1,31 @@
 :root {
-    --bg-primary: rgba(255, 255, 255, 0.97);
-    --bg-secondary: rgba(248, 248, 248, 0.9);
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f8f8;
     --text-primary: #0a0a0a;
-    --text-secondary: rgba(68, 68, 68, 0.95);
-    --text-muted: rgba(136, 136, 136, 0.9);
+    --text-secondary: #444444;
+    --text-muted: #888888;
     --neon-cyan: #00ffff;
     --neon-cyan-dim: rgba(0, 255, 255, 0.3);
     --neon-green: #39ff14;
     --indigenous-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8B00FF);
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
-    --radius-sm: 16px;
-    --radius-md: 24px;
-    --radius-full: 36px;
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-full: 30px;
     --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    /* Espaciado fluido + safe areas (móviles con notch) */
+    /* Espaciado fluido + safe areas */
     --pad-x: clamp(1rem, 5vw, 5rem);
     --pad-y-section: clamp(4rem, 12vh, 10rem);
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-right: env(safe-area-inset-right, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
     --safe-left: env(safe-area-inset-left, 0px);
-    /* Glass effect */
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    /* Liquid effect */
-    --liquid-gradient: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.9) 25%,
-        rgba(255, 255, 255, 0.85) 50%,
-        rgba(255, 255, 255, 0.9) 75%,
-        rgba(255, 255, 255, 0.95) 100%
-    );
+    /* Simple glass */
+    --glass-bg: #ffffff;
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --liquid-gradient: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
 }
 
 * {
@@ -59,14 +52,10 @@ body {
     text-rendering: optimizeSpeed;
 }
 
-/* Optimizar elementos con blur */
+/* Simplificar GPU acceleration - solo donde es necesario */
 .navbar.scrolled,
-.web-project-card,
-.web-project-mockup,
-.panel {
+.web-project-card {
     will-change: transform;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
 }
 
 body::after {
@@ -333,12 +322,10 @@ body::after {
 }
 
 .navbar.scrolled {
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%);
-    box-shadow: var(--glass-shadow);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
     padding: max(1rem, var(--safe-top)) max(5vw, var(--safe-right)) max(1rem, var(--safe-bottom)) max(5vw, var(--safe-left));
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -499,13 +486,10 @@ body::after {
     padding: var(--pad-y-section) clamp(1rem, 6vw, 15vw);
     box-sizing: border-box;
     background: var(--liquid-gradient);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     border-top: 1px solid var(--glass-border);
-    border-bottom: 1px solid var(--glass-border);
 }
 
-/* Efecto de brillo en los bordes de los paneles */
+/* Simplificar borders - solo superior */
 .panel::before {
     content: '';
     position: absolute;
@@ -515,67 +499,33 @@ body::after {
     height: 1px;
     background: linear-gradient(90deg, 
         transparent 0%,
-        rgba(0, 255, 255, 0.3) 20%,
-        rgba(0, 255, 255, 0.5) 50%,
-        rgba(0, 255, 255, 0.3) 80%,
-        transparent 100%
-    );
-    z-index: 2;
-}
-
-.panel::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%,
-        rgba(57, 255, 20, 0.3) 20%,
-        rgba(57, 255, 20, 0.5) 50%,
-        rgba(57, 255, 20, 0.3) 80%,
+        rgba(0, 255, 255, 0.2) 50%,
         transparent 100%
     );
     z-index: 2;
 }
 
 /* =============================================
-   HERO SECTION
+   HERO SECTION - SIMPLIFICADO
    ============================================= */
 .hero {
     flex-direction: column;
     text-align: center;
     background: var(--liquid-gradient);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     overflow: hidden;
     position: relative;
     border-bottom: 1px solid var(--glass-border);
 }
 
-/* Hero glass overlay */
+/* Simplificar overlays - solo uno */
 .hero::before {
     content: '';
     position: absolute;
     inset: 0;
     background: radial-gradient(
-        circle at 30% 20%,
-        rgba(0, 255, 255, 0.08) 0%,
-        transparent 50%
-    );
-    z-index: 0;
-    pointer-events: none;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        circle at 70% 80%,
-        rgba(57, 255, 20, 0.04) 0%,
-        transparent 50%
+        circle at 50% 30%,
+        rgba(0, 255, 255, 0.06) 0%,
+        transparent 60%
     );
     z-index: 0;
     pointer-events: none;
@@ -999,42 +949,19 @@ body::after {
     flex-direction: column;
     gap: 1.5rem;
     border-radius: var(--radius-md);
-    transition: all 0.5s var(--transition-smooth);
+    transition: transform 0.3s ease;
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
     position: relative;
-    /* GPU acceleration */
     will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-}
-
-.web-project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.2) 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 0.5s var(--transition-smooth);
-    will-change: opacity;
 }
 
 .web-project-card:hover {
-    transform: translateY(-8px) translateZ(0) scale(1.02);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.12),
-        0 0 40px rgba(0, 255, 255, 0.1),
-        inset 0 0 40px rgba(0, 255, 255, 0.05);
-    border-color: rgba(0, 255, 255, 0.4);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 255, 255, 0.3);
 }
 
 .web-project-card:hover::before {
@@ -1066,35 +993,21 @@ body::after {
 }
 
 .web-project-mockup {
-    background: rgba(245, 245, 245, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: #fafafa;
     border-radius: var(--radius-sm);
     overflow: hidden;
-    box-shadow: 
-        0 20px 50px rgba(0, 0, 0, 0.1),
-        inset 0 1px 1px rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.5s var(--transition-smooth);
-    position: relative;
-    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
 }
 
 .web-project-card:hover .web-project-mockup {
-    box-shadow: 
-        0 30px 70px rgba(0, 255, 255, 0.2),
-        inset 0 1px 2px rgba(0, 255, 255, 0.2);
-    border-color: rgba(0, 255, 255, 0.6);
-    background: rgba(250, 250, 250, 0.98);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 255, 255, 0.3);
 }
 
 .browser-chrome {
-    background: linear-gradient(180deg, 
-        rgba(232, 232, 232, 0.95) 0%, 
-        rgba(213, 213, 213, 0.9) 100%
-    );
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(180deg, #e8e8e8 0%, #d5d5d5 100%);
     padding: 0.75rem 1rem;
     display: flex;
     align-items: center;
@@ -1599,56 +1512,13 @@ body::after {
 }
 
 /* =============================================
-   SECTION BACKGROUNDS - Glass/Liquid effect
+   SECTION BACKGROUNDS - Simple
    ============================================= */
-.section-sobre { 
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.98) 0%,
-        rgba(248, 248, 248, 0.95) 50%,
-        rgba(255, 255, 255, 0.98) 100%
-    );
+.section-sobre, .section-web, .section-motion, .section-certs { 
+    background: #fff;
 }
-.section-web { 
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(250, 250, 250, 0.92) 50%,
-        rgba(255, 255, 255, 0.95) 100%
-    );
-}
-.section-grafico { 
-    background: linear-gradient(135deg, 
-        rgba(248, 248, 248, 0.92) 0%,
-        rgba(240, 240, 240, 0.9) 50%,
-        rgba(248, 248, 248, 0.92) 100%
-    );
-}
-.section-motion { 
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(250, 250, 250, 0.92) 50%,
-        rgba(255, 255, 255, 0.95) 100%
-    );
-}
-.section-socio { 
-    background: linear-gradient(135deg, 
-        rgba(248, 248, 248, 0.92) 0%,
-        rgba(240, 240, 240, 0.9) 50%,
-        rgba(248, 248, 248, 0.92) 100%
-    );
-}
-.section-certs { 
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(250, 250, 250, 0.92) 50%,
-        rgba(255, 255, 255, 0.95) 100%
-    );
-}
-.section-contacto { 
-    background: linear-gradient(135deg, 
-        rgba(248, 248, 248, 0.92) 0%,
-        rgba(240, 240, 240, 0.9) 50%,
-        rgba(248, 248, 248, 0.92) 100%
-    );
+.section-grafico, .section-socio, .section-contacto { 
+    background: #f8f8f8;
 }
 
 /* =============================================
@@ -2452,20 +2322,17 @@ body::after {
         padding: max(1.2rem, var(--safe-top)) max(5vw, var(--safe-right)) max(1.2rem, var(--safe-bottom)) max(5vw, var(--safe-left));
     }
     
-    /* Reducir blur en móviles para mejor performance */
+    /* Quitar blur en móvil */
     .navbar.scrolled {
-        backdrop-filter: blur(15px) saturate(180%);
-        -webkit-backdrop-filter: blur(15px) saturate(180%);
+        background: rgba(255, 255, 255, 0.98);
     }
     
     .web-project-card {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background: #fff;
     }
     
     .web-project-mockup {
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
     .panel {

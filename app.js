@@ -246,24 +246,48 @@ if (prefersReducedMotion) {
 }
 
 // ==============================================
-// 5. PARTICLE CANVAS (HERO) - OPTIMIZADO
+// 5. PARTICLE CANVAS (HERO) - ULTRA OPTIMIZADO
 // ==============================================
 function initParticles() {
     const canvas = document.getElementById('hero-particles');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+    
+    // Detectar si el dispositivo puede manejar animaciones complejas
+    const isMobile = window.innerWidth < 768;
+    const isLowPerf = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Desactivar partículas en móviles de bajo rendimiento
+    if (isLowPerf && isMobile) {
+        canvas.style.display = 'none';
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d', { 
+        alpha: true, 
+        desynchronized: true,
+        willReadFrequently: false 
+    });
     let w, h, particles = [];
     let animationId;
+    let lastTime = 0;
+    const fps = isMobile ? 30 : 60; // Reducir FPS en móvil
+    const interval = 1000 / fps;
 
     function resize() {
         w = canvas.width = canvas.offsetWidth;
         h = canvas.height = canvas.offsetHeight;
     }
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, { passive: true });
 
     let heroMX = w / 2, heroMY = h / 2;
+    let mouseUpdateThrottle = 0;
+    
     canvas.parentElement.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - mouseUpdateThrottle < 50) return; // Throttle mouse movement
+        mouseUpdateThrottle = now;
+        
         const rect = canvas.getBoundingClientRect();
         heroMX = e.clientX - rect.left;
         heroMY = e.clientY - rect.top;
@@ -274,30 +298,32 @@ function initParticles() {
         reset() {
             this.x = Math.random() * w;
             this.y = Math.random() * h;
-            this.baseVx = (Math.random() - 0.5) * 0.3;
-            this.baseVy = (Math.random() - 0.5) * 0.3;
+            this.baseVx = (Math.random() - 0.5) * 0.2;
+            this.baseVy = (Math.random() - 0.5) * 0.2;
             this.vx = this.baseVx;
             this.vy = this.baseVy;
-            this.r = Math.random() * 1.5 + 0.5;
-            this.alpha = Math.random() * 0.3 + 0.05;
+            this.r = Math.random() * 1.2 + 0.4;
+            this.alpha = Math.random() * 0.25 + 0.05;
         }
         update() {
             const dx = this.x - heroMX;
             const dy = this.y - heroMY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const repelRadius = 150;
+            const distSq = dx * dx + dy * dy; // Evitar sqrt
+            const repelRadiusSq = 22500; // 150^2
 
-            if (dist < repelRadius && dist > 0) {
-                const force = (repelRadius - dist) / repelRadius * 0.8;
+            if (distSq < repelRadiusSq && distSq > 0) {
+                const dist = Math.sqrt(distSq);
+                const force = (150 - dist) / 150 * 0.6;
                 this.vx += (dx / dist) * force;
                 this.vy += (dy / dist) * force;
             }
 
-            this.vx += (this.baseVx - this.vx) * 0.05;
-            this.vy += (this.baseVy - this.vy) * 0.05;
+            this.vx += (this.baseVx - this.vx) * 0.03;
+            this.vy += (this.baseVy - this.vy) * 0.03;
 
             this.x += this.vx;
             this.y += this.vy;
+            
             if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
         }
         draw() {
@@ -308,34 +334,9 @@ function initParticles() {
         }
     }
 
-    // Reducir partículas en móviles
-    const isMobile = window.innerWidth < 768;
-    const count = isMobile ? Math.min(30, Math.floor(w * h / 25000)) : Math.min(60, Math.floor(w * h / 18000));
-    
+    // Muy pocas partículas
+    const count = isMobile ? 15 : 35;
     for (let i = 0; i < count; i++) particles.push(new Particle());
-
-    function drawConnections() {
-        const maxDistance = isMobile ? 80 : 100;
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < maxDistance) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0,255,255,${0.06 * (1 - dist / maxDistance)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    let lastTime = 0;
-    const fps = 60;
-    const interval = 1000 / fps;
 
     function animate(currentTime) {
         const deltaTime = currentTime - lastTime;
@@ -343,16 +344,17 @@ function initParticles() {
         if (deltaTime > interval) {
             ctx.clearRect(0, 0, w, h);
             particles.forEach(p => { p.update(); p.draw(); });
-            if (!isMobile) drawConnections(); // Solo en desktop
             lastTime = currentTime - (deltaTime % interval);
         }
         
         animationId = requestAnimationFrame(animate);
     }
     
-    animationId = requestAnimationFrame(animate);
+    // Delay para no interferir con carga inicial
+    setTimeout(() => {
+        animationId = requestAnimationFrame(animate);
+    }, 1000);
     
-    // Limpiar en unmount
     return () => {
         if (animationId) cancelAnimationFrame(animationId);
     };
@@ -419,12 +421,13 @@ gsap.to('.scroll-progress-fill', {
 });
 
 // ==============================================
-// 9. SCROLL ANIMATIONS (WOW FACTOR)
+// 9. SCROLL ANIMATIONS (WOW FACTOR) - SIMPLIFICADO
 // ==============================================
 const panels = gsap.utils.toArray('.panel');
 
 panels.forEach((panel, i) => {
     if (i === 0) {
+        // Hero - solo SVG paths, sin parallax pesado
         const paths = panel.querySelectorAll('.draw-path');
         paths.forEach(path => {
             const length = path.getTotalLength();
@@ -432,148 +435,94 @@ panels.forEach((panel, i) => {
             gsap.to(path, {
                 strokeDashoffset: 0,
                 ease: "none",
-                scrollTrigger: { trigger: panel, start: "top top", end: "bottom top", scrub: 1.5 }
+                scrollTrigger: { 
+                    trigger: panel, 
+                    start: "top top", 
+                    end: "bottom top", 
+                    scrub: 2 // Más lento = menos cálculos
+                }
             });
-        });
-
-        gsap.to(".hero-drawing-svg", {
-            yPercent: 30,
-            ease: "none",
-            scrollTrigger: { trigger: panel, start: "top top", end: "bottom top", scrub: true }
         });
         return;
     }
 
     const title = panel.querySelector('.neon-text');
-    const content = panel.querySelector('.portfolio-grid, .about-grid, .ethnic-feature, .certs-feature, .contact-grid');
+    const content = panel.querySelector('.portfolio-grid, .about-grid, .ethnic-feature, .certs-feature, .contact-grid, .web-projects-grid');
     const paragraphs = panel.querySelectorAll('.section-content > p, .hint-text');
-    const chars = title ? panel.querySelectorAll('.char') : [];
-    const skillChips = panel.querySelectorAll('.skill-chip');
 
     const elements = [title, ...paragraphs, content].filter(Boolean);
-    gsap.set(elements, { y: 100, opacity: 0 });
-    if (chars.length) gsap.set(chars, { opacity: 0, rotationX: -90, y: 50, transformOrigin: '50% 50% -50px' });
-    if (skillChips.length) gsap.set(skillChips, { opacity: 0, scale: 0.8, y: 20 });
+    gsap.set(elements, { y: 60, opacity: 0 }); // Menos movimiento
 
     ScrollTrigger.create({
         trigger: panel,
-        start: "top 80%",
+        start: "top 75%", // Menos agresivo
+        once: true, // Solo animar una vez
         onEnter: () => {
             gsap.to(elements, {
-                y: 0, opacity: 1, duration: 1.4, stagger: 0.15, ease: "power3.out"
+                y: 0, 
+                opacity: 1, 
+                duration: 0.8, // Más rápido
+                stagger: 0.1, // Menos stagger
+                ease: "power2.out"
             });
-            if (chars.length) {
-                gsap.to(chars, {
-                    opacity: 1, rotationX: 0, y: 0,
-                    duration: 0.8, stagger: 0.04, ease: "back.out(2)", delay: 0.2
-                });
-            }
-            if (skillChips.length) {
-                gsap.to(skillChips, {
-                    opacity: 1, scale: 1, y: 0,
-                    duration: 0.6, stagger: 0.08, ease: "back.out(1.5)", delay: 0.5
-                });
-            }
-        },
-        onLeaveBack: () => {
-            gsap.to(elements, {
-                y: 50, opacity: 0, duration: 0.5, stagger: 0.08, ease: "power2.in"
-            });
-            if (chars.length) {
-                gsap.to(chars, {
-                    opacity: 0, rotationX: 90, y: 30,
-                    duration: 0.3, stagger: 0.02, ease: "power2.in"
-                });
-            }
-            if (skillChips.length) {
-                gsap.to(skillChips, {
-                    opacity: 0, scale: 0.8, y: 20,
-                    duration: 0.3, stagger: 0.03, ease: "power2.in"
-                });
-            }
         }
-    });
-
-    gsap.to(panel, {
-        backgroundPosition: "50% 100%",
-        ease: "none",
-        scrollTrigger: { trigger: panel, start: "top bottom", end: "bottom top", scrub: true }
     });
 });
 
-// Stagger web project cards
+// Simplificar animaciones de tarjetas
 gsap.utils.toArray('.web-project-card').forEach((card, i) => {
     gsap.from(card, {
-        y: 80,
+        y: 40,
         opacity: 0,
-        scale: 0.95,
-        duration: 1,
-        ease: "power3.out",
+        duration: 0.6,
+        ease: "power2.out",
         scrollTrigger: {
             trigger: card,
             start: "top 85%",
-            toggleActions: "play none none reverse"
+            once: true
         }
     });
-    
-    // Parallax effect on mockup
-    const mockup = card.querySelector('.web-project-mockup');
-    if (mockup) {
-        gsap.to(mockup, {
-            y: -20,
-            ease: "none",
-            scrollTrigger: {
-                trigger: card,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1
-            }
-        });
-    }
 });
 
-// Stagger gallery items
+// Simplificar gallery items
 gsap.utils.toArray('.gallery-grid .portfolio-item').forEach((item, i) => {
     gsap.from(item, {
-        y: 80,
+        y: 40,
         opacity: 0,
-        scale: 0.95,
-        rotationY: i % 2 === 0 ? -5 : 5,
-        duration: 1,
-        ease: "power3.out",
+        duration: 0.6,
+        ease: "power2.out",
         scrollTrigger: {
             trigger: item,
             start: "top 90%",
-            toggleActions: "play none none reverse"
+            once: true
         }
     });
 });
 
-// Contact cards
+// Contact cards - simplificado
 gsap.utils.toArray('.contact-card').forEach((card, i) => {
     gsap.from(card, {
-        y: 60,
+        y: 30,
         opacity: 0,
-        scale: 0.9,
-        duration: 0.8,
-        delay: i * 0.1,
-        ease: "back.out(1.5)",
+        duration: 0.5,
+        delay: i * 0.05,
+        ease: "power2.out",
         scrollTrigger: {
             trigger: card,
             start: "top 90%",
-            toggleActions: "play none none reverse"
+            once: true
         }
     });
 });
 
-// Footer
+// Footer - simplificado
 gsap.from('.site-footer', {
     opacity: 0,
-    duration: 1,
+    duration: 0.6,
     scrollTrigger: {
         trigger: '.site-footer',
         start: "top 95%",
-        toggleActions: "play none none none"
+        once: true
     }
 });
 
