@@ -1,0 +1,55 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f8f8"/>
+  <rect width="1200" height="800" fill="url(#grad1)"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,0,0,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#grid)"/>
+  
+  <!-- Header mockup -->
+  <rect x="100" y="100" width="1000" height="80" rx="10" fill="white" opacity="0.9"/>
+  <circle cx="140" cy="140" r="15" fill="#00ffff" opacity="0.3"/>
+  <rect x="180" y="130" width="150" height="20" rx="10" fill="rgba(0,0,0,0.08)"/>
+  <rect x="900" y="130" width="80" height="20" rx="10" fill="rgba(0,0,0,0.08)"/>
+  <rect x="1000" y="130" width="80" height="20" rx="10" fill="rgba(0,0,0,0.08)"/>
+  
+  <!-- Hero section mockup -->
+  <rect x="100" y="220" width="1000" height="300" rx="10" fill="white" opacity="0.9"/>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#0a0a0a">ALEX ANDRADE</text>
+  <text x="600" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#888888">Portfolio Creativo</text>
+  <circle cx="600" cy="450" r="30" fill="none" stroke="#00ffff" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Cards mockup -->
+  <rect x="100" y="560" width="280" height="180" rx="10" fill="white" opacity="0.8"/>
+  <rect x="120" y="580" width="240" height="100" rx="5" fill="rgba(0,255,255,0.1)"/>
+  <rect x="120" y="700" width="180" height="15" rx="7" fill="rgba(0,0,0,0.1)"/>
+  
+  <rect x="460" y="560" width="280" height="180" rx="10" fill="white" opacity="0.8"/>
+  <rect x="480" y="580" width="240" height="100" rx="5" fill="rgba(0,255,255,0.1)"/>
+  <rect x="480" y="700" width="180" height="15" rx="7" fill="rgba(0,0,0,0.1)"/>
+  
+  <rect x="820" y="560" width="280" height="180" rx="10" fill="white" opacity="0.8"/>
+  <rect x="840" y="580" width="240" height="100" rx="5" fill="rgba(0,255,255,0.1)"/>
+  <rect x="840" y="700" width="180" height="15" rx="7" fill="rgba(0,0,0,0.1)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="200" cy="300" r="3" fill="#00ffff" opacity="0.3"/>
+  <circle cx="1000" cy="250" r="3" fill="#00ffff" opacity="0.3"/>
+  <circle cx="150" cy="650" r="2" fill="#00ffff" opacity="0.2"/>
+  <circle cx="1050" cy="600" r="2" fill="#00ffff" opacity="0.2"/>
+  
+  <!-- Watermark -->
+  <text x="600" y="780" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#cccccc" opacity="0.5">Portfolio Preview - Replace with actual screenshot</text>
+</svg>

@@ -469,19 +469,35 @@ panels.forEach((panel, i) => {
     });
 });
 
-// Parallax for web mockups
-gsap.utils.toArray('.web-mockup-item').forEach((item, i) => {
-    gsap.from(item, {
-        y: 60 + (i % 2) * 40,
+// Stagger web project cards
+gsap.utils.toArray('.web-project-card').forEach((card, i) => {
+    gsap.from(card, {
+        y: 80,
         opacity: 0,
-        duration: 1.2,
+        scale: 0.95,
+        duration: 1,
         ease: "power3.out",
         scrollTrigger: {
-            trigger: item,
+            trigger: card,
             start: "top 85%",
             toggleActions: "play none none reverse"
         }
     });
+    
+    // Parallax effect on mockup
+    const mockup = card.querySelector('.web-project-mockup');
+    if (mockup) {
+        gsap.to(mockup, {
+            y: -20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: card,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1
+            }
+        });
+    }
 });
 
 // Stagger gallery items
@@ -697,10 +713,26 @@ const iframeObserver = new IntersectionObserver((entries) => {
             if (src) {
                 const iframe = document.createElement('iframe');
                 iframe.src = src;
-                iframe.title = src;
+                iframe.title = src.split('/').pop() || 'Web Project';
                 iframe.setAttribute('scrolling', 'no');
-                iframe.setAttribute('tabindex', '-1');
                 iframe.setAttribute('loading', 'lazy');
+                
+                // Para proyectos web en la galería, permitir interacción en hover
+                if (placeholder.closest('.web-project-preview')) {
+                    iframe.style.pointerEvents = 'none';
+                    const card = placeholder.closest('.web-project-card');
+                    if (card) {
+                        card.addEventListener('mouseenter', () => {
+                            iframe.style.pointerEvents = 'auto';
+                        });
+                        card.addEventListener('mouseleave', () => {
+                            iframe.style.pointerEvents = 'none';
+                        });
+                    }
+                } else {
+                    iframe.setAttribute('tabindex', '-1');
+                }
+                
                 placeholder.parentNode.replaceChild(iframe, placeholder);
             }
             iframeObserver.unobserve(entry.target);
