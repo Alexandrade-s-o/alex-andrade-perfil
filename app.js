@@ -931,6 +931,7 @@ const translations = {
         aboutTitle: "Sobre Mí",
         aboutText1: "Soy un diseñador y director creativo apasionado por la creación de soluciones estructuradas que impactan visualmente y además generan un cambio funcional positivo.",
         aboutText2: "Mi enfoque abarca desde experiencias web minimalistas y gráficos de alto contraste, hasta narrativas en movimiento y compromisos socio-ambientales. Conecto los puntos entre la estética profunda y el diseño centrado en el usuario.",
+        skillsTitle: "Habilidades",
         webTitle: "Diseño Web",
         webText: "Interfaces modernas y funcionales que combinan estética y experiencia de usuario.",
         webHint: "Haz clic en \"Ver Sitio\" para explorar cada proyecto en vivo",
@@ -972,6 +973,7 @@ const translations = {
         aboutTitle: "About Me",
         aboutText1: "I'm a passionate creative designer focused on building structured solutions that make visual impact while generating positive functional change.",
         aboutText2: "My approach spans from minimalist web experiences and high-contrast graphics to motion narratives and socio-environmental commitments. I connect the dots between deep aesthetics and user-centered design.",
+        skillsTitle: "Skills",
         webTitle: "Web Design",
         webText: "Modern and functional interfaces that combine aesthetics and user experience.",
         webHint: "Click \"View Site\" to explore each project live",
@@ -1052,6 +1054,11 @@ function updateLanguage(lang) {
             const nextP = p.nextElementSibling;
             if (p) p.textContent = t.aboutText1;
             if (nextP && nextP.tagName === 'P') nextP.textContent = t.aboutText2;
+            
+            // Update skills
+            document.querySelectorAll('.skill-chip').forEach(chip => {
+                chip.textContent = chip.dataset[lang];
+            });
         } else if (p && panel.id === 'web') {
             p.textContent = t.webText;
             const hint = panel.querySelector('.hint-text');
