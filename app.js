@@ -910,3 +910,223 @@ document.querySelectorAll('.neon-text .number').forEach(num => {
         once: true
     });
 });
+// ==============================================
+// LANGUAGE TOGGLE (ES/EN)
+// ==============================================
+const translations = {
+    es: {
+        // Nav
+        sobre: "Sobre Mí",
+        web: "Diseño Web",
+        grafico: "Diseño Gráfico",
+        motion: "Motion",
+        socio: "Étnica",
+        certs: "Certificados",
+        contacto: "Contacto",
+        // Hero
+        heroTag: "Diseñador Multimedia • Animador • Desarrollador Web",
+        heroSubtitle: "Creando experiencias visuales que trascienden",
+        scrollText: "Scroll para descubrir",
+        // Sections
+        aboutTitle: "Sobre Mí",
+        aboutText1: "Soy un diseñador y director creativo apasionado por la creación de soluciones estructuradas que impactan visualmente y además generan un cambio funcional positivo.",
+        aboutText2: "Mi enfoque abarca desde experiencias web minimalistas y gráficos de alto contraste, hasta narrativas en movimiento y compromisos socio-ambientales. Conecto los puntos entre la estética profunda y el diseño centrado en el usuario.",
+        webTitle: "Diseño Web",
+        webText: "Interfaces modernas y funcionales que combinan estética y experiencia de usuario.",
+        webHint: "Haz clic en \"Ver Sitio\" para explorar cada proyecto en vivo",
+        graficoTitle: "Diseño Gráfico",
+        graficoText: "Comunicación visual de alto impacto donde convergen ideas innovadoras.",
+        graficoHint: "Clic en cualquier diseño para verlo en pantalla completa",
+        motionTitle: "Motion Graphics",
+        motionText: "Dando vida a las ideas a través del movimiento y dinámico storytelling.",
+        motionHint: "Clic en las miniaturas para reproducir directamente en HD",
+        socioTitle: "Exp. Étnica Socio-ambiental",
+        socioText: "Diseño con propósito y consciencia ecológica, honrando identidades, raíces y comunidades.",
+        certsTitle: "Certificados",
+        certsText: "Experiencia laboral respaldada por organizaciones y equipos de alto impacto.",
+        contactoTitle: "Contacto",
+        contactoText: "¿Tienes un proyecto en mente? Hablemos y hagamos algo increíble juntos.",
+        // Buttons
+        verProyecto: "Ver proyecto",
+        verSitio: "Ver Sitio",
+        verCodigo: "Ver Código",
+        skipIntro: "Saltar intro",
+        // Footer
+        footerTagline: "Diseño con propósito. Código con pasión.",
+        footerCopy: "© 2026 Alex Andrade. Todos los derechos reservados."
+    },
+    en: {
+        // Nav
+        sobre: "About Me",
+        web: "Web Design",
+        grafico: "Graphic",
+        motion: "Motion",
+        socio: "Ethnic",
+        certs: "Certificates",
+        contacto: "Contact",
+        // Hero
+        heroTag: "Multimedia Designer • Animator • Web Developer",
+        heroSubtitle: "Creating visual experiences that transcend",
+        scrollText: "Scroll to discover",
+        // Sections
+        aboutTitle: "About Me",
+        aboutText1: "I'm a passionate creative designer focused on building structured solutions that make visual impact while generating positive functional change.",
+        aboutText2: "My approach spans from minimalist web experiences and high-contrast graphics to motion narratives and socio-environmental commitments. I connect the dots between deep aesthetics and user-centered design.",
+        webTitle: "Web Design",
+        webText: "Modern and functional interfaces that combine aesthetics and user experience.",
+        webHint: "Click \"View Site\" to explore each project live",
+        graficoTitle: "Graphic Design",
+        graficoText: "High-impact visual communication where innovative ideas converge.",
+        graficoHint: "Click on any design to view it in full screen",
+        motionTitle: "Motion Graphics",
+        motionText: "Bringing ideas to life through movement and dynamic storytelling.",
+        motionHint: "Click on thumbnails to play directly in HD",
+        socioTitle: "Socio-environmental Ethnic Exp.",
+        socioText: "Design with purpose and ecological awareness, honoring identities, roots, and communities.",
+        certsTitle: "Certificates",
+        certsText: "Work experience backed by high-impact organizations and teams.",
+        contactoTitle: "Contact",
+        contactoText: "Do you have a project in mind? Let's talk and create something amazing together.",
+        // Buttons
+        verProyecto: "View project",
+        verSitio: "View Site",
+        verCodigo: "View Code",
+        skipIntro: "Skip intro",
+        // Footer
+        footerTagline: "Design with purpose. Code with passion.",
+        footerCopy: "© 2026 Alex Andrade. All rights reserved."
+    }
+};
+
+let currentLang = 'es';
+
+function updateLanguage(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    
+    // Update nav links
+    document.querySelectorAll('.nav-links a[data-es]').forEach(link => {
+        link.textContent = t[link.dataset.section];
+    });
+    
+    // Update mobile nav links
+    document.querySelectorAll('.mobile-nav-links a[data-es]').forEach(link => {
+        link.textContent = t[link.dataset.section] || link.dataset.en;
+    });
+    
+    // Update hero
+    const heroTag = document.querySelector('.hero-tag');
+    if (heroTag) heroTag.textContent = t.heroTag;
+    
+    const heroSubtitle = document.querySelector('.hero .subtitle');
+    if (heroSubtitle) heroSubtitle.textContent = t.heroSubtitle;
+    
+    const scrollText = document.querySelector('.scroll-indicator span');
+    if (scrollText) scrollText.textContent = t.scrollText;
+    
+    // Update section titles
+    document.querySelectorAll('.neon-text').forEach(title => {
+        const text = title.textContent.replace(/\d+$/, '').trim();
+        if (title.closest('.section-sobre')) {
+            title.innerHTML = t.aboutTitle + ' <span class="number">00</span>';
+        } else if (title.closest('.section-web')) {
+            title.innerHTML = t.webTitle + ' <span class="number">01</span>';
+        } else if (title.closest('.section-grafico')) {
+            title.innerHTML = t.graficoTitle + ' <span class="number">02</span>';
+        } else if (title.closest('.section-motion')) {
+            title.innerHTML = t.motionTitle + ' <span class="number">03</span>';
+        } else if (title.closest('.section-socio')) {
+            title.innerHTML = t.socioTitle + ' <span class="number">04</span>';
+        } else if (title.closest('.section-certs')) {
+            title.innerHTML = t.certsTitle + ' <span class="number">05</span>';
+        } else if (title.closest('.section-contacto')) {
+            title.innerHTML = t.contactoTitle + ' <span class="number">06</span>';
+        }
+    });
+    
+    // Update section texts
+    const panels = document.querySelectorAll('.panel');
+    panels.forEach(panel => {
+        const p = panel.querySelector('.section-content > p');
+        if (p && panel.id === 'sobre') {
+            const nextP = p.nextElementSibling;
+            if (p) p.textContent = t.aboutText1;
+            if (nextP && nextP.tagName === 'P') nextP.textContent = t.aboutText2;
+        } else if (p && panel.id === 'web') {
+            p.textContent = t.webText;
+            const hint = panel.querySelector('.hint-text');
+            if (hint) hint.textContent = t.webHint;
+        } else if (p && panel.id === 'grafico') {
+            p.textContent = t.graficoText;
+            const hint = panel.querySelector('.hint-text');
+            if (hint) hint.textContent = t.graficoHint;
+        } else if (p && panel.id === 'motion') {
+            p.textContent = t.motionText;
+            const hint = panel.querySelector('.hint-text');
+            if (hint) hint.textContent = t.motionHint;
+        } else if (p && panel.id === 'socio') {
+            p.textContent = t.socioText;
+        } else if (p && panel.id === 'certs') {
+            p.textContent = t.certsText;
+        } else if (p && panel.id === 'contacto') {
+            p.textContent = t.contactoText;
+        }
+    });
+    
+    // Update footer
+    const footerTagline = document.querySelector('.footer-tagline');
+    if (footerTagline) footerTagline.textContent = t.footerTagline;
+    
+    const footerCopy = document.querySelector('.footer-copy');
+    if (footerCopy) footerCopy.textContent = t.footerCopy;
+    
+    // Update buttons
+    document.querySelectorAll('.img-overlay span').forEach(span => {
+        if (span.textContent.includes('Ver')) {
+            span.textContent = t.verProyecto;
+        }
+    });
+    
+    document.querySelectorAll('.cyber-btn').forEach(btn => {
+        if (btn.textContent.includes('Ver Sitio')) {
+            btn.textContent = t.verSitio;
+        }
+    });
+    
+    // Update lang toggle buttons
+    document.querySelectorAll('.lang-toggle .lang-current').forEach(span => {
+        span.textContent = lang.toUpperCase();
+    });
+    document.querySelectorAll('.lang-toggle .lang-other').forEach(span => {
+        span.textContent = lang === 'es' ? 'EN' : 'ES';
+    });
+    
+    // Update skip button
+    const skipBtn = document.getElementById('preloader-skip');
+    if (skipBtn) skipBtn.textContent = t.skipIntro;
+    
+    // Save preference
+    localStorage.setItem('portfolio-lang', lang);
+}
+
+// Language toggle event
+const langToggle = document.getElementById('langToggle');
+const langToggleMobile = document.getElementById('langToggleMobile');
+
+function toggleLanguage() {
+    const newLang = currentLang === 'es' ? 'en' : 'es';
+    updateLanguage(newLang);
+}
+
+if (langToggle) {
+    langToggle.addEventListener('click', toggleLanguage);
+}
+if (langToggleMobile) {
+    langToggleMobile.addEventListener('click', toggleLanguage);
+}
+
+// Load saved language preference
+const savedLang = localStorage.getItem('portfolio-lang');
+if (savedLang) {
+    updateLanguage(savedLang);
+}
