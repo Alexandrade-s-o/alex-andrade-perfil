@@ -1670,6 +1670,92 @@ body::after {
 /* =============================================
    CERTIFICATES SECTION
    ============================================= */
+.sena-certs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.sena-cert-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+.sena-cert-badge {
+    align-self: flex-start;
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-full);
+    background: #39ff14;
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+}
+
+.sena-cert-card h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    line-height: 1.2;
+}
+
+.sena-cert-card p {
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.sena-cert-meta,
+.sena-cert-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.sena-cert-meta span {
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.06);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.sena-cert-actions {
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.sena-cert-actions .cert-download-btn {
+    margin-top: 0;
+}
+
+.cert-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 24px;
+    border: 2px solid var(--text-primary);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.35s var(--transition-smooth);
+}
+
+.cert-secondary-btn:hover {
+    background: var(--text-primary);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
 .certs-feature {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
@@ -1769,6 +1855,10 @@ body::after {
 }
 
 @media (max-width: 900px) {
+    .sena-certs-grid {
+        grid-template-columns: 1fr;
+    }
+
     .contact-grid--three {
         grid-template-columns: 1fr;
     }
