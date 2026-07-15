@@ -1551,7 +1551,7 @@ body::after {
     height: 100%;
     margin: 0;
     transform-style: preserve-3d;
-    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
 }
 
@@ -1570,8 +1570,14 @@ body::after {
     opacity: 0.28;
     filter: saturate(0.45) brightness(0.72);
     backface-visibility: hidden;
+    contain: layout paint style;
     pointer-events: none;
     transition: opacity 0.55s ease, filter 0.55s ease, box-shadow 0.55s ease;
+}
+
+.web-wheel .web-project-card:not(.is-active) iframe,
+.web-wheel.is-dragging iframe {
+    visibility: hidden;
 }
 
 .web-wheel .web-project-card:hover {
@@ -1711,6 +1717,7 @@ body::after {
         top: 270px;
         width: 46px;
         height: 46px;
+        backdrop-filter: none;
     }
 
     .web-wheel-prev { left: 0.25rem; }

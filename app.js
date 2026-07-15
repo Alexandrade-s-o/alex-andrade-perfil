@@ -538,6 +538,10 @@ if (webWheel) {
     let dragStartRotation = 0;
     let isDragging = false;
     let wheelLocked = false;
+    let wheelIsVisible = false;
+    let dragFrame = 0;
+    let pendingRotation = 0;
+    let resizeFrame = 0;
 
     const normalizeIndex = index => (index % wheelCards.length + wheelCards.length) % wheelCards.length;
 
@@ -562,11 +566,15 @@ if (webWheel) {
             card.style.setProperty('--wheel-transform', cardTransform);
             card.style.transform = cardTransform;
         });
-        renderWheel();
+        updateWheelSelection();
     };
 
-    const renderWheel = () => {
-        wheelTrack.style.transform = `translateZ(${-radius}px) rotateY(${rotation}deg)`;
+    const renderWheelTransform = () => {
+        wheelTrack.style.transform = `translate3d(0, 0, ${-radius}px) rotateY(${rotation}deg)`;
+    };
+
+    const updateWheelSelection = () => {
+        renderWheelTransform();
         activeIndex = normalizeIndex(Math.round(-rotation / angleStep));
         wheelCards.forEach((card, index) => {
             const isActive = index === activeIndex;
@@ -575,7 +583,7 @@ if (webWheel) {
             card.querySelectorAll('a, button').forEach(control => {
                 control.tabIndex = isActive ? 0 : -1;
             });
-            if (isActive) loadProjectIframe(card.querySelector('.iframe-placeholder'));
+            if (isActive && wheelIsVisible) loadProjectIframe(card.querySelector('.iframe-placeholder'));
         });
         Array.from(dotsContainer.children).forEach((dot, index) => {
             dot.classList.toggle('is-active', index === activeIndex);
@@ -588,7 +596,7 @@ if (webWheel) {
     function goTo(index) {
         activeIndex = normalizeIndex(index);
         rotation = -activeIndex * angleStep;
-        renderWheel();
+        updateWheelSelection();
     }
 
     prevButton.addEventListener('click', () => goTo(activeIndex - 1));
@@ -618,13 +626,24 @@ if (webWheel) {
 
     webWheel.addEventListener('pointermove', event => {
         if (!isDragging) return;
-        rotation = dragStartRotation + (event.clientX - dragStartX) * 0.28;
-        renderWheel();
+        const latestEvent = event.getCoalescedEvents?.().at(-1) || event;
+        pendingRotation = dragStartRotation + (latestEvent.clientX - dragStartX) * 0.28;
+        if (dragFrame) return;
+        dragFrame = requestAnimationFrame(() => {
+            rotation = pendingRotation;
+            renderWheelTransform();
+            dragFrame = 0;
+        });
     });
 
     const finishWheelDrag = event => {
         if (!isDragging) return;
         isDragging = false;
+        if (dragFrame) {
+            cancelAnimationFrame(dragFrame);
+            dragFrame = 0;
+            rotation = pendingRotation;
+        }
         webWheel.classList.remove('is-dragging');
         if (webWheel.hasPointerCapture(event.pointerId)) webWheel.releasePointerCapture(event.pointerId);
         goTo(Math.round(-rotation / angleStep));
@@ -632,7 +651,20 @@ if (webWheel) {
 
     webWheel.addEventListener('pointerup', finishWheelDrag);
     webWheel.addEventListener('pointercancel', finishWheelDrag);
-    window.addEventListener('resize', updateRadius, { passive: true });
+    const wheelVisibilityObserver = new IntersectionObserver(entries => {
+        wheelIsVisible = entries[0].isIntersecting;
+        if (wheelIsVisible) {
+            loadProjectIframe(wheelCards[activeIndex].querySelector('.iframe-placeholder'));
+        }
+    }, { rootMargin: '180px', threshold: 0.01 });
+    wheelVisibilityObserver.observe(webWheel);
+    window.addEventListener('resize', () => {
+        if (resizeFrame) return;
+        resizeFrame = requestAnimationFrame(() => {
+            updateRadius();
+            resizeFrame = 0;
+        });
+    }, { passive: true });
     updateRadius();
 }
 
