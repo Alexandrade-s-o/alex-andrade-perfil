@@ -219,27 +219,42 @@ function finishIntro() {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const introVideo = document.getElementById('intro-video');
 const skipBtn = document.getElementById('preloader-skip');
+const experienceGate = document.getElementById('experience-gate');
+const experienceStart = document.getElementById('experience-start');
+const experienceSkip = document.getElementById('experience-skip');
 
 if (prefersReducedMotion) {
     finishIntro();
 } else if (introVideo) {
     introVideo.setAttribute('playsinline', '');
-    introVideo.muted = true;
-
-    const tryPlay = () => introVideo.play().catch(() => {});
+    introVideo.muted = false;
+    introVideo.volume = 1;
 
     introVideo.addEventListener('ended', finishIntro);
     introVideo.addEventListener('error', () => finishIntro());
 
-    if (skipBtn) {
-        skipBtn.addEventListener('click', finishIntro);
+    const startExperience = () => {
+        introVideo.muted = false;
+        introVideo.volume = 1;
+        introVideo.currentTime = 0;
+        if (experienceGate) {
+            experienceGate.classList.add('is-hidden');
+        }
+        if (skipBtn) {
+            skipBtn.classList.add('is-visible');
+        }
+        introVideo.play().catch(() => {});
+    };
+
+    if (experienceStart) {
+        experienceStart.addEventListener('click', startExperience);
+    }
+    if (experienceSkip) {
+        experienceSkip.addEventListener('click', finishIntro);
     }
 
-    if (introVideo.readyState >= 2) {
-        tryPlay();
-    } else {
-        introVideo.addEventListener('canplay', tryPlay, { once: true });
-        introVideo.addEventListener('loadeddata', tryPlay, { once: true });
+    if (skipBtn) {
+        skipBtn.addEventListener('click', finishIntro);
     }
 } else {
     finishIntro();
@@ -269,6 +284,7 @@ function initParticles() {
     });
     let w, h, particles = [];
     let animationId;
+    let isCanvasVisible = true;
     let lastTime = 0;
     const fps = isMobile ? 30 : 60; // Reducir FPS en móvil
     const interval = 1000 / fps;
@@ -339,6 +355,10 @@ function initParticles() {
     for (let i = 0; i < count; i++) particles.push(new Particle());
 
     function animate(currentTime) {
+        if (!isCanvasVisible || document.hidden) {
+            animationId = null;
+            return;
+        }
         const deltaTime = currentTime - lastTime;
         
         if (deltaTime > interval) {
@@ -352,8 +372,20 @@ function initParticles() {
     
     // Delay para no interferir con carga inicial
     setTimeout(() => {
-        animationId = requestAnimationFrame(animate);
+        if (isCanvasVisible) animationId = requestAnimationFrame(animate);
     }, 1000);
+
+    const canvasVisibilityObserver = new IntersectionObserver(entries => {
+        isCanvasVisible = entries[0].isIntersecting;
+        if (isCanvasVisible && !animationId && !document.hidden) {
+            lastTime = performance.now();
+            animationId = requestAnimationFrame(animate);
+        } else if (!isCanvasVisible && animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    }, { threshold: 0.01 });
+    canvasVisibilityObserver.observe(canvas);
     
     return () => {
         if (animationId) cancelAnimationFrame(animationId);
@@ -447,7 +479,7 @@ panels.forEach((panel, i) => {
     }
 
     const title = panel.querySelector('.neon-text');
-    const content = panel.querySelector('.portfolio-grid, .about-grid, .ethnic-feature, .certs-feature, .contact-grid, .web-projects-grid');
+    const content = panel.querySelector('.portfolio-grid, .about-grid, .ethnic-feature, .certs-feature, .contact-grid, .web-wheel');
     const paragraphs = panel.querySelectorAll('.section-content > p, .hint-text');
 
     const elements = [title, ...paragraphs, content].filter(Boolean);
@@ -469,20 +501,140 @@ panels.forEach((panel, i) => {
     });
 });
 
-// Simplificar animaciones de tarjetas
-gsap.utils.toArray('.web-project-card').forEach((card, i) => {
-    gsap.from(card, {
+// Entrada de la rueda 3D de proyectos
+const webWheelElement = document.querySelector('.web-wheel');
+if (webWheelElement) {
+    gsap.from(webWheelElement, {
         y: 40,
         opacity: 0,
-        duration: 0.6,
+        duration: 0.75,
         ease: "power2.out",
         scrollTrigger: {
-            trigger: card,
+            trigger: webWheelElement,
             start: "top 85%",
             once: true
         }
     });
-});
+}
+
+// ==============================================
+// 3D PROJECT WHEEL
+// ==============================================
+const webWheel = document.querySelector('.web-wheel');
+
+if (webWheel) {
+    const wheelTrack = webWheel.querySelector('.web-projects-grid');
+    const wheelCards = Array.from(webWheel.querySelectorAll('.web-project-card'));
+    const prevButton = webWheel.querySelector('.web-wheel-prev');
+    const nextButton = webWheel.querySelector('.web-wheel-next');
+    const currentLabel = webWheel.querySelector('.web-wheel-current');
+    const totalLabel = webWheel.querySelector('.web-wheel-total');
+    const dotsContainer = webWheel.querySelector('.web-wheel-dots');
+    const angleStep = 360 / wheelCards.length;
+    let activeIndex = 0;
+    let rotation = 0;
+    let radius = 620;
+    let dragStartX = 0;
+    let dragStartRotation = 0;
+    let isDragging = false;
+    let wheelLocked = false;
+
+    const normalizeIndex = index => (index % wheelCards.length + wheelCards.length) % wheelCards.length;
+
+    wheelCards.forEach((card, index) => {
+        card.setAttribute('role', 'group');
+        card.setAttribute('aria-label', `Proyecto ${index + 1} de ${wheelCards.length}`);
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'web-wheel-dot';
+        dot.setAttribute('aria-label', `Ver proyecto ${index + 1}`);
+        dot.addEventListener('click', () => goTo(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const updateRadius = () => {
+        radius = window.innerWidth <= 768
+            ? Math.max(300, Math.min(390, window.innerWidth * 0.92))
+            : Math.max(520, Math.min(720, window.innerWidth * 0.48));
+
+        wheelCards.forEach((card, index) => {
+            const cardTransform = `rotateY(${index * angleStep}deg) translateZ(${radius}px)`;
+            card.style.setProperty('--wheel-transform', cardTransform);
+            card.style.transform = cardTransform;
+        });
+        renderWheel();
+    };
+
+    const renderWheel = () => {
+        wheelTrack.style.transform = `translateZ(${-radius}px) rotateY(${rotation}deg)`;
+        activeIndex = normalizeIndex(Math.round(-rotation / angleStep));
+        wheelCards.forEach((card, index) => {
+            const isActive = index === activeIndex;
+            card.classList.toggle('is-active', isActive);
+            card.setAttribute('aria-hidden', String(!isActive));
+            card.querySelectorAll('a, button').forEach(control => {
+                control.tabIndex = isActive ? 0 : -1;
+            });
+            if (isActive) loadProjectIframe(card.querySelector('.iframe-placeholder'));
+        });
+        Array.from(dotsContainer.children).forEach((dot, index) => {
+            dot.classList.toggle('is-active', index === activeIndex);
+            dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
+        });
+        currentLabel.textContent = String(activeIndex + 1).padStart(2, '0');
+        totalLabel.textContent = String(wheelCards.length).padStart(2, '0');
+    };
+
+    function goTo(index) {
+        activeIndex = normalizeIndex(index);
+        rotation = -activeIndex * angleStep;
+        renderWheel();
+    }
+
+    prevButton.addEventListener('click', () => goTo(activeIndex - 1));
+    nextButton.addEventListener('click', () => goTo(activeIndex + 1));
+
+    webWheel.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') goTo(activeIndex - 1);
+        if (event.key === 'ArrowRight') goTo(activeIndex + 1);
+    });
+
+    webWheel.addEventListener('wheel', event => {
+        if (Math.abs(event.deltaY) < 8 || wheelLocked) return;
+        event.preventDefault();
+        wheelLocked = true;
+        goTo(activeIndex + (event.deltaY > 0 ? 1 : -1));
+        window.setTimeout(() => { wheelLocked = false; }, 650);
+    }, { passive: false });
+
+    webWheel.addEventListener('pointerdown', event => {
+        if (event.target.closest('a, button, iframe')) return;
+        isDragging = true;
+        dragStartX = event.clientX;
+        dragStartRotation = rotation;
+        webWheel.classList.add('is-dragging');
+        webWheel.setPointerCapture(event.pointerId);
+    });
+
+    webWheel.addEventListener('pointermove', event => {
+        if (!isDragging) return;
+        rotation = dragStartRotation + (event.clientX - dragStartX) * 0.28;
+        renderWheel();
+    });
+
+    const finishWheelDrag = event => {
+        if (!isDragging) return;
+        isDragging = false;
+        webWheel.classList.remove('is-dragging');
+        if (webWheel.hasPointerCapture(event.pointerId)) webWheel.releasePointerCapture(event.pointerId);
+        goTo(Math.round(-rotation / angleStep));
+    };
+
+    webWheel.addEventListener('pointerup', finishWheelDrag);
+    webWheel.addEventListener('pointercancel', finishWheelDrag);
+    window.addEventListener('resize', updateRadius, { passive: true });
+    updateRadius();
+}
 
 // Simplificar gallery items
 gsap.utils.toArray('.gallery-grid .portfolio-item').forEach((item, i) => {
@@ -647,6 +799,31 @@ if (backToTop) {
 // ==============================================
 // 13. IMAGE MODAL
 // ==============================================
+const graphicFilters = document.querySelectorAll('.graphic-filter');
+const graphicProjects = document.querySelectorAll('#grafico .behance-project');
+
+graphicFilters.forEach(filterButton => {
+    filterButton.addEventListener('click', () => {
+        const selectedCategory = filterButton.dataset.filter;
+        graphicFilters.forEach(button => button.classList.toggle('is-active', button === filterButton));
+
+        graphicProjects.forEach((project, index) => {
+            const shouldShow = selectedCategory === 'all' || project.dataset.category === selectedCategory;
+            project.classList.toggle('is-filtered-out', !shouldShow);
+            if (shouldShow) {
+                project.animate([
+                    { opacity: 0, transform: 'translateY(18px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ], {
+                    duration: 420,
+                    delay: index * 35,
+                    easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+                });
+            }
+        });
+    });
+});
+
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImg');
 const galleryItems = document.querySelectorAll('#grafico .portfolio-item');
@@ -721,37 +898,35 @@ document.addEventListener('keydown', (e) => {
 // ==============================================
 const iframePlaceholders = document.querySelectorAll('.iframe-placeholder');
 
+function loadProjectIframe(placeholder) {
+    if (!placeholder || placeholder.dataset.loading === 'true') return;
+    const src = placeholder.dataset.src;
+    if (!src) return;
+    placeholder.dataset.loading = 'true';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = placeholder.closest('.web-project-card')?.querySelector('h3')?.textContent || 'Proyecto web';
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('importance', 'low');
+    iframe.style.pointerEvents = 'none';
+
+    const card = placeholder.closest('.web-project-card');
+    if (card) {
+        card.addEventListener('mouseenter', () => { iframe.style.pointerEvents = 'auto'; }, { passive: true });
+        card.addEventListener('mouseleave', () => { iframe.style.pointerEvents = 'none'; }, { passive: true });
+    }
+
+    placeholder.parentNode?.replaceChild(iframe, placeholder);
+}
+
 const iframeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const placeholder = entry.target;
-            const src = placeholder.dataset.src;
-            if (src) {
-                // Delay para mejor UX
-                setTimeout(() => {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = src;
-                    iframe.title = src.split('/').pop() || 'Web Project';
-                    iframe.setAttribute('loading', 'lazy');
-                    iframe.setAttribute('importance', 'low');
-                    
-                    // Para proyectos web en la galería, permitir interacción en hover
-                    if (placeholder.closest('.web-project-preview')) {
-                        iframe.style.pointerEvents = 'none';
-                        const card = placeholder.closest('.web-project-card');
-                        if (card) {
-                            card.addEventListener('mouseenter', () => {
-                                iframe.style.pointerEvents = 'auto';
-                            }, { passive: true });
-                            card.addEventListener('mouseleave', () => {
-                                iframe.style.pointerEvents = 'none';
-                            }, { passive: true });
-                        }
-                    }
-                    
-                    placeholder.parentNode.replaceChild(iframe, placeholder);
-                }, 150);
-            }
+            const wheelCard = placeholder.closest('.web-wheel .web-project-card');
+            if (wheelCard && !wheelCard.classList.contains('is-active')) return;
+            loadProjectIframe(placeholder);
             iframeObserver.unobserve(entry.target);
         }
     });
@@ -776,7 +951,8 @@ document.querySelectorAll('.pdf-trigger').forEach(item => {
 // 18. 3D TILT EFFECT ON CARDS
 // ==============================================
 function initTilt() {
-    const items = document.querySelectorAll('.portfolio-item, .contact-card, .browser-mockup');
+    if (window.matchMedia('(pointer: coarse), (prefers-reduced-motion: reduce)').matches) return;
+    const items = document.querySelectorAll('.contact-card, .browser-mockup');
 
     items.forEach(card => {
         card.classList.add('tilt-card');
@@ -822,25 +998,6 @@ function initTilt() {
 }
 
 initTilt();
-
-// ==============================================
-// 18. MOUSE-REACTIVE HERO PARTICLES
-// ==============================================
-(function upgradeParticles() {
-    const canvas = document.getElementById('hero-particles');
-    if (!canvas) return;
-
-    let heroMouseX = 0, heroMouseY = 0;
-
-    canvas.parentElement.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        heroMouseX = e.clientX - rect.left;
-        heroMouseY = e.clientY - rect.top;
-    });
-
-    const originalInit = window._particleUpdate;
-    window._heroMouse = { get x() { return heroMouseX; }, get y() { return heroMouseY; } };
-})();
 
 // ==============================================
 // 19. MARQUEE SPEED ON SCROLL

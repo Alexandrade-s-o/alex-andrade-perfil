@@ -56,9 +56,18 @@
 
     <!-- Intro: video de presentación (exportar desde remotion-presentation → assets/intro.mp4) -->
     <div id="preloader" role="dialog" aria-modal="true" aria-busy="true" aria-label="Introducción en video">
-        <video id="intro-video" class="preloader-video" playsinline muted preload="metadata">
+        <video id="intro-video" class="preloader-video" playsinline preload="metadata">
             <source src="assets/intro.mp4" type="video/mp4" />
         </video>
+        <div class="experience-gate" id="experience-gate">
+            <span class="experience-gate__eyebrow">Alex Andrade</span>
+            <h1>Una experiencia<br>multimedia</h1>
+            <p>Activa el sonido y descubre mi universo creativo.</p>
+            <div class="experience-gate__actions">
+                <button type="button" class="experience-start magnetic" id="experience-start">Iniciar experiencia multimedia</button>
+                <button type="button" class="experience-skip magnetic" id="experience-skip">Saltar intro</button>
+            </div>
+        </div>
         <button type="button" class="preloader-skip" id="preloader-skip"
             aria-label="Saltar la introducción y entrar al portafolio">Saltar intro</button>
     </div>
@@ -270,8 +279,11 @@
                 <div class="section-content">
                     <h2 class="neon-text">Diseño Web <span class="number">01</span></h2>
                     <p>Interfaces modernas y funcionales que combinan estética y experiencia de usuario.</p>
-                    <p class="hint-text">Haz clic en "Ver Sitio" para explorar cada proyecto en vivo</p>
-                    
+                    <p class="hint-text">Arrastra o gira la rueda para elegir un proyecto</p>
+
+                    <div class="web-wheel" tabindex="0" aria-label="Selector 3D de proyectos web. Usa las flechas izquierda y derecha para girar.">
+                        <button type="button" class="web-wheel-btn web-wheel-prev" aria-label="Proyecto anterior">&#8592;</button>
+                        <div class="web-wheel-scene">
                     <div class="web-projects-grid">
                         <!-- Proyecto 1: Boskes -->
                         <div class="web-project-card">
@@ -465,62 +477,83 @@
                             </div>
                         </div>
                     </div>
+                        </div>
+                        <button type="button" class="web-wheel-btn web-wheel-next" aria-label="Proyecto siguiente">&#8594;</button>
+                        <div class="web-wheel-status" aria-live="polite">
+                            <span class="web-wheel-current">01</span>
+                            <span class="web-wheel-line"></span>
+                            <span class="web-wheel-total">06</span>
+                        </div>
+                        <div class="web-wheel-dots" aria-label="Elegir proyecto"></div>
+                    </div>
                 </div>
             </section>
 
             <section class="panel section-grafico" id="grafico">
                 <div class="section-content">
-                    <h2 class="neon-text">Diseño Gráfico <span class="number">02</span></h2>
-                    <p>Comunicación visual de alto impacto donde convergen ideas innovadoras.</p>
-                    <p class="hint-text">Clic en cualquier diseño para verlo en pantalla completa</p>
-                    <div class="portfolio-grid gallery-grid">
-                        <div class="portfolio-item hover-image">
+                    <div class="graphic-editorial-head">
+                        <div>
+                            <span class="graphic-kicker">Selected work · 2024—2026</span>
+                            <h2 class="neon-text">Diseño Gráfico <span class="number">02</span></h2>
+                            <p>Identidades, portadas, campañas y universos visuales construidos desde el concepto.</p>
+                        </div>
+                        <div class="graphic-stats" aria-label="Resumen del portafolio gráfico">
+                            <span><strong>09</strong> proyectos</span>
+                            <span><strong>04</strong> disciplinas</span>
+                        </div>
+                    </div>
+                    <div class="graphic-filters" aria-label="Categorías de diseño gráfico">
+                        <button type="button" class="graphic-filter is-active" data-filter="all">Todo</button>
+                        <button type="button" class="graphic-filter" data-filter="branding">Branding</button>
+                        <button type="button" class="graphic-filter" data-filter="editorial">Editorial</button>
+                        <button type="button" class="graphic-filter" data-filter="digital">Digital</button>
+                        <button type="button" class="graphic-filter" data-filter="3d">3D</button>
+                    </div>
+                    <div class="portfolio-grid gallery-grid behance-gallery">
+                        <div class="portfolio-item hover-image behance-project behance-project--hero" data-category="editorial">
                             <img src="SOLO 1-CDK3wvje.jfif" alt="Diseño de portada musical — estilo urbano" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                            <div class="img-overlay"><div><span>Dirección de arte</span><h3>Solo I</h3><p>Portada musical · 2026</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image">
+                        <div class="portfolio-item hover-image behance-project behance-project--tall" data-category="digital">
                             <img src="2-Car0yTGv.jfif" alt="Arte visual y composición gráfica" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                            <div class="img-overlay"><div><span>Arte digital</span><h3>Carácter</h3><p>Composición visual</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image">
+                        <div class="portfolio-item hover-image behance-project" data-category="digital">
                             <img src="WhatsApp%20Image%202026-01-22%20at%2010.36.11%20AM%20(1)-BbwLzITu.jpeg"
                                 alt="Dirección de fotografía y concepto visual" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                            <div class="img-overlay"><div><span>Fotografía</span><h3>Retrato &amp; concepto</h3><p>Dirección visual</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image">
+                        <div class="portfolio-item hover-image behance-project behance-project--portrait" data-category="branding">
                             <img src="WhatsApp%20Image%202026-04-02%20at%2011.37.05%20AM.jpeg" alt="Campaña publicitaria — concepto Z"
                                 class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                            <div class="img-overlay"><div><span>Campaña</span><h3>Concepto Z</h3><p>Publicidad · Dirección de arte</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image">
+                        <div class="portfolio-item hover-image behance-project behance-project--wide behance-project--logo" data-category="branding">
                             <img src="logo%20dj.png" alt="Diseño de logotipo para DJ" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                            <div class="img-overlay"><div><span>Identidad</span><h3>DJ Brand</h3><p>Logo system</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image">
-                            <img src="lata%20coca.png" alt="Modelado 3D de producto — lata" class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                        <div class="portfolio-item hover-image behance-project behance-project--portrait" data-category="3d">
+                            <img src="lata-coca-optimized.jpg" alt="Modelado 3D de producto — lata" class="portfolio-img" loading="lazy" decoding="async" width="1080" height="1350">
+                            <div class="img-overlay"><div><span>3D / Producto</span><h3>Refresh</h3><p>Modelado y visualización</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image pdf-trigger" data-pdf="yenifer.pdf" title="Yenifer — portada (PDF)">
+                        <div class="portfolio-item hover-image pdf-trigger behance-project behance-project--wide" data-category="editorial" data-pdf="yenifer.pdf" title="Yenifer — portada (PDF)">
                             <div class="pdf-cover-wrap" aria-hidden="true">
-                                <iframe class="pdf-cover-preview"
-                                    src="yenifer.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
-                                    title="Portada del proyecto Yenifer"
-                                    tabindex="-1"
-                                    loading="lazy"></iframe>
+                                <img class="pdf-cover-image" src="yenifer-cover.jpg"
+                                    alt="" loading="lazy" decoding="async">
                             </div>
-                            <div class="img-overlay"><span>Ver PDF completo</span></div>
+                            <div class="img-overlay"><div><span>Editorial</span><h3>Yenifer</h3><p>Publicación · Ver PDF</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image">
-                            <img src="736997057_1694073655255951_6473823560705156853_n.png" 
+                        <div class="portfolio-item hover-image behance-project" data-category="branding">
+                            <img src="identidad-visual-optimized.jpg"
                                 alt="Branding y diseño de identidad corporativa — proyecto editorial" 
-                                class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                                class="portfolio-img" loading="lazy" decoding="async" width="960" height="960">
+                            <div class="img-overlay"><div><span>Branding</span><h3>Identidad viva</h3><p>Sistema visual</p></div><b>↗</b></div>
                         </div>
-                        <div class="portfolio-item hover-image">
+                        <div class="portfolio-item hover-image behance-project" data-category="digital">
                             <img src="descarga%20(1).jpeg" 
                                 alt="Ilustración digital y arte conceptual" 
                                 class="portfolio-img" loading="lazy">
-                            <div class="img-overlay"><span>Ver proyecto</span></div>
+                            <div class="img-overlay"><div><span>Ilustración</span><h3>Imaginarios</h3><p>Arte conceptual</p></div><b>↗</b></div>
                         </div>
                     </div>
                 </div>
