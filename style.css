@@ -2218,9 +2218,19 @@ body::after {
    ============================================= */
 .sena-certs-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
     margin-top: 3rem;
+}
+
+@media (max-width: 1100px) {
+    .sena-certs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sena-cert-card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
 }
 
 .sena-cert-card {
@@ -2403,6 +2413,10 @@ body::after {
 @media (max-width: 900px) {
     .sena-certs-grid {
         grid-template-columns: 1fr;
+    }
+
+    .sena-cert-card:last-child:nth-child(odd) {
+        grid-column: auto;
     }
 
     .contact-grid--three {
