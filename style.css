@@ -52,6 +52,13 @@ body {
     text-rendering: optimizeSpeed;
 }
 
+@media (min-width: 769px) {
+    *, *::before, *::after,
+    html, body, a, button, input, select, textarea, div, p, span, h1, h2, h3, h4, h5, h6, img, video, iframe, article, section {
+        cursor: none !important;
+    }
+}
+
 /* Simplificar GPU acceleration - solo donde es necesario */
 .navbar.scrolled,
 .web-project-card {

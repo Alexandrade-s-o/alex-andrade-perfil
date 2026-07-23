@@ -62,10 +62,13 @@ function createTrail() {
 if (cursor && follower) {
     createTrail();
 
+    gsap.set(cursor, { opacity: 1 });
+    gsap.set(follower, { opacity: 1 });
+
     document.addEventListener('mouseenter', () => {
         isMouseOnScreen = true;
-        gsap.to(cursor, { opacity: 1, duration: 0.3 });
-        gsap.to(follower, { opacity: 1, duration: 0.3 });
+        gsap.to(cursor, { opacity: 1, duration: 0.2 });
+        gsap.to(follower, { opacity: 1, duration: 0.2 });
     });
 
     document.addEventListener('mouseleave', () => {
@@ -76,6 +79,11 @@ if (cursor && follower) {
     });
 
     document.addEventListener('mousemove', (e) => {
+        if (!isMouseOnScreen) {
+            isMouseOnScreen = true;
+            gsap.to(cursor, { opacity: 1, duration: 0.2 });
+            gsap.to(follower, { opacity: 1, duration: 0.2 });
+        }
         mouseX = e.clientX;
         mouseY = e.clientY;
         gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.08, ease: "power2.out" });
@@ -127,34 +135,29 @@ if (cursor && follower) {
         setCursorState(null, '');
     }
 
-    // --- Links & buttons ---
-    document.querySelectorAll('a:not(.portfolio-item):not(.contact-card), button:not(.hamburger):not(.back-to-top), .nav-links a, .skill-chip').forEach(el => {
-        el.addEventListener('mouseenter', () => setCursorState('link', ''));
-        el.addEventListener('mouseleave', resetCursor);
+    // --- Global Event Delegation for Cursors ---
+    document.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('a, button, .portfolio-item, .video-trigger, .video-trigger-local, .threed-card, .contact-card, .skill-chip, .magnetic, .neon-text');
+        if (!target) return;
+
+        if (target.matches('.video-trigger, .video-trigger-local, .threed-video-wrapper')) {
+            setCursorState('video', 'Play');
+        } else if (target.matches('#grafico .portfolio-item, .portfolio-img')) {
+            setCursorState('image', 'Ver');
+        } else if (target.matches('.neon-text')) {
+            setCursorState('text', '');
+        } else if (target.matches('.magnetic')) {
+            setCursorState('magnetic', '');
+        } else {
+            setCursorState('link', '');
+        }
     });
 
-    // --- Gallery images ---
-    document.querySelectorAll('#grafico .portfolio-item').forEach(el => {
-        el.addEventListener('mouseenter', () => setCursorState('image', 'Ver'));
-        el.addEventListener('mouseleave', resetCursor);
-    });
-
-    // --- Video triggers ---
-    document.querySelectorAll('.video-trigger').forEach(el => {
-        el.addEventListener('mouseenter', () => setCursorState('video', 'Play'));
-        el.addEventListener('mouseleave', resetCursor);
-    });
-
-    // --- Contact cards ---
-    document.querySelectorAll('.contact-card').forEach(el => {
-        el.addEventListener('mouseenter', () => setCursorState('link', ''));
-        el.addEventListener('mouseleave', resetCursor);
-    });
-
-    // --- Section titles (text beam) ---
-    document.querySelectorAll('.neon-text').forEach(el => {
-        el.addEventListener('mouseenter', () => setCursorState('text', ''));
-        el.addEventListener('mouseleave', resetCursor);
+    document.addEventListener('mouseout', (e) => {
+        const target = e.target.closest('a, button, .portfolio-item, .video-trigger, .video-trigger-local, .threed-card, .contact-card, .skill-chip, .magnetic, .neon-text');
+        if (target) {
+            resetCursor();
+        }
     });
 
     // --- Magnetic buttons ---
