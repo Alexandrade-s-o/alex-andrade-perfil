@@ -528,155 +528,22 @@ if (webWheelElement) {
 }
 
 // ==============================================
-// 3D PROJECT WHEEL
+// WEB PROJECTS FLAT GRID ANIMATIONS
 // ==============================================
-const webWheel = document.querySelector('.web-wheel');
-
-if (webWheel) {
-    const wheelTrack = webWheel.querySelector('.web-projects-grid');
-    const wheelCards = Array.from(webWheel.querySelectorAll('.web-project-card'));
-    const prevButton = webWheel.querySelector('.web-wheel-prev');
-    const nextButton = webWheel.querySelector('.web-wheel-next');
-    const currentLabel = webWheel.querySelector('.web-wheel-current');
-    const totalLabel = webWheel.querySelector('.web-wheel-total');
-    const dotsContainer = webWheel.querySelector('.web-wheel-dots');
-    const angleStep = 360 / wheelCards.length;
-    let activeIndex = 0;
-    let rotation = 0;
-    let radius = 620;
-    let dragStartX = 0;
-    let dragStartRotation = 0;
-    let isDragging = false;
-    let wheelLocked = false;
-    let wheelIsVisible = false;
-    let dragFrame = 0;
-    let pendingRotation = 0;
-    let resizeFrame = 0;
-
-    const normalizeIndex = index => (index % wheelCards.length + wheelCards.length) % wheelCards.length;
-
-    wheelCards.forEach((card, index) => {
-        card.setAttribute('role', 'group');
-        card.setAttribute('aria-label', `Proyecto ${index + 1} de ${wheelCards.length}`);
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'web-wheel-dot';
-        dot.setAttribute('aria-label', `Ver proyecto ${index + 1}`);
-        dot.addEventListener('click', () => goTo(index));
-        dotsContainer.appendChild(dot);
-    });
-
-    const updateRadius = () => {
-        radius = window.innerWidth <= 768
-            ? Math.max(300, Math.min(390, window.innerWidth * 0.92))
-            : Math.max(520, Math.min(720, window.innerWidth * 0.48));
-
-        wheelCards.forEach((card, index) => {
-            const cardTransform = `rotateY(${index * angleStep}deg) translateZ(${radius}px)`;
-            card.style.setProperty('--wheel-transform', cardTransform);
-            card.style.transform = cardTransform;
-        });
-        updateWheelSelection();
-    };
-
-    const renderWheelTransform = () => {
-        wheelTrack.style.transform = `translate3d(0, 0, ${-radius}px) rotateY(${rotation}deg)`;
-    };
-
-    const updateWheelSelection = () => {
-        renderWheelTransform();
-        activeIndex = normalizeIndex(Math.round(-rotation / angleStep));
-        wheelCards.forEach((card, index) => {
-            const isActive = index === activeIndex;
-            card.classList.toggle('is-active', isActive);
-            card.setAttribute('aria-hidden', String(!isActive));
-            card.querySelectorAll('a, button').forEach(control => {
-                control.tabIndex = isActive ? 0 : -1;
-            });
-            if (isActive && wheelIsVisible) loadProjectIframe(card.querySelector('.iframe-placeholder'));
-        });
-        Array.from(dotsContainer.children).forEach((dot, index) => {
-            dot.classList.toggle('is-active', index === activeIndex);
-            dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
-        });
-        currentLabel.textContent = String(activeIndex + 1).padStart(2, '0');
-        totalLabel.textContent = String(wheelCards.length).padStart(2, '0');
-    };
-
-    function goTo(index) {
-        activeIndex = normalizeIndex(index);
-        rotation = -activeIndex * angleStep;
-        updateWheelSelection();
-    }
-
-    prevButton.addEventListener('click', () => goTo(activeIndex - 1));
-    nextButton.addEventListener('click', () => goTo(activeIndex + 1));
-
-    webWheel.addEventListener('keydown', event => {
-        if (event.key === 'ArrowLeft') goTo(activeIndex - 1);
-        if (event.key === 'ArrowRight') goTo(activeIndex + 1);
-    });
-
-    webWheel.addEventListener('wheel', event => {
-        if (Math.abs(event.deltaY) < 8 || wheelLocked) return;
-        event.preventDefault();
-        wheelLocked = true;
-        goTo(activeIndex + (event.deltaY > 0 ? 1 : -1));
-        window.setTimeout(() => { wheelLocked = false; }, 650);
-    }, { passive: false });
-
-    webWheel.addEventListener('pointerdown', event => {
-        if (event.target.closest('a, button, iframe')) return;
-        isDragging = true;
-        dragStartX = event.clientX;
-        dragStartRotation = rotation;
-        webWheel.classList.add('is-dragging');
-        webWheel.setPointerCapture(event.pointerId);
-    });
-
-    webWheel.addEventListener('pointermove', event => {
-        if (!isDragging) return;
-        const latestEvent = event.getCoalescedEvents?.().at(-1) || event;
-        pendingRotation = dragStartRotation + (latestEvent.clientX - dragStartX) * 0.28;
-        if (dragFrame) return;
-        dragFrame = requestAnimationFrame(() => {
-            rotation = pendingRotation;
-            renderWheelTransform();
-            dragFrame = 0;
-        });
-    });
-
-    const finishWheelDrag = event => {
-        if (!isDragging) return;
-        isDragging = false;
-        if (dragFrame) {
-            cancelAnimationFrame(dragFrame);
-            dragFrame = 0;
-            rotation = pendingRotation;
+gsap.utils.toArray('.web-projects-flat-grid .web-project-card').forEach((card, i) => {
+    gsap.from(card, {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        delay: (i % 2) * 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: card,
+            start: "top 88%",
+            once: true
         }
-        webWheel.classList.remove('is-dragging');
-        if (webWheel.hasPointerCapture(event.pointerId)) webWheel.releasePointerCapture(event.pointerId);
-        goTo(Math.round(-rotation / angleStep));
-    };
-
-    webWheel.addEventListener('pointerup', finishWheelDrag);
-    webWheel.addEventListener('pointercancel', finishWheelDrag);
-    const wheelVisibilityObserver = new IntersectionObserver(entries => {
-        wheelIsVisible = entries[0].isIntersecting;
-        if (wheelIsVisible) {
-            loadProjectIframe(wheelCards[activeIndex].querySelector('.iframe-placeholder'));
-        }
-    }, { rootMargin: '180px', threshold: 0.01 });
-    wheelVisibilityObserver.observe(webWheel);
-    window.addEventListener('resize', () => {
-        if (resizeFrame) return;
-        resizeFrame = requestAnimationFrame(() => {
-            updateRadius();
-            resizeFrame = 0;
-        });
-    }, { passive: true });
-    updateRadius();
-}
+    });
+});
 
 // Simplificar gallery items
 gsap.utils.toArray('.gallery-grid .portfolio-item').forEach((item, i) => {
