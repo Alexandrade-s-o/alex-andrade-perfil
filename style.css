@@ -623,29 +623,36 @@ body::after {
     max-width: 100%;
 }
 
+/* Hero Logo Image */
+.hero-logo-wrapper {
+    margin: 1rem 0 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.hero-logo-img {
+    width: min(85vw, 460px);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 35px rgba(0, 216, 234, 0.45));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.hero-logo-img:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 55px rgba(0, 216, 234, 0.75));
+}
+
 /* Glitch Effect (clip-path) */
 .glitch {
-    color: var(--text-primary);
+    color: #ffffff;
     position: relative;
-    text-shadow: 
-        0 0 10px rgba(0, 255, 255, 0.3),
-        0 0 20px rgba(0, 255, 255, 0.2),
-        0 0 30px rgba(0, 255, 255, 0.1);
-    background: linear-gradient(
-        90deg,
-        var(--text-primary) 0%,
-        rgba(0, 255, 255, 0.3) 20%,
-        var(--text-primary) 40%,
-        rgba(57, 255, 20, 0.2) 60%,
-        var(--text-primary) 80%,
-        rgba(0, 255, 255, 0.3) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: text-shine 8s ease-in-out infinite alternate;
+    text-shadow: none;
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    animation: none;
 }
 
 @keyframes text-shine {
@@ -1522,7 +1529,7 @@ body::after {
 }
 
 .web-project-card {
-    background: #ffffff;
+    background: rgba(11, 43, 98, 0.45);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     overflow: hidden;
