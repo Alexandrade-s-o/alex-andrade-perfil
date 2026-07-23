@@ -900,7 +900,7 @@ body::after {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: #ececec;
+    background: rgba(11, 43, 98, 0.45);
     z-index: 1;
 }
 
@@ -920,7 +920,7 @@ body::after {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background: #ececec;
+    background: rgba(11, 43, 98, 0.45);
 }
 
 .pdf-trigger {
@@ -944,7 +944,7 @@ body::after {
 }
 
 #grafico {
-    background: #f7f7f5;
+    background: none;
 }
 
 .graphic-editorial-head {
@@ -1043,11 +1043,11 @@ body::after {
     grid-row: span 4;
     height: auto;
     min-height: 0;
-    border: 0;
+    border: 1px solid var(--glass-border);
     border-radius: 4px;
-    background: #ececea;
+    background: rgba(11, 43, 98, 0.45);
     box-shadow: none;
-    transition: opacity 0.45s ease, transform 0.55s var(--transition-smooth), box-shadow 0.55s ease;
+    transition: opacity 0.45s ease, transform 0.55s var(--transition-smooth), box-shadow 0.55s ease, border-color 0.3s ease;
 }
 
 #grafico .behance-project--hero {
@@ -1075,9 +1075,9 @@ body::after {
 
 #grafico .behance-project:hover {
     z-index: 3;
-    border-color: transparent;
-    background: #ececea;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.13);
+    border-color: rgba(0, 216, 234, 0.4);
+    background: rgba(11, 43, 98, 0.65);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 216, 234, 0.15);
     transform: translateY(-4px);
 }
 
@@ -1090,11 +1090,11 @@ body::after {
 }
 
 #grafico .behance-project:not(.behance-project--logo) {
-    background: #e9e9e6;
+    background: rgba(11, 43, 98, 0.45);
 }
 
 #grafico .behance-project--logo {
-    background: #f1f1f1;
+    background: rgba(11, 43, 98, 0.45);
 }
 
 #grafico .behance-project--logo .portfolio-img {
@@ -1165,8 +1165,8 @@ body::after {
 }
 
 #grafico .behance-project:hover .img-overlay b {
-    background: #fff;
-    color: #000;
+    background: var(--neon-cyan);
+    color: var(--bg-primary);
     transform: translateY(0) rotate(0);
 }
 
@@ -1326,11 +1326,11 @@ body::after {
 }
 
 .web-project-mockup {
-    background: #fafafa;
+    background: rgba(11, 43, 98, 0.45);
     border-radius: var(--radius-sm);
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
     transition: box-shadow 0.3s ease;
 }
 
@@ -1340,13 +1340,13 @@ body::after {
 }
 
 .browser-chrome {
-    background: linear-gradient(180deg, #e8e8e8 0%, #d5d5d5 100%);
+    background: #0b2b62;
     padding: 0.75rem 1rem;
     display: flex;
     align-items: center;
     gap: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .browser-dots {
@@ -1366,20 +1366,20 @@ body::after {
 
 .browser-address {
     flex: 1;
-    background: #fff;
+    background: rgba(0, 0, 0, 0.2);
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
     font-size: 0.75rem;
-    color: #888;
+    color: var(--text-secondary);
     font-family: monospace;
     text-align: center;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .web-project-preview {
     width: 100%;
     height: 400px;
-    background: #fff;
+    background: #000;
     overflow: hidden;
     position: relative;
     aspect-ratio: 16 / 10;
@@ -1411,7 +1411,7 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    background: #04122d;
 }
 
 .web-project-info {
@@ -1733,7 +1733,7 @@ body::after {
 .browser-content {
     width: 100%;
     height: 380px;
-    background: #fff;
+    background: #000;
     position: relative;
     overflow: hidden;
 }
@@ -1987,10 +1987,10 @@ body::after {
    SECTION BACKGROUNDS - Simple
    ============================================= */
 .section-sobre, .section-web, .section-motion, .section-3d, .section-certs { 
-    background: #fff;
+    background: none;
 }
 .section-grafico, .section-socio, .section-contacto { 
-    background: #f8f8f8;
+    background: none;
 }
 
 /* =============================================
@@ -2041,9 +2041,9 @@ body::after {
     border-radius: var(--radius-sm);
     overflow: hidden;
     position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    border: 1px solid rgba(0,0,0,0.05);
-    background: #fff;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border: 1px solid var(--glass-border);
+    background: rgba(11, 43, 98, 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2087,12 +2087,12 @@ body::after {
 }
 
 .ethnic-info p strong {
-    color: #000;
+    color: var(--text-primary);
     font-weight: 800;
 }
 
 .ethnic-info i {
-    color: #555;
+    color: var(--neon-cyan);
 }
 
 .ethnic-buttons {
@@ -2114,28 +2114,28 @@ body::after {
 }
 
 .btn-green {
-    background: #000;
-    color: #fff;
-    border: 1px solid #000;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    background: var(--neon-cyan);
+    color: var(--bg-primary);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 10px 20px rgba(0,216,234,0.1);
 }
 .btn-green:hover {
-    background: #39ff14;
-    border-color: #39ff14;
-    color: #000;
-    box-shadow: 0 5px 30px rgba(57, 255, 20, 0.5);
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 5px 30px rgba(255, 255, 255, 0.5);
     transform: translateY(-3px);
 }
 
 .btn-outline-green {
     background: transparent;
-    color: #000;
-    border: 1px solid rgba(0,0,0,0.2);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
 }
 .btn-outline-green:hover {
-    border-color: #39ff14;
-    color: #39ff14;
-    background: rgba(57, 255, 20, 0.05);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    background: rgba(0, 216, 234, 0.05);
     transform: translateY(-3px);
 }
 
@@ -2174,8 +2174,8 @@ body::after {
     align-self: flex-start;
     padding: 0.45rem 0.85rem;
     border-radius: var(--radius-full);
-    background: #39ff14;
-    color: #000;
+    background: var(--neon-cyan);
+    color: var(--bg-primary);
     font-family: var(--font-heading);
     font-size: 0.75rem;
     font-weight: 900;
@@ -2287,7 +2287,7 @@ body::after {
 }
 
 .cert-info p strong {
-    color: #000;
+    color: var(--text-primary);
     font-weight: 800;
 }
 
@@ -3007,11 +3007,11 @@ body::after {
     
     /* Quitar blur en móvil */
     .navbar.scrolled {
-        background: rgba(255, 255, 255, 0.98);
+        background: rgba(6, 29, 70, 0.98);
     }
     
     .web-project-card {
-        background: #fff;
+        background: rgba(11, 43, 98, 0.45);
     }
     
     .web-project-mockup {
@@ -3331,7 +3331,7 @@ body::after {
    3D DESIGN & ANIMATION SECTION
    ============================================= */
 .section-3d {
-    background: #fafafa;
+    background: none;
 }
 
 .threed-grid {
@@ -3342,8 +3342,8 @@ body::after {
 }
 
 .threed-card {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(11, 43, 98, 0.45);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     overflow: hidden;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
@@ -3400,10 +3400,10 @@ body::after {
 
 .threed-card:hover .threed-modal-btn {
     opacity: 1;
-    background: rgba(0, 240, 255, 0.9);
-    color: #000;
-    border-color: rgba(0, 240, 255, 1);
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+    background: var(--neon-cyan);
+    color: var(--bg-primary);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 12px rgba(0, 216, 234, 0.5);
 }
 
 .threed-card-body {
@@ -3424,7 +3424,7 @@ body::after {
 
 .threed-card-body p {
     font-size: 0.9rem;
-    color: #555;
+    color: var(--text-secondary);
     line-height: 1.5;
     margin-bottom: 1.2rem;
 }
@@ -3437,9 +3437,9 @@ body::after {
 }
 
 .threed-tag {
-    background: rgba(0, 0, 0, 0.04);
-    color: #333;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(0, 216, 234, 0.1);
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0, 216, 234, 0.2);
     padding: 0.3rem 0.75rem;
     border-radius: 20px;
     font-size: 0.75rem;
