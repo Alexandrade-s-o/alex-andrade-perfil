@@ -1112,7 +1112,7 @@ body::after {
     justify-content: space-between;
     gap: 1rem;
     padding: clamp(1.1rem, 2vw, 1.75rem);
-    background: linear-gradient(180deg, transparent 48%, rgba(0, 0, 0, 0.82) 100%);
+    background: linear-gradient(180deg, transparent 48%, rgba(6, 29, 70, 0.95) 100%);
     text-align: left;
 }
 
