@@ -14,6 +14,12 @@ ScrollTrigger.config({
     syncInterval: 50
 });
 
+// Force scroll to top on reload/load
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 let scrollLocked = true;
 
 function lockScroll() {
@@ -193,6 +199,7 @@ function playHeroEntrance() {
 function finishIntro() {
     if (introFinished) return;
     introFinished = true;
+    window.scrollTo({ top: 0, behavior: 'instant' });
     const preloader = document.getElementById('preloader');
     const video = document.getElementById('intro-video');
     if (video) {
@@ -740,6 +747,13 @@ if (hamburger && mobileMenu) {
 // ==============================================
 // 11. SMOOTH NAV SCROLL + ACTIVE SECTION
 // ==============================================
+document.querySelectorAll('.logo').forEach(logo => {
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+
 document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
