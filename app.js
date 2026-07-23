@@ -212,7 +212,7 @@ function finishLoader() {
             macLoader.remove();
             initParticles();
             playHeroEntrance();
-        }, 800);
+        }, 400);
     } else {
         initParticles();
         playHeroEntrance();
@@ -227,11 +227,11 @@ window.addEventListener('load', () => {
     const macText = document.getElementById('mac-text');
     
     if(!dotsContainer) {
-        setTimeout(finishLoader, 2800);
+        setTimeout(finishLoader, 1000);
         return;
     }
 
-    // Simulate typing 6 dots
+    // Simulate typing dots quickly
     let dotCount = 0;
     const typeInterval = setInterval(() => {
         dotCount++;
@@ -239,7 +239,7 @@ window.addEventListener('load', () => {
         dot.textContent = '•';
         dotsContainer.appendChild(dot);
         
-        if(dotCount >= 6) {
+        if(dotCount >= 5) {
             clearInterval(typeInterval);
             // Simulate pressing enter
             setTimeout(() => {
@@ -251,11 +251,11 @@ window.addEventListener('load', () => {
                     macText.textContent = 'Iniciando sesión...';
                     
                     // Wait for progress bar animation
-                    setTimeout(finishLoader, 2500);
-                }, 300);
-            }, 400);
+                    setTimeout(finishLoader, 600);
+                }, 100);
+            }, 150);
         }
-    }, 150); // type a dot every 150ms
+    }, 60); // type a dot every 60ms
 });
 
 // ==============================================
