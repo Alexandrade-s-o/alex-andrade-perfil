@@ -222,9 +222,6 @@ function finishLoader() {
 window.addEventListener('load', () => {
     const dotsContainer = document.getElementById('mac-dots');
     const enterBtn = document.getElementById('mac-enter');
-    const passBox = document.getElementById('mac-password-box');
-    const progressBox = document.getElementById('mac-progress');
-    const macText = document.getElementById('mac-text');
     
     if(!dotsContainer) {
         setTimeout(finishLoader, 1000);
@@ -245,13 +242,8 @@ window.addEventListener('load', () => {
             setTimeout(() => {
                 enterBtn.classList.add('is-pressed');
                 setTimeout(() => {
-                    // Switch to loading mode
-                    passBox.style.display = 'none';
-                    progressBox.classList.remove('is-hidden');
-                    macText.textContent = 'Iniciando sesión...';
-                    
-                    // Wait for progress bar animation
-                    setTimeout(finishLoader, 600);
+                    // Open the page directly without progress bar
+                    finishLoader();
                 }, 100);
             }, 150);
         }
