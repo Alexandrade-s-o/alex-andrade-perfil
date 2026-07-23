@@ -58,10 +58,20 @@
     <div id="mac-loader" class="mac-loader" role="dialog" aria-modal="true" aria-busy="true" aria-label="Iniciando sesión">
         <div class="mac-loader-content">
             <img src="alex-logo-white.png" alt="Alex Estudio Logo" class="mac-loader-logo">
-            <div class="mac-loader-progress-container">
+            <h2 class="mac-loader-username">Alex Andrade</h2>
+            
+            <div class="mac-loader-password-box" id="mac-password-box">
+                <div class="mac-loader-dots" id="mac-dots"></div>
+                <div class="mac-loader-enter" id="mac-enter">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+
+            <div class="mac-loader-progress-container is-hidden" id="mac-progress">
                 <div class="mac-loader-progress-bar"></div>
             </div>
-            <p class="mac-loader-text">Iniciando sesión...</p>
+            
+            <p class="mac-loader-text" id="mac-text"> </p>
         </div>
     </div>
 

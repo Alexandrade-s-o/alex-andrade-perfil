@@ -220,8 +220,42 @@ function finishLoader() {
 }
 
 window.addEventListener('load', () => {
-    // Wait for the progress bar animation (2.5s) plus a small buffer
-    setTimeout(finishLoader, 2800);
+    const dotsContainer = document.getElementById('mac-dots');
+    const enterBtn = document.getElementById('mac-enter');
+    const passBox = document.getElementById('mac-password-box');
+    const progressBox = document.getElementById('mac-progress');
+    const macText = document.getElementById('mac-text');
+    
+    if(!dotsContainer) {
+        setTimeout(finishLoader, 2800);
+        return;
+    }
+
+    // Simulate typing 6 dots
+    let dotCount = 0;
+    const typeInterval = setInterval(() => {
+        dotCount++;
+        const dot = document.createElement('span');
+        dot.textContent = '•';
+        dotsContainer.appendChild(dot);
+        
+        if(dotCount >= 6) {
+            clearInterval(typeInterval);
+            // Simulate pressing enter
+            setTimeout(() => {
+                enterBtn.classList.add('is-pressed');
+                setTimeout(() => {
+                    // Switch to loading mode
+                    passBox.style.display = 'none';
+                    progressBox.classList.remove('is-hidden');
+                    macText.textContent = 'Iniciando sesión...';
+                    
+                    // Wait for progress bar animation
+                    setTimeout(finishLoader, 2500);
+                }, 300);
+            }, 400);
+        }
+    }, 150); // type a dot every 150ms
 });
 
 // ==============================================
