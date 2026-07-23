@@ -199,76 +199,30 @@ function playHeroEntrance() {
     return tl;
 }
 
-function finishIntro() {
+function finishLoader() {
     if (introFinished) return;
     introFinished = true;
     window.scrollTo({ top: 0, behavior: 'instant' });
-    const preloader = document.getElementById('preloader');
-    const video = document.getElementById('intro-video');
-    if (video) {
-        video.pause();
-    }
     unlockScroll();
-    if (preloader) {
-        preloader.removeAttribute('aria-busy');
-        gsap.to(preloader, {
-            autoAlpha: 0,
-            duration: 0.95,
-            ease: "power2.out",
-            onComplete: () => {
-                preloader.style.display = 'none';
-                initParticles();
-            }
-        });
+    
+    const macLoader = document.getElementById('mac-loader');
+    if (macLoader) {
+        macLoader.classList.add('fade-out');
+        setTimeout(() => {
+            macLoader.remove();
+            initParticles();
+            playHeroEntrance();
+        }, 800);
     } else {
         initParticles();
+        playHeroEntrance();
     }
-    playHeroEntrance();
 }
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const introVideo = document.getElementById('intro-video');
-const skipBtn = document.getElementById('preloader-skip');
-const experienceGate = document.getElementById('experience-gate');
-const experienceStart = document.getElementById('experience-start');
-const experienceSkip = document.getElementById('experience-skip');
-
-if (prefersReducedMotion) {
-    finishIntro();
-} else if (introVideo) {
-    introVideo.setAttribute('playsinline', '');
-    introVideo.muted = false;
-    introVideo.volume = 1;
-
-    introVideo.addEventListener('ended', finishIntro);
-    introVideo.addEventListener('error', () => finishIntro());
-
-    const startExperience = () => {
-        introVideo.muted = false;
-        introVideo.volume = 1;
-        introVideo.currentTime = 0;
-        if (experienceGate) {
-            experienceGate.classList.add('is-hidden');
-        }
-        if (skipBtn) {
-            skipBtn.classList.add('is-visible');
-        }
-        introVideo.play().catch(() => {});
-    };
-
-    if (experienceStart) {
-        experienceStart.addEventListener('click', startExperience);
-    }
-    if (experienceSkip) {
-        experienceSkip.addEventListener('click', finishIntro);
-    }
-
-    if (skipBtn) {
-        skipBtn.addEventListener('click', finishIntro);
-    }
-} else {
-    finishIntro();
-}
+window.addEventListener('load', () => {
+    // Wait for the progress bar animation (2.5s) plus a small buffer
+    setTimeout(finishLoader, 2800);
+});
 
 // ==============================================
 // 5. PARTICLE CANVAS (HERO) - ULTRA OPTIMIZADO

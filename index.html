@@ -54,22 +54,15 @@
     <!-- Skip to content (accesibilidad) -->
     <a href="#sobre" class="skip-link">Saltar al contenido</a>
 
-    <!-- Intro: video de presentación (exportar desde remotion-presentation → assets/intro.mp4) -->
-    <div id="preloader" role="dialog" aria-modal="true" aria-busy="true" aria-label="Introducción en video">
-        <video id="intro-video" class="preloader-video" playsinline preload="metadata">
-            <source src="assets/intro.mp4" type="video/mp4" />
-        </video>
-        <div class="experience-gate" id="experience-gate">
-            <span class="experience-gate__eyebrow">Alex Andrade</span>
-            <h1>Una experiencia<br>multimedia</h1>
-            <p>Activa el sonido y descubre mi universo creativo.</p>
-            <div class="experience-gate__actions">
-                <button type="button" class="experience-start magnetic" id="experience-start">Iniciar experiencia multimedia</button>
-                <button type="button" class="experience-skip magnetic" id="experience-skip">Saltar intro</button>
+    <!-- Intro: Mac OS style login loader -->
+    <div id="mac-loader" class="mac-loader" role="dialog" aria-modal="true" aria-busy="true" aria-label="Iniciando sesión">
+        <div class="mac-loader-content">
+            <img src="alex-logo-white.png" alt="Alex Estudio Logo" class="mac-loader-logo">
+            <div class="mac-loader-progress-container">
+                <div class="mac-loader-progress-bar"></div>
             </div>
+            <p class="mac-loader-text">Iniciando sesión...</p>
         </div>
-        <button type="button" class="preloader-skip" id="preloader-skip"
-            aria-label="Saltar la introducción y entrar al portafolio">Saltar intro</button>
     </div>
 
     <div class="cursor"></div>
