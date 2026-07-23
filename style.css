@@ -189,7 +189,7 @@ body::after {
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 9999999;
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
@@ -214,7 +214,7 @@ body::after {
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    z-index: 9998;
+    z-index: 9999998;
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
@@ -305,7 +305,7 @@ body::after {
     background: var(--neon-cyan);
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9997;
+    z-index: 9999997;
     opacity: 0;
     transform: translate(-50%, -50%);
 }
