@@ -228,7 +228,7 @@ window.addEventListener('load', () => {
         return;
     }
 
-    // Simulate typing dots quickly
+    // Simulate typing dots a bit slower
     let dotCount = 0;
     const typeInterval = setInterval(() => {
         dotCount++;
@@ -238,16 +238,16 @@ window.addEventListener('load', () => {
         
         if(dotCount >= 5) {
             clearInterval(typeInterval);
-            // Simulate pressing enter
+            // Simulate pressing enter with a slight pause
             setTimeout(() => {
                 enterBtn.classList.add('is-pressed');
                 setTimeout(() => {
                     // Open the page directly without progress bar
                     finishLoader();
-                }, 100);
-            }, 150);
+                }, 200);
+            }, 300);
         }
-    }, 60); // type a dot every 60ms
+    }, 120); // type a dot every 120ms
 });
 
 // ==============================================
