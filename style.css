@@ -2164,10 +2164,10 @@ body::after {
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+    background: rgba(11, 43, 98, 0.45);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
 }
 
 .sena-cert-badge {
@@ -2203,7 +2203,9 @@ body::after {
 .sena-cert-meta span {
     padding: 0.45rem 0.75rem;
     border-radius: var(--radius-full);
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 216, 234, 0.1);
+    border: 1px solid rgba(0, 216, 234, 0.2);
+    color: var(--neon-cyan);
     font-size: 0.82rem;
     font-weight: 700;
 }
@@ -2221,7 +2223,7 @@ body::after {
     display: inline-flex;
     align-items: center;
     padding: 14px 24px;
-    border: 2px solid var(--text-primary);
+    border: 2px solid var(--glass-border);
     border-radius: var(--radius-full);
     color: var(--text-primary);
     font-family: var(--font-heading);
@@ -2234,7 +2236,7 @@ body::after {
 
 .cert-secondary-btn:hover {
     background: var(--text-primary);
-    color: #fff;
+    color: var(--bg-primary);
     transform: translateY(-3px);
 }
 
@@ -2298,7 +2300,7 @@ body::after {
     margin-top: 1rem;
     padding: 14px 30px;
     background: var(--text-primary);
-    color: #fff;
+    color: var(--bg-primary);
     font-family: var(--font-heading);
     font-size: 0.9rem;
     font-weight: 700;
@@ -2311,9 +2313,9 @@ body::after {
 }
 
 .cert-download-btn:hover {
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: transparent;
     border-color: var(--text-primary);
+    color: var(--text-primary);
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.25);
     transform: translateY(-3px);
 }
