@@ -882,17 +882,43 @@ modal.addEventListener('click', (e) => {
 modal.querySelector('.modal-close')?.addEventListener('click', closeImageModal);
 
 // ==============================================
-// 14. VIDEO MODAL
+// 14. VIDEO MODAL (YouTube & Local HTML5 Videos)
 // ==============================================
 const vidModal = document.getElementById('videoModal');
 const modalVideoIframe = document.getElementById('modalVideoIframe');
+const modalLocalVideo = document.getElementById('modalLocalVideo');
 const videoTriggers = document.querySelectorAll('.video-trigger');
+const videoTriggersLocal = document.querySelectorAll('.video-trigger-local');
 
 videoTriggers.forEach(btn => {
     btn.addEventListener('click', () => {
         const vidId = btn.getAttribute('data-video-id');
         if (vidId) {
-            modalVideoIframe.src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0&showinfo=0`;
+            if (modalLocalVideo) {
+                modalLocalVideo.pause();
+                modalLocalVideo.style.display = 'none';
+            }
+            if (modalVideoIframe) {
+                modalVideoIframe.style.display = 'block';
+                modalVideoIframe.src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0&showinfo=0`;
+            }
+            vidModal.classList.add('active');
+            lockScroll();
+        }
+    });
+});
+
+videoTriggersLocal.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const videoSrc = btn.getAttribute('data-local-video');
+        if (videoSrc && modalLocalVideo) {
+            if (modalVideoIframe) {
+                modalVideoIframe.src = '';
+                modalVideoIframe.style.display = 'none';
+            }
+            modalLocalVideo.src = videoSrc;
+            modalLocalVideo.style.display = 'block';
+            modalLocalVideo.play();
             vidModal.classList.add('active');
             lockScroll();
         }
@@ -901,7 +927,15 @@ videoTriggers.forEach(btn => {
 
 function closeVideoModal() {
     vidModal.classList.remove('active');
-    modalVideoIframe.src = '';
+    if (modalVideoIframe) {
+        modalVideoIframe.src = '';
+        modalVideoIframe.style.display = 'none';
+    }
+    if (modalLocalVideo) {
+        modalLocalVideo.pause();
+        modalLocalVideo.src = '';
+        modalLocalVideo.style.display = 'none';
+    }
     unlockScroll();
 }
 
@@ -1130,6 +1164,10 @@ const translations = {
         motionTitle: "Motion Graphics",
         motionText: "Dando vida a las ideas a través del movimiento y dinámico storytelling.",
         motionHint: "Clic en las miniaturas para reproducir directamente en HD",
+        tresdNav: "Diseño 3D",
+        tresdTitle: "Diseño & Animación 3D",
+        tresdText: "Modelado, rigging, renderizado y composición 3D para proyectos multimediales.",
+        tresdHint: "Reproduce los videos directamente o haz clic en \"Ampliar\" para ver en pantalla completa",
         socioTitle: "Exp. Étnica Socio-ambiental",
         socioText: "Diseño con propósito y consciencia ecológica, honrando identidades, raíces y comunidades.",
         certsTitle: "Certificados",
@@ -1151,6 +1189,7 @@ const translations = {
         web: "Web Design",
         grafico: "Graphic",
         motion: "Motion",
+        tresd: "3D Design",
         socio: "Ethnic",
         certs: "Certificates",
         contacto: "Contact",
@@ -1172,6 +1211,9 @@ const translations = {
         motionTitle: "Motion Graphics",
         motionText: "Bringing ideas to life through movement and dynamic storytelling.",
         motionHint: "Click on thumbnails to play directly in HD",
+        tresdTitle: "3D Design & Animation",
+        tresdText: "3D modeling, rigging, rendering, and composition for multimedia projects.",
+        tresdHint: "Play videos directly or click \"Expand\" for fullscreen view",
         socioTitle: "Socio-environmental Ethnic Exp.",
         socioText: "Design with purpose and ecological awareness, honoring identities, roots, and communities.",
         certsTitle: "Certificates",
@@ -1197,7 +1239,7 @@ function updateLanguage(lang) {
     
     // Update nav links
     document.querySelectorAll('.nav-links a[data-es]').forEach(link => {
-        link.textContent = t[link.dataset.section];
+        link.textContent = t[link.dataset.section] || link.dataset.es;
     });
     
     // Update mobile nav links
@@ -1217,7 +1259,6 @@ function updateLanguage(lang) {
     
     // Update section titles
     document.querySelectorAll('.neon-text').forEach(title => {
-        const text = title.textContent.replace(/\d+$/, '').trim();
         if (title.closest('.section-sobre')) {
             title.innerHTML = t.aboutTitle + ' <span class="number">00</span>';
         } else if (title.closest('.section-web')) {
@@ -1226,12 +1267,14 @@ function updateLanguage(lang) {
             title.innerHTML = t.graficoTitle + ' <span class="number">02</span>';
         } else if (title.closest('.section-motion')) {
             title.innerHTML = t.motionTitle + ' <span class="number">03</span>';
+        } else if (title.closest('.section-3d')) {
+            title.innerHTML = t.tresdTitle + ' <span class="number">04</span>';
         } else if (title.closest('.section-socio')) {
-            title.innerHTML = t.socioTitle + ' <span class="number">04</span>';
+            title.innerHTML = t.socioTitle + ' <span class="number">05</span>';
         } else if (title.closest('.section-certs')) {
-            title.innerHTML = t.certsTitle + ' <span class="number">05</span>';
+            title.innerHTML = t.certsTitle + ' <span class="number">06</span>';
         } else if (title.closest('.section-contacto')) {
-            title.innerHTML = t.contactoTitle + ' <span class="number">06</span>';
+            title.innerHTML = t.contactoTitle + ' <span class="number">07</span>';
         }
     });
     
@@ -1260,6 +1303,10 @@ function updateLanguage(lang) {
             p.textContent = t.motionText;
             const hint = panel.querySelector('.hint-text');
             if (hint) hint.textContent = t.motionHint;
+        } else if (p && panel.id === '3d') {
+            p.textContent = t.tresdText;
+            const hint = panel.querySelector('.hint-text');
+            if (hint) hint.textContent = t.tresdHint;
         } else if (p && panel.id === 'socio') {
             p.textContent = t.socioText;
         } else if (p && panel.id === 'certs') {
