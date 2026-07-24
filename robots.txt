@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alexandrade-s-o.github.io/alex-andrade-perfil/sitemap.xml
