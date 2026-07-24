@@ -1263,3 +1263,22 @@ if (downloadAllCertsBtn) {
         });
     });
 }
+
+// ==============================================
+// 13. CERTIFICATES CAROUSEL ARROWS
+// ==============================================
+const certWrapper = document.getElementById('cert-pdf-wrapper');
+const certPrev = document.querySelector('.cert-arrow-prev');
+const certNext = document.querySelector('.cert-arrow-next');
+
+if (certWrapper && certPrev && certNext) {
+    certPrev.addEventListener('click', () => {
+        // Scroll left by the width of one item
+        certWrapper.scrollBy({ left: -certWrapper.clientWidth, behavior: 'smooth' });
+    });
+    
+    certNext.addEventListener('click', () => {
+        // Scroll right by the width of one item
+        certWrapper.scrollBy({ left: certWrapper.clientWidth, behavior: 'smooth' });
+    });
+}
