@@ -1237,3 +1237,29 @@ const savedLang = localStorage.getItem('portfolio-lang');
 if (savedLang) {
     updateLanguage(savedLang);
 }
+
+// ==============================================
+// 12. MULTI-DOWNLOAD CERTIFICATES
+// ==============================================
+const downloadAllCertsBtn = document.getElementById('download-all-certs');
+if (downloadAllCertsBtn) {
+    downloadAllCertsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filesToDownload = [
+            '1.3. CERTIFICADOS LABORALES .pdf',
+            'certificado solidar.jpeg'
+        ];
+        
+        filesToDownload.forEach((fileUrl, index) => {
+            // Use setTimeout to slightly stagger downloads to prevent browser blocking
+            setTimeout(() => {
+                const a = document.createElement('a');
+                a.href = fileUrl;
+                a.download = fileUrl.split('/').pop();
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }, index * 300);
+        });
+    });
+}
