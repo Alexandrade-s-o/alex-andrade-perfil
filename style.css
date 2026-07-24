@@ -3683,3 +3683,21 @@ body::after {
     .cert-arrow-prev { left: -10px; width: 36px; height: 36px; font-size: 1.2rem; }
     .cert-arrow-next { right: -10px; width: 36px; height: 36px; font-size: 1.2rem; }
 }
+
+
+/* SEO Hidden H1 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.arrow-icon {
+    font-weight: bold;
+}
