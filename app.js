@@ -1247,6 +1247,7 @@ if (downloadAllCertsBtn) {
         e.preventDefault();
         const filesToDownload = [
             '1.3. CERTIFICADOS LABORALES .pdf',
+            'Certificado laboral ALEX ANDRADE HERNANDEZ.pdf',
             'certificado solidar.jpeg'
         ];
         
