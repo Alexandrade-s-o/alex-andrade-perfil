@@ -487,6 +487,20 @@
                                 </div>
                             </div>
                         </div>
+                        <article class="web-project-card">
+                            <div class="web-project-info">
+                                <h3>Eris — Multijugador</h3>
+                                <p>Demo interactiva en 3D inspirada en la novela <em>Eris</em> de Andrés F. Burbano. Juega en el Parque Caldas contra bots o conecta con otras personas mediante un código de sala.</p>
+                                <div class="web-project-tags">
+                                    <span class="tag">JavaScript</span><span class="tag">Three.js</span><span class="tag">WebGL</span><span class="tag">cannon-es</span><span class="tag">WebRTC</span><span class="tag">Trystero</span><span class="tag">Blender</span>
+                                </div>
+                                <div class="web-project-actions"><a href="https://eris-demo.vercel.app/multijugador" target="_blank" rel="noopener noreferrer" class="cyber-btn">Jugar en pantalla completa ↗</a></div>
+                                <details style="margin-top: 1.5rem">
+                                    <summary style="cursor:pointer">Abrir juego interactivo</summary>
+                                    <iframe title="Eris multijugador: juego interactivo" data-src="https://eris-demo.vercel.app/multijugador" allow="fullscreen; pointer-lock; gamepad" allowfullscreen style="width:100%;height:min(70vh,600px);border:0;margin-top:1rem;background:#111"></iframe>
+                                </details>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -866,6 +880,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Custom JS -->
     <script src="app.js"></script>
+<script>
+        document.querySelectorAll('iframe[data-src]').forEach(function (frame) {
+            frame.closest('details').addEventListener('toggle', function () {
+                if (this.open && !frame.src) frame.src = frame.dataset.src;
+            });
+        });
+    </script>
 </body>
 
 </html>
